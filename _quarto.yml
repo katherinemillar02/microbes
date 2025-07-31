@@ -1,0 +1,53 @@
+project:
+  type: website
+  output-dir: docs
+
+includes:
+  before-body: |
+    <header class="site-banner">
+      <img src="hexmedfly.png" alt="Site Banner" style="width:100%; height:auto;">
+    </header>
+
+website:
+  title: "Microbial Analysis"
+  favicon: hexmedfly.png
+  navbar:
+    logo: hexmedfly.png
+    brand:
+      href: index.qmd
+      image: hexmedfly.png
+      alt: "Header Logo"
+    left:
+      - text: Microbial Analysis Introduction
+        file: qmds/introduction.qmd
+      - text: Beta Diversity Analysis Methods
+        file: qmds/beta.qmd
+      - text: PCA
+        file: qmds/PCA.qmd
+      - text: NMDS
+        file: qmds/NMDS.qmd
+      - text: The Microbial Summary
+        file: qmds/microbialsummary.qmd
+
+page-footer: |
+  <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; font-size: 0.9em;">
+    <div style="text-align: center;">
+      <img src="hexmedfly.png" alt="Footer Logo" style="height:80px;"><br>
+      © 2025 Katie Millar · Built with <a href="https://quarto.org/">Quarto</a>
+    </div>
+    <div style="text-align: right;">
+      Made with <i class="fab fa-r-project"></i> and <a href="https://quarto.org/">Quarto</a><br>
+      <a href="https://github.com/katherinemillar02/microbiomeanalysis-website">Source at <i class="fab fa-github"></i> GitHub</a>
+    </div>
+  </div>
+
+format:
+  html:
+    theme:
+      light: flatly
+      dark: darkly
+    include-in-header: 
+      text: |
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    toc: true
+   

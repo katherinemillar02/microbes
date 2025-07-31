@@ -1,0 +1,59 @@
+---
+title: "Microbial Analysis Introduction"
+about:
+  template: marquee
+  links:
+    - icon: envelope
+      text: Email
+      href: mailto:Katie.millar@uea.ac.uk
+    - icon: github
+      text: Github
+      href: https://github.com/katherinemillar02
+    - text: Bluesky
+      href: https://bsky.app/profile/katiemillar.bsky.social
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/katie-millar-15bb56236/
+---
+
+Techniques for measuring microbial diversity usually fall under **Alpha Diversity** and **Beta Diversity**.
+
+ 
+
+### **Alpha Diversity vs. Beta Diversity?**
+
+  **Alpha Diversity** describes **the diversity within a single sample or environment**, while **Beta Diversity** describes **the differences in diversity between two or more samples or environments**.
+
+   
+
+::::: {style="display: flex; align-items: flex-start; gap: 20px; margin-bottom: 30px;"}
+::: {style="flex: 1 0 45%; max-width: 45%;"}
+```{r echo=FALSE, out.width="100%", fig.align="center", fig.cap="This image was generated from ChatGPT."}
+knitr::include_graphics("images/beta1.png")
+```
+:::
+
+::: {style="flex: 1; padding-left: 20px;"}
+Alpha Diversity refers to the diversity **within** a sample. For example, orange vs. blue vs. green vs. pink.
+:::
+:::::
+
+::::: {style="display: flex; align-items: flex-start; gap: 20px;"}
+::: {style="flex: 0 0 45%; max-width: 45%;"}
+```{r echo=FALSE, out.width="100%", fig.align="center", fig.cap="This image was generated from ChatGPT."}
+   knitr::include_graphics("images/beta2.png") 
+```
+:::
+
+::: {style="flex: 1; padding-left: 20px;"}
+Beta diversity refers to the overall diversity **between** samples.For example, how the colours on the left *collectively* compare to the colours on the right.
+:::
+:::
+
+
+These may seem easy to remember on the surface, but they can easily be forgotten!
+
+
+
+### **Why do we look at Microbial Analysis?**
+Microbial analysis is the process of detecting, identifying, and/or quantifying microorganisms (like bacteria, fungi, viruses, and archaea) in various samples. This process is essential for understanding ecological interactions, diagnosing disease, ensuring food safety, and monitoring industrial or agricultural systems.  In research, it helps uncover the roles microbes play in host health, nutrient cycling, and symbiotic relationships, as seen in studies of insect gut microbiotas like that of the Mediterranean fruit fly. Analysis of microbial communities can help you to better understand, manage and utilise microbial relations in natural and applied settings. 

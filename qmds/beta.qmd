@@ -1,0 +1,443 @@
+---
+title: "Beta Diversity Analysis Methods"
+---
+
+Beta Diversity, as discussed is a measure of dissimilarity or similarity between two different communities.
+
+```{r echo=FALSE, out.width="50%", fig.align="center", fig.cap="This image was generated from ChatGPT."}
+   knitr::include_graphics("images/beta2.png") 
+```
+
+There are many methods which can be used to calculate Beta Diversity, in this section, you will be introduced to:
+
+#### **Bray-Curtis Dissimilarity**
+
+#### **Jaccard Dissimilarity**
+
+ 
+
+### Bray-Curtis Dissimilarity, ***BC**~ij~*
+
+A statistical method founded by J. Roger Bray and John T. Curtis.
+
+```{r echo=FALSE, out.width="45%", fig.align="left", fig.cap="This image was generated with ChatGPT."}
+knitr::include_graphics("images/braycurtishistory.png")
+```
+
+Bray-Curtis Dissimilarity can be described as a statistic used to quantify the **dissimilarity** in composition of species (in this context, microbes) between **two** different sites. It works by a formula (explained below) outputting a value between 0 and 1, with 0 meaning the sites are exactly the same, to very similar, and 1 being they are very dissimilar.
+
+ 
+
+The formula used in **Bray-Curtis Dissimilarity** is shown below:
+
+ 
+
+```{r echo=FALSE, fig.align="center"}
+knitr::include_graphics("images/mathsanalysis.png")
+```
+
+#### **Bray-Curtis Dissimilarity in action**
+
+Lets go through an example of how **Bray-Curtis Dissimilarity** works, using data from [Darrington et al. (2022)](https://www.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000801#tab2).
+
+Because Bray-Curtis Dissimilarity is based on a calculation of two different sites, we will use Medfly larval samples taken from two different fruits (Argan 🌰 and Peach 🍑, taken from Morocco and Greece respectively). That have been sequenced through 16S rRNA sequencing.
+
+::::: columns
+::: {.column width="50%"}
+**Sample 1 - Medfly from Morocco (Argan 🌰)**
+
+**Bacterial composition (relative proportions):**
+
+| Bacterium          | Proportion |
+|--------------------|------------|
+| *Klebsiella*       | 0.75       |
+| *Pantonea*         | 0.15       |
+| *Commensalibacter* | 0.10       |
+:::
+
+::: {.column width="50%"}
+**Sample 2 - Medfly from Greece (Peach 🍑)**
+
+**Bacterial composition (relative proportions):**
+
+| Bacterium          | Proportion |
+|--------------------|------------|
+| *Klebsiella*       | 0.25       |
+| *Pantonea*         | 0.50       |
+| *Serratia*         | 0.05       |
+| *Spinghobacterium* | 0.15       |
+:::
+:::::
+
+ 
+
+**Calculating Bray-Curtis Dissimilarity (*BC~ij~*)**
+
+C~ij~ = the sum of **lower** counts found at both sites
+
+> C~ij~ = 0.25 + 0.15 = 0.4
+
+The only bacteria these two samples have in common are *Klebsiella* and *Pantonea*, the lowest values of which are 0.25 of *Klebsiella* (from the peach samples), and 0.15 of *Pantonea* (from the argan samples).
+
+::: {.callout-tip title="Deep Dive into Bray Curtis Dissimilarity"}
+<details>
+
+<summary>Why use the lower counts?</summary>
+
+In Bray-Curtis dissimilarity, the overlap between two samples is measured by summing the **minimum (lower)** values for each species across the two samples. This captures the *shared abundance*—how much both sites have in common—while ignoring excess that exists only in one site. The lower count for each taxon tells you the maximum that can be considered “shared” between the two samples.
+
+For example, if one site has *Klebsiella* at 0.75 and the other at 0.25, only **0.25** is considered as the shared amount.
+
+</details>
+:::
+
+S~i~ = total number on site i - Argan
+
+> S~i~ = 0.75 + 0.15 + 0.1 = 1
+
+S~j~ = total number on site j - Peach
+
+> S~j~ = 0.25 + 0.5 + 0.05 + 0.15 = 1
+
+::: {.callout-tip title="Deep Dive into Bray Curtis Dissimilarity"}
+<details>
+
+<summary>Why do we work out the total counts on each site?</summary>
+
+By dividing by the total abundance across both sites, we **normalise** the shared abundance, accounting for differences in sample size or total population. This allows the measure to reflect **relative similarity** rather than absolute counts, ensuring the value ranges between 0 (identical) and 1 (completely different).
+
+In other words, calculating totals ensures that the Bray-Curtis dissimilarity is **scale-independent** and fair across samples of different sizes.
+
+</details>
+:::
+
+Now that we have:
+
+$$
+C_{ij} = 0.4 \\
+$$ $$
+S_i = 1 \\
+$$ $$
+S_j = 1
+$$
+
+The Bray-Curtis formula is:
+
+$$
+BC_{ij} = 1 - \frac{2 C_{ij}}{S_i + S_j}
+$$
+
+Plugging in the values:
+
+$$
+BC_{ij} = 1 - \frac{2*0.4}{1 + 1}
+$$
+
+Calculate the division:
+
+$$
+\frac{0.8}{2} = 0.4
+$$
+
+Finally:
+
+$$
+BC_{ij} = 1 - 0.4 = \mathbf{0.6}
+$$
+
+**Interpretation:**\
+Using this formula we have worked out the Bray-Curtis Dissimilarity of the two Medfly microbiotas from Argan and Peach to be **0.6**.
+
+Now let's go into what this means. Below shows the scale, where Bray-Curtis dissimilarity will range from 0 - 1, with 1 being the largest amount of dissimilarity between the two samples.
+
+```{r echo=FALSE, out.width="70%", fig.align="center"}
+
+knitr::include_graphics("images/braycurtisscale.png")
+
+```
+
+From the scale, we can conclude that two samples are not similar, not are they massively dissimilar. But they are more dissimilar than similar! You might be able to see this makes somewhat sense by going back to the dataframe. To put it simply, a Bray-Curtis dissimilarity of **0.6** indicates moderate dissimilarity between the two sites.
+
+ 
+
+# Jaccard Dissimilarity
+
+Jaccard distance does not take abundances into account; just the presence of microbes in one or both samples.
+
+The Jaccard dissimilarity is defined as:
+
+$$
+\text{Jaccard}_{ij} = 1 - \frac{|A \cap B|}{|A \cup B|}
+$$
+
+**A ∩ B** is the number of *shared* species (present in both sites).
+
+  **A ∪ B** is the total number of *unique* species across both sites.
+
+ 
+
+Lets take the two samples we used to calculate Bray Curtis Dissimilarity from the [Darrington et al. (2022)](https://www.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000801#tab2) data again.
+
+::::: columns
+::: {.column width="50%"}
+**Sample 1 - Medfly from Morocco (Argan 🌰)**
+
+**Bacterial composition (relative proportions):**
+
+| Bacterium          | Proportion |
+|--------------------|------------|
+| *Klebsiella*       | 0.75       |
+| *Pantonea*         | 0.15       |
+| *Commensalibacter* | 0.10       |
+:::
+
+::: {.column width="50%"}
+**Sample 2 - Medfly from Greece (Peach 🍑)**
+
+**Bacterial composition (relative proportions):**
+
+| Bacterium          | Proportion |
+|--------------------|------------|
+| *Klebsiella*       | 0.25       |
+| *Pantonea*         | 0.50       |
+| *Serratia*         | 0.05       |
+| *Spinghobacterium* | 0.15       |
+:::
+:::::
+
+In both the Argan sample, and the Peach sample, there is *Klebsiella* and *Pantonea*, this means there are **2** samples which are the same.
+
+In the Argan sample, there is *Klebsiella*, *Pantonea* and *Commensalibacter*. In the Peach sample, there is *Klebsiella*, *Pantonea*, *Serratia* and *Spinghobacterium*, so there are **5** different bacterias present across both of these samples.
+
+Putting this into a equation is:
+
+$$
+\text{Jaccard}_{ij} = 1 - \frac{2}{5}
+$$
+
+$$
+\text{Jaccard}_{ij} = \frac{2}{5} = 0.4 
+$$ $$
+\text{Jaccard}_{ij} = 1 - 0.4 = 0.6 
+$$
+
+Our Jaccard value is **0.6**. Jaccard uses the same dissimilarity scale as Bray Curtis, with 0 being very similar, and 1 being completley dissimilar, so this means, like Bray Curtis, there is *moderate* dissimilarity.
+
+# Bray-Curtis vs. Jaccard
+
+An important concept to understand, and something worth testing yourself on, is the difference between the **Bray-Curtis** and **Jaccard** dissimilarity measures.
+
+-   **Bray-Curtis** considers the **actual abundance** of each bacterial species. It quantifies how different two samples are based on the amount of each bacteria present.
+
+-   **Jaccard**, by contrast, uses only **presence or absence** data. It ignores the amount of each species are found and focuses solely on whether a species is present in either sample.
+
+ 
+
+| Metric          | Considers Abundance? | Based On                         |
+|-----------------|----------------------|----------------------------------|
+| **Bray-Curtis** | Yes                  | The actual count data of the bacteria       |
+| **Jaccard**     | No                   | Presence/absence of the bacteria |
+
+ 
+
+In short:
+
+-   **Bray-Curtis** → *The quantity of each bacteria matters*
+-   **Jaccard** → *Only the presence/absence of each bacteria matters*
+
+# Test your understanding!
+
+------------------------------------------------------------------------
+
+**Which of the following best describes the difference between Jaccard and Bray-Curtis dissimilarity?**
+
+:::: {#quiz1}
+<form id="quiz-form-1">
+
+<input type="radio" name="q1" value="a"> A. Jaccard uses relative abundance, Bray-Curtis uses only presence/absence<br> <input type="radio" name="q1" value="b"> B. Jaccard uses presence/absence, Bray-Curtis uses abundance<br> <input type="radio" name="q1" value="c"> C. Both use only abundance data<br> <input type="radio" name="q1" value="d"> D. They are mathematically identical<br><br>
+
+<button type="button" onclick="checkAnswer1()">
+
+Submit
+
+</button>
+
+</form>
+
+::: {#result1 style="margin-top: 1em; font-weight: bold;"}
+:::
+::::
+
+```{=html}
+<script>
+function checkAnswer1() {
+  const answer = document.querySelector('#quiz-form-1 input[name="q1"]:checked');
+  const result = document.getElementById("result1");
+
+  if (!answer) {
+    result.textContent = "⚠️ Please select an answer.";
+    result.style.color = "orange";
+    return;
+  }
+
+  if (answer.value === "b") {
+    result.textContent = "✅ Correct! Jaccard uses presence/absence, Bray-Curtis uses abundance.";
+    result.style.color = "green";
+  } else {
+    result.textContent = "❌ Not quite., try again";
+    result.style.color = "red";
+  }
+}
+</script>
+```
+
+------------------------------------------------------------------------
+
+**Both Bray-Curtis and Jaccard use a dissimilarity scale of 0–1. What does this mean?**
+
+:::: {#quiz2}
+<form id="quiz-form-2">
+
+<input type="radio" name="q2" value="a"> A. 0 means completely different, 1 means identical<br> <input type="radio" name="q2" value="b"> B. 0 means identical, 1 means completely different<br> <input type="radio" name="q2" value="c"> C. Both always give the same result<br> <input type="radio" name="q2" value="d"> D. The scale measures sample size<br><br>
+
+<button type="button" onclick="checkAnswer2()">
+
+Submit
+
+</button>
+
+</form>
+
+::: {#result2 style="margin-top: 1em; font-weight: bold;"}
+:::
+::::
+
+```{=html}
+<script>
+function checkAnswer2() {
+  const answer = document.querySelector('#quiz-form-2 input[name="q2"]:checked');
+  const result = document.getElementById("result2");
+
+  if (!answer) {
+    result.textContent = "⚠️ Please select an answer.";
+    result.style.color = "orange";
+    return;
+  }
+
+  if (answer.value === "b") {
+    result.textContent = "✅ Correct! A value of 0 means identical, and 1 means completely different.";
+    result.style.color = "green";
+  } else {
+    result.textContent = "❌ Not quite., try again";
+    result.style.color = "red";
+  }
+}
+</script>
+```
+
+------------------------------------------------------------------------
+
+**In both Bray-Curtis and Jaccard dissimilarity, the formula starts with "1 -". Why is that?**
+
+:::: {#quiz3}
+<form id="quiz-form-3">
+
+<input type="radio" name="q3" value="a"> A. To invert similarity into dissimilarity<br> <input type="radio" name="q3" value="b"> B. Because the equation calculates diversity directly<br> <input type="radio" name="q3" value="c"> C. To normalize the values between 0 and 1<br> <input type="radio" name="q3" value="d"> D. It’s an arbitrary choice without meaning<br><br>
+
+<button type="button" onclick="checkAnswer3()">
+Submit
+</button>
+
+</form>
+
+::: {#result3 style="margin-top: 1em; font-weight: bold;"}
+:::
+::::
+
+```{=html}
+<script>
+function checkAnswer3() {
+  const answer = document.querySelector('#quiz-form-3 input[name="q3"]:checked');
+  const result = document.getElementById("result3");
+
+  if (!answer) {
+    result.textContent = "⚠️ Please select an answer.";
+    result.style.color = "orange";
+    return;
+  }
+
+  if (answer.value === "a") {
+    result.textContent = "✅ Correct! The '1 -' part inverts similarity measures into a dissimilarity scale.";
+    result.style.color = "green";
+  } else {
+    result.textContent = "❌ Not quite., Try again";
+    result.style.color = "red";
+  }
+}
+</script>
+```
+------------------------------------------------------------------------
+<form id="quiz-form-5">
+
+<p><strong>Calculate the Bray-Curtis and Jaccard dissimilarity between the following two samples:</strong></p>
+
+:::::: columns
+::: {.column width="100%"}
+| Bacterial Species | Sample from Greece | Sample from Victoria, AU |
+|-------------------|--------------------|--------------------------|
+| *Bacillus*     | 2                  | 0                        |
+| *Lactobacillus* | 8                  | 2                        |
+| *Streptococcus* | 0                  | 4                        |
+| *Escherichia*   | 2                  | 2                        |
+| *Clostridium*  | 0                  | 6                        |
+| *Pseudomonas*     | 2                  | 2                        |
+**Test data set**: this table compares the presence of selected bacterial genera (%) in the Melon fruit fly, with gut samples from Greece and Victoria, Australia.
+:::
+
+:::: {.column width="100%"}
+<label for="bc">Bray-Curtis dissimilarity:</label><br> <input type="text" id="bc" name="bc" style="width: 100%; padding: 8px;"><br><br>
+
+<label for="jac">Jaccard dissimilarity:</label><br> <input type="text" id="jac" name="jac" style="width: 100%; padding: 8px;"><br><br>
+
+<button type="button" onclick="checkAnswer5()">
+
+Submit
+</button>
+</form>
+
+::: {#result5 style="margin-top: 1em; font-weight: bold;"}
+:::
+::::
+
+```{=html}
+<script>
+function checkAnswer5() {
+  const bc = parseFloat(document.getElementById("bc").value.trim());
+  const jac = parseFloat(document.getElementById("jac").value.trim());
+  const result = document.getElementById("result5");
+
+  if (isNaN(bc) || isNaN(jac)) {
+    result.textContent = "⚠️ Please enter numeric answers for both dissimilarities.";
+    result.style.color = "orange";
+    return;
+  }
+
+  const isCorrectBC = Math.abs(bc - 0.6) < 0.001;
+  const isCorrectJaccard = Math.abs(jac - 0.5) < 0.001;
+
+  if (isCorrectBC && isCorrectJaccard) {
+    result.textContent = "✅ Correct! Bray-Curtis is 0.6 and Jaccard is 0.5";
+    result.style.color = "green";
+  } else {
+    result.textContent = "❌ Not quite. Try checking your calculations again .";
+    result.style.color = "red";
+  }
+}
+</script>
+```
+
+# References:
+
+Su, X., 2021. Elucidating the beta-diversity of the microbiome: from global alignment to local alignment. *Msystems*, *6*(4), pp.10-1128.
+
+:::::::

@@ -1,0 +1,87 @@
+---
+title: "Microbial Analysis Technqiues"
+about:
+  template: marquee
+  links:
+    - icon: envelope
+      text: Email
+      href: mailto:Katie.millar@uea.ac.uk
+    - icon: github
+      text: Github
+      href: https://github.com/katherinemillar02
+    - text: Bluesky
+      href: https://bsky.app/profile/katiemillar.bsky.social
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/katie-millar-15bb56236/
+---
+
+## **Everything Microbial Analysis...**
+
+Welcome! This site is designed to help you build a solid understanding of microbial analysis techniques from the beginning. With a focus on beta diversity methods, and visualisation techniques such as PCA and NMDS, looking through the key concepts and practical applications. Using real-world datasets, hopefully this can be used to help identify and interpret differences in microbial diversity with confidence.
+
+ 
+
+```{r echo=FALSE, out.width="30%",fig.align="left", fig.cap="This image was created on Canva."}
+knitr::include_graphics("hexmedfly.png")
+```
+
+
+ 
+This site will cover methods to calculate **Beta Diversity** in microbial communities, including commonly used metrics such as **Bray-Curtis** and **Jaccard**. It will also introduce key visualisation techniques for exploring differences in microbiome composition, such as **Principal Component Analysis (PCA)** and **Non-metric Multidimensional Scaling (NMDS)**.
+
+ 
+
+## Covered Topics
+
+-   [**Beta Diversity Analysis Methods**](qmds/beta.qmd): An overview of key techniques used to calculate beta diversity, including Bray-Curtis and Jaccard indices.
+-   **Visualisation Methods**
+      - [**PCA**](qmds/PCA.qmd): A guide to visualising microbial community differences using PCA. 
+      - [**NMDS**](qmds/NMDS.qmd): A guide to visualising microbial community differences using NMDS. 
+      
+      
+## Study Used: Darrington et al. (2022)
+
+The study: [ "Characterisation of the symbionts in the Mediterranean fruit fly gut"](https://www.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000801)
+
+This study investigated the gut microbiota of the Mediterranean fruit fly (*Ceratitis capitata*), a significant agricultural pest, to better understand its microbial associations. The researchers compared the gut bacteria of wild and laboratory-raised flies fed on various diets. They found that while diet strongly influences the gut microbiota, a single bacterium *Klebsiella michiganensis/oxytoca* ("Medkleb") was consistently dominant and notably resistant to antibiotics.
+
+### Data Used on This Website
+Throughout this website, we focus on data from the **wild-caught samples** in the study. Specifically, the researchers examined how different natural fruit larval diets influence the adult gut microbiome of Mediterranean fruit flies.
+
+Newly emerged adult female flies (0–3 days old) were collected during the summer of 2014 from a range of fruit hosts:  
+
+-   **Morocco**: Argan  
+
+-   **Crete**: Apricots, Oranges, Grapefruits  
+
+-   **Greece**: Peaches, Oranges, Tangerines
+
+The flies were preserved in ethanol, transported to the UK, and dissected to isolate DNA from their guts. Their microbial communities were then analysed using short-read 16S rRNA gene sequencing. 
+
+<span style="display: inline-flex; align-items: center;">
+
+  <a href="https://github.com/Philip-Leftwich/Characterisation-of-the-symbionts-in-the-Mediterranean-fruitfly-gut" target="_blank" style="text-decoration: none; color: inherit;">
+    For full data and analysis, visit the **GitHub repository**
+      <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 16 16" width="20" style="vertical-align: middle; margin-right: 6px;">
+    <path fill-rule="evenodd" fill="#000000"
+      d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 
+      6.53 5.47 7.59.4.07.55-.17.55-.38 
+      0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52
+      -.01-.53.63-.01 1.08.58 1.23.82.72 1.21 
+      1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2
+      -3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08
+      -.2-.36-1.01.08-2.11 0 0 .67-.21 2.2.82.64-.18 
+      1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 
+      2.2-.82 2.2-.82.44 1.1.16 1.91.08 2.11.51.56.82 
+      1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 
+      1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 
+      8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+  </svg>
+  </a>
+</span>
+
+
+**Author: Katie Millar**\
+I am a PhD Student at the University of East Anglia, UK, researching insect-microbe symbioses using the Mediterranean fruitfly. For any of my socials, please click below. 
+

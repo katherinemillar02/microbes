@@ -1,0 +1,2003 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Principal Component Analysis (PCA) – Microbial Analysis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../hexmedfly.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../hexmedfly.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Microbial Analysis</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../qmds/introduction.html"> 
+<span class="menu-text">Microbial Analysis Introduction</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../qmds/beta.html"> 
+<span class="menu-text">Beta Diversity Analysis Methods</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../qmds/PCA.html" aria-current="page"> 
+<span class="menu-text">PCA</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../qmds/NMDS.html"> 
+<span class="menu-text">NMDS</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../qmds/microbialsummary.html"> 
+<span class="menu-text">The Microbial Summary</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+  <ul>
+  <li><a href="#a-background-to-pca" id="toc-a-background-to-pca" class="nav-link active" data-scroll-target="#a-background-to-pca">A background to PCA</a></li>
+  <li><a href="#pca-in-action" id="toc-pca-in-action" class="nav-link" data-scroll-target="#pca-in-action"><strong>PCA in action</strong></a>
+  <ul class="collapse">
+  <li><a href="#step-1-scaling-the-data" id="toc-step-1-scaling-the-data" class="nav-link" data-scroll-target="#step-1-scaling-the-data">Step 1: Scaling the data</a></li>
+  <li><a href="#step-2-centering-the-data" id="toc-step-2-centering-the-data" class="nav-link" data-scroll-target="#step-2-centering-the-data">Step 2: Centering the data</a></li>
+  <li><a href="#step-3-calculate-the-co-variance-matrix-values" id="toc-step-3-calculate-the-co-variance-matrix-values" class="nav-link" data-scroll-target="#step-3-calculate-the-co-variance-matrix-values">Step 3: Calculate the co-variance matrix values</a></li>
+  <li><a href="#step-4-generating-eigenvalues-and-eigenvectors." id="toc-step-4-generating-eigenvalues-and-eigenvectors." class="nav-link" data-scroll-target="#step-4-generating-eigenvalues-and-eigenvectors.">Step 4: Generating eigenvalues and eigenvectors.</a></li>
+  <li><a href="#step-5-calculate-the-principal-components" id="toc-step-5-calculate-the-principal-components" class="nav-link" data-scroll-target="#step-5-calculate-the-principal-components">Step 5: Calculate the Principal Components</a></li>
+  </ul></li>
+  <li><a href="#pca---test-yourself" id="toc-pca---test-yourself" class="nav-link" data-scroll-target="#pca---test-yourself">PCA - Test Yourself!</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References:</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<div class="quarto-about-marquee">
+  <div class="about-image-container">
+  </div>
+  <div class="about-contents">
+    <header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Principal Component Analysis (PCA)</h1>
+</div>
+<div class="quarto-title-meta">
+  </div>
+</header> <main class="content" id="quarto-document-content">
+
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/PCA2.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Credit: This image was created on Canva.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>&nbsp;</p>
+<section id="a-background-to-pca" class="level2">
+<h2 data-anchor-id="a-background-to-pca">A background to PCA</h2>
+<p>&nbsp;</p>
+<section id="what-is-pca" class="level4">
+<h4 data-anchor-id="what-is-pca"><strong>What is PCA?</strong></h4>
+<p>Principal Component Analysis (PCA) is a visualisation method that simplifies complex data by reducing it to just a few key dimensions. It helps you visualise patterns: points that appear close together on the plot are more similar, while those farther apart are more different. PCA works best when the data exhibits linear relationships, as it captures variation along straight-line directions in the data.</p>
+<p>This similarity is often based on <strong>Euclidean distance</strong>, which measures the straight-line distance between data points in the reduced space. PCA ensures that this reduced space still captures the most important variation in the data, so Euclidean distances between points remain meaningful.</p>
+<p>&nbsp;</p>
+</section>
+<section id="breaking-it-down-into-a-few-key-points" class="level4">
+<h4 data-anchor-id="breaking-it-down-into-a-few-key-points"><strong>Breaking it down into a few key points…</strong></h4>
+<ul>
+<li><p><strong>PCA</strong> reduces the dimensionality of datasets with a lot of different variables and transforms highly correlated variables together into a smaller set of uncorrelated components.</p></li>
+<li><p>This method clusts together correlated variables by finding the <strong>covariance matrix</strong> of the data, that allows one to see the relationship between different variables, and identifying its principal components, which are defined by their <strong>eigenvalues</strong> and <strong>eigenvectors</strong>.</p></li>
+<li><p><strong>Eigenvalues</strong> can be used to work out which are the first two, or three (depending on how many are being used) principal components of the dataset, while the <strong>eigenvectors</strong> will be used directly in the calculation of the principal components, along with the raw but <strong>centered data</strong>.</p></li>
+</ul>
+<blockquote class="blockquote">
+<p><strong>Centered data:</strong> where the raw data has had the overall mean of its group substracted from it.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>Covariance matrix:</strong> a matrix that summarises the relationships between variables in a dataset, looks at how the variables change together.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>Eigenvalues:</strong> numerical values that represent the amount of data explained by each of the principal components.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>Eigenvectors:</strong> unit vectors (numerical values) that indicate the direction of the principal components.</p>
+</blockquote>
+<p>&nbsp; To make it easier, lets look at it step by step …</p>
+<p>&nbsp;</p>
+</section>
+<section id="the-key-steps-to-pca" class="level4">
+<h4 data-anchor-id="the-key-steps-to-pca"><strong>The key steps to PCA:</strong></h4>
+<ol type="1">
+<li><p><span style="color:green"><strong>Scale the data</strong></span> (work out the mean composition of each bacteria).</p></li>
+<li><p><span style="color:green"><strong>Centre the data</strong></span> (subtract the column means from the bacteria composition).</p></li>
+<li><p>Find the <span style="color:green"><strong>covariance matrix values</strong></span> using the <span style="color:green"><strong>centered data</strong></span>.</p></li>
+<li><p>Calculate the <span style="color:green"><strong>eigenvalues</strong></span> and <span style="color:green"><strong>eigenvectors</strong></span> with the <span style="color:green"><strong>covariance matrix values</strong></span>.</p></li>
+<li><p>Calculate the <span style="color:green"><strong>principal component spaces</strong></span>.</p></li>
+<li><p>Generate the <span style="color:green"><strong>PCA plot</strong></span>.</p></li>
+</ol>
+<p>&nbsp;<br>
+</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/PCA-intro.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Credit: This image was created on Canva.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>&nbsp;</p>
+</section>
+</section>
+<section id="pca-in-action" class="level2">
+<h2 data-anchor-id="pca-in-action"><strong>PCA in action</strong></h2>
+<p>Now we know a little bit more about PCA, let’s use PCA to understand some data using the dataset from <a href="https://www.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000801#tab2">Darrington et al.&nbsp;(2022)</a>.</p>
+<p>&nbsp;</p>
+<p>As mentioned throughout this website, in this study, Medflies were reared on six different fruit types, and their microbiota composition was analysed. So this dataset will allow us to use PCA to visualise how microbiota communities differ depending on the fruit substrate if which the Medflies were reared.</p>
+<p>If you would like to understand a little more about this study, please see: <a href="index.qmd"><strong>The Home Page</strong></a></p>
+<p>&nbsp;</p>
+<p><strong>Table 1:</strong> <em>Relative abundance (%) of bacterial genera on the surfaces of different fruits. Please scroll sideways to see the entire table.</em></p>
+<div style="overflow-x: auto;">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Fruit</th>
+<th><em>Klebsiella</em></th>
+<th><em>Acinetobacter</em></th>
+<th><em>Pantoea</em></th>
+<th><em>Pseudoxanthomonas</em></th>
+<th><em>Serratia</em></th>
+<th><em>Stenotrophomonas</em></th>
+<th><em>Delftia</em></th>
+<th><em>Burkholderia</em></th>
+<th><em>Sphingomonas</em></th>
+<th><em>Bacillus</em></th>
+<th><em>Sphingobacterium</em></th>
+<th><em>Mycoplasma</em></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Apricot</td>
+<td>80%</td>
+<td>10%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>5%</td>
+</tr>
+<tr class="even">
+<td>Argan</td>
+<td>75%</td>
+<td>10%</td>
+<td>5%</td>
+<td>5%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>5%</td>
+<td>5%</td>
+</tr>
+<tr class="odd">
+<td>Grapefruit</td>
+<td>75%</td>
+<td>10%</td>
+<td>5%</td>
+<td>5%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>5%</td>
+<td>5%</td>
+</tr>
+<tr class="even">
+<td>Orange</td>
+<td>70%</td>
+<td>15%</td>
+<td>5%</td>
+<td>5%</td>
+<td>5%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>5%</td>
+</tr>
+<tr class="odd">
+<td>Peach</td>
+<td>60%</td>
+<td>10%</td>
+<td>10%</td>
+<td>10%</td>
+<td>5%</td>
+<td>5%</td>
+<td>0%</td>
+<td>0%</td>
+<td>5%</td>
+<td>5%</td>
+<td>0%</td>
+<td>0%</td>
+</tr>
+<tr class="even">
+<td>Tang</td>
+<td>40%</td>
+<td>10%</td>
+<td>20%</td>
+<td>20%</td>
+<td>10%</td>
+<td>5%</td>
+<td>0%</td>
+<td>5%</td>
+<td>10%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>&nbsp;</p>
+<section id="step-1-scaling-the-data" class="level3">
+<h3 data-anchor-id="step-1-scaling-the-data">Step 1: Scaling the data</h3>
+<p>As seen above, in the key steps to PCA, our first step is to use our data - and scale it! This involves calculating the <strong>mean composition</strong> of each bacterial relative abundance across all samples.</p>
+<p>&nbsp;</p>
+<p><strong>Table 2:</strong> <em>Relative abundance (%) of bacterial genera on the surfaces of different fruits. Please scroll sideways to see the entire table.</em></p>
+<div id="Scale" style="overflow-x: auto;">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Fruit</th>
+<th><em>Klebsiella</em></th>
+<th><em>Acinetobacter</em></th>
+<th><em>Pantoea</em></th>
+<th><em>Pseudoxanthomonas</em></th>
+<th><em>Serratia</em></th>
+<th><em>Stenotrophomonas</em></th>
+<th><em>Delftia</em></th>
+<th><em>Burkholderia</em></th>
+<th><em>Sphingomonas</em></th>
+<th><em>Bacillus</em></th>
+<th><em>Sphingobacterium</em></th>
+<th><em>Mycoplasma</em></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Apricot</td>
+<td>80%</td>
+<td>10%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>5%</td>
+</tr>
+<tr class="even">
+<td>Argan</td>
+<td>75%</td>
+<td>10%</td>
+<td>5%</td>
+<td>5%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>5%</td>
+<td>5%</td>
+</tr>
+<tr class="odd">
+<td>GF</td>
+<td>75%</td>
+<td>10%</td>
+<td>5%</td>
+<td>5%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>5%</td>
+<td>5%</td>
+</tr>
+<tr class="even">
+<td>Orange</td>
+<td>70%</td>
+<td>15%</td>
+<td>5%</td>
+<td>5%</td>
+<td>5%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>5%</td>
+</tr>
+<tr class="odd">
+<td>Peach</td>
+<td>60%</td>
+<td>10%</td>
+<td>10%</td>
+<td>10%</td>
+<td>5%</td>
+<td>5%</td>
+<td>0%</td>
+<td>0%</td>
+<td>5%</td>
+<td>5%</td>
+<td>0%</td>
+<td>0%</td>
+</tr>
+<tr class="even">
+<td>Tang</td>
+<td>40%</td>
+<td>10%</td>
+<td>20%</td>
+<td>20%</td>
+<td>10%</td>
+<td>5%</td>
+<td>0%</td>
+<td>5%</td>
+<td>10%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+</tr>
+<tr class="odd">
+<td><strong>Mean</strong></td>
+<td><strong>66.7%</strong></td>
+<td><strong>10.8%</strong></td>
+<td><strong>7.5%</strong></td>
+<td><strong>7.5%</strong></td>
+<td><strong>3.3%</strong></td>
+<td><strong>1.7%</strong></td>
+<td><strong>0%</strong></td>
+<td><strong>0.8%</strong></td>
+<td><strong>2.5%</strong></td>
+<td><strong>0.8%</strong></td>
+<td><strong>1.7%</strong></td>
+<td><strong>3.3%</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>&nbsp;<br>
+&nbsp;</p>
+</section>
+<section id="step-2-centering-the-data" class="level3">
+<h3 data-anchor-id="step-2-centering-the-data">Step 2: Centering the data</h3>
+<p>Our next step is to centre the data. We can do this by subtracting the <strong>mean composition</strong> (which was calculated in Step 1) from each individual value in the data-set. This step adjusts each bacterial taxa so that its average value across all samples becomes zero.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Deep Dive into Principal Component Analysis">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Deep Dive into Principal Component Analysis
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<details>
+<summary>
+Why do we want the average across the samples to be zero?
+</summary>
+<p>PCA is all about variation, not about absolute values. We need to make the average value across zero, so there is no biasing. Say if the abundance of bacteria 1 was 66%, and the bacteria 2 was 5%, if we don’t center this - PCA may think that bacteria is way more important, just because there is more of it, but PCA is not about this, it’s all about how bacteria varies and works together with one another.</p>
+</details>
+</div>
+</div>
+<div style="overflow-x: auto;">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Fruit</th>
+<th><em>Klebsiella</em></th>
+<th><em>Acinetobacter</em></th>
+<th><em>Pantoea</em></th>
+<th><em>Pseudoxanthomonas</em></th>
+<th><em>Serratia</em></th>
+<th><em>Stenotrophomonas</em></th>
+<th><em>Delftia</em></th>
+<th><em>Burkholderia</em></th>
+<th><em>Sphingomonas</em></th>
+<th><em>Bacillus</em></th>
+<th><em>Sphingobacterium</em></th>
+<th><em>Mycoplasma</em></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Apricot</td>
+<td>13.3%</td>
+<td>-0.8%</td>
+<td>-7.5%</td>
+<td>-7.5%</td>
+<td>-3.3%</td>
+<td>-1.7%</td>
+<td>0%</td>
+<td>-0.8%</td>
+<td>-2.5%</td>
+<td>-0.8%</td>
+<td>-1.7%</td>
+<td>1.7%</td>
+</tr>
+<tr class="even">
+<td>Argan</td>
+<td>8.3%</td>
+<td>-0.8%</td>
+<td>-2.5%</td>
+<td>-2.5%</td>
+<td>-3.3%</td>
+<td>-1.7%</td>
+<td>0%</td>
+<td>-0.8%</td>
+<td>-2.5%</td>
+<td>-0.8%</td>
+<td>3.3%</td>
+<td>1.7%</td>
+</tr>
+<tr class="odd">
+<td>GF</td>
+<td>8.3%</td>
+<td>-0.8%</td>
+<td>-2.5%</td>
+<td>-2.5%</td>
+<td>-3.3%</td>
+<td>-1.7%</td>
+<td>0%</td>
+<td>-0.8%</td>
+<td>-2.5%</td>
+<td>-0.8%</td>
+<td>3.3%</td>
+<td>1.7%</td>
+</tr>
+<tr class="even">
+<td>Orange</td>
+<td>3.3%</td>
+<td>4.2%</td>
+<td>-2.5%</td>
+<td>-2.5%</td>
+<td>1.7%</td>
+<td>-1.7%</td>
+<td>0%</td>
+<td>-0.8%</td>
+<td>-2.5%</td>
+<td>-0.8%</td>
+<td>-1.7%</td>
+<td>1.7%</td>
+</tr>
+<tr class="odd">
+<td>Peach</td>
+<td>-6.7%</td>
+<td>-0.8%</td>
+<td>2.5%</td>
+<td>2.5%</td>
+<td>1.7%</td>
+<td>3.3%</td>
+<td>0%</td>
+<td>-0.8%</td>
+<td>2.5%</td>
+<td>4.2%</td>
+<td>-1.7%</td>
+<td>-3.3%</td>
+</tr>
+<tr class="even">
+<td>Tang</td>
+<td>-26.7%</td>
+<td>-0.8%</td>
+<td>12.5%</td>
+<td>12.5%</td>
+<td>6.7%</td>
+<td>3.3%</td>
+<td>0%</td>
+<td>4.2%</td>
+<td>7.5%</td>
+<td>-0.8%</td>
+<td>-1.0%</td>
+<td>-3.3%</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;<br>
+&nbsp;</p>
+</section>
+<section id="step-3-calculate-the-co-variance-matrix-values" class="level3">
+<h3 data-anchor-id="step-3-calculate-the-co-variance-matrix-values">Step 3: Calculate the co-variance matrix values</h3>
+<p>Once the data has been mean-centered, we apply the <strong>covariance formula</strong> to assess the relationships between the bacterial compositions across samples. Covariance measures how much two variables change together.</p>
+<p>The population covariance is:</p>
+<p><span class="math display">\[
+\text{Cov}_{\text{population}} = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{n}
+\]</span></p>
+<p>The sample covariance is:</p>
+<p><span class="math display">\[
+\text{Cov}_{\text{sample}} = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{n-1}
+\]</span></p>
+<p>&nbsp;</p>
+<p><strong>Breaking down the formula</strong></p>
+<p><span class="math display">\[
+( x_i - \bar{x} )
+\]</span></p>
+<p><span style="color: gray;">This represents the centered value of variable ( x ) — how far one fruit’s measurement (e.g., <em>Klebsiella</em> abundance) is from the average across all fruits.</span></p>
+<p><span class="math display">\[
+( y_i - \bar{y} )
+\]</span></p>
+<p><span style="color: gray;">This represents the centered value of variable ( y ) — for example, how much another bacterial feature (like <em>Acinetobacter</em>) deviates from its average.</span></p>
+<p>&nbsp;</p>
+<p><span class="math display">\[
+( n - 1 )
+\]</span> <span style="color: gray;">This is the total number of samples minus one. We divide by ( n - 1 ) instead of ( n ) because we’re working with a sample, not the entire population — this is known as <strong>Bessel’s correction</strong>.</span></p>
+<p>&nbsp;</p>
+<p>Using the co-variance formula, and calculating the mean centered data - we can try calculate our covariance matrix values. We have two options, we can either jump straight to using R, OR, we can first give ourselves a bit of an understanding of how they are calculated manually - so we really understand the method…</p>
+<p>&nbsp;</p>
+<section id="calculating-the-covariance-matrix-values-manually" class="level4">
+<h4 data-anchor-id="calculating-the-covariance-matrix-values-manually"><strong>3.1 Calculating the covariance matrix values manually</strong></h4>
+<p>With our previously calculated mean centered data, lets work out the co-variance matrix of <em>Klebsiella</em> and <em>Acinetobacter</em>, and the presence of how these bacteria act together across the different fruits. &nbsp;</p>
+<p><em>Covariance Calculation of Klebsiella vs Acinetobacter:</em></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Fruit</th>
+<th><em>Klebsiella</em></th>
+<th><em>Acinetobacter</em></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Apricot</td>
+<td>13.3%</td>
+<td>-0.8%</td>
+</tr>
+<tr class="even">
+<td>Argan</td>
+<td>8.3%</td>
+<td>-0.8%</td>
+</tr>
+<tr class="odd">
+<td>GF</td>
+<td>8.3%</td>
+<td>-0.8%</td>
+</tr>
+<tr class="even">
+<td>Orange</td>
+<td>3.3%</td>
+<td>4.2%</td>
+</tr>
+<tr class="odd">
+<td>Peach</td>
+<td>-6.7%</td>
+<td>-0.8%</td>
+</tr>
+<tr class="even">
+<td>Tangerine</td>
+<td>-26.7%</td>
+<td>-0.8%</td>
+</tr>
+</tbody>
+</table>
+<p>Let’s quickly tae just these two bacteria from the table above where we calculated the centered values, the top of the formula, tells us to multiple the centered values of one bacteria, by another bacteria. So let’s do that for all of them.</p>
+<p>Apricot: <span class="math display">\[
+( x_i - \bar{x} ) ( y_i - \bar{y} ) = ( 13.3 ) ( -0.8 ) = -10.64
+\]</span></p>
+<ul>
+<li>Now lets do these for all of the fruits.</li>
+</ul>
+<span class="math display">\[\begin{align*}
+&amp;Apricot:(13.3)*(-0.8) = -10.64 \\
+&amp;Argan:(8.3)*(-0.8) = -6.64 \\
+&amp;Grapefruit:(8.3)*(-0.8) = -6.64 \\
+&amp;Orange:(3.3)*(4.2) = 13.86 \\
+&amp;Peach:(-6.7)*(-0.8) = 5.36 \\
+&amp;Tangerine:(-26.7)*(-0.8) =  21.36 \\
+\end{align*}\]</span>
+<ul>
+<li>Sum the results</li>
+</ul>
+<span class="math display">\[\begin{align*}
+    (-10.64) + (-6.64) + (-6.64) + 13.86 + 5.36 +  21.36  = 16.66 \\
+\end{align*}\]</span>
+<ul>
+<li>We now have the calculation for the top of our formula, now we use the bottom of the formula and divide the result of the sum by (n-1)</li>
+</ul>
+<p><span class="math display">\[
+\text= \frac{16.66}{6-1} = 3.332
+\]</span></p>
+<p>We’ve worked out the variance of two different species across these 6 different fruits, very good going!</p>
+<p>To make sure we have got it down, lets take the variance of the <em>same</em> bacteria, and as our formula is bacteria * bacteria, we can just do squared.</p>
+<p>&nbsp;</p>
+<p><em>Variance: Klebsiella vs Klebsiella</em> <span class="math display">\[\begin{align*}
+&amp;Apricot:(13.3)^2 =  176.89 \\
+&amp;Argan:(8.3)^2 = 68.89 \\
+&amp;Grapefruit:(8.3)^2 = 68.89 \\
+&amp;Orange:(3.3)^2 = 10.89 \\
+&amp;Peach:(-6.7)^2 = 44.89 \\
+&amp;Tangerine:(-26.7)^2 = 712.89 \\
+\end{align*}\]</span></p>
+<p>&nbsp;<span class="math display">\[\begin{align*}
+    176.89 + 68.89 + 68.89 + 10.89 + 44.89 + 712.89
+    = 1083.34 \\
+\end{align*}\]</span></p>
+<p><span class="math display">\[
+\frac{1083.34}{6-1} = 216.668
+\]</span></p>
+<p>We have manually worked out that the covariance matrix of (<em>Klebsiella</em>, <em>Acinetobacter</em>) = <strong>3.332</strong> and the covariance matrix of (<em>Klebsiella</em>, <em>Klebsiella</em>) = <strong>216.668</strong>.</p>
+<p>Now we know how to work out covariance matrices <em>manually</em>, we can be pleased with ourselves, and just use R to work out the rest… This is how to do that!</p>
+</section>
+<section id="using-r-to-work-out-the-covariance-matrix-values" class="level4">
+<h4 data-anchor-id="using-r-to-work-out-the-covariance-matrix-values"><strong>3.2 Using R to work out the covariance matrix values</strong></h4>
+<p>We first put our centered data in a <strong>matrix</strong> for R to read:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>centered_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Klebsiella =</span> <span class="fu">c</span>(<span class="fl">13.3</span>, <span class="fl">8.3</span>, <span class="fl">8.3</span>, <span class="fl">3.3</span>, <span class="sc">-</span><span class="fl">6.7</span>, <span class="sc">-</span><span class="fl">26.7</span>),</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Acinetobacter =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.8</span>, <span class="sc">-</span><span class="fl">0.8</span>, <span class="sc">-</span><span class="fl">0.8</span>, <span class="fl">4.2</span>, <span class="sc">-</span><span class="fl">0.8</span>, <span class="sc">-</span><span class="fl">0.8</span>),</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Pantoea =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">7.5</span>, <span class="sc">-</span><span class="fl">2.5</span>, <span class="sc">-</span><span class="fl">2.5</span>, <span class="sc">-</span><span class="fl">2.5</span>, <span class="fl">2.5</span>, <span class="fl">12.5</span>),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Pseudoxanthomonas =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">7.5</span>, <span class="sc">-</span><span class="fl">2.5</span>, <span class="sc">-</span><span class="fl">2.5</span>, <span class="sc">-</span><span class="fl">2.5</span>, <span class="fl">2.5</span>, <span class="fl">12.5</span>),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Serratia =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">3.3</span>, <span class="sc">-</span><span class="fl">3.3</span>, <span class="sc">-</span><span class="fl">3.3</span>, <span class="fl">1.7</span>, <span class="fl">1.7</span>, <span class="fl">6.7</span>),</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">Stenotrophomonas =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.7</span>, <span class="sc">-</span><span class="fl">1.7</span>, <span class="sc">-</span><span class="fl">1.7</span>, <span class="sc">-</span><span class="fl">1.7</span>, <span class="fl">3.3</span>, <span class="fl">3.3</span>),</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">Delftia =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">Burkholderia =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.8</span>, <span class="sc">-</span><span class="fl">0.8</span>, <span class="sc">-</span><span class="fl">0.8</span>, <span class="sc">-</span><span class="fl">0.8</span>, <span class="sc">-</span><span class="fl">0.8</span>, <span class="fl">4.2</span>),</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">Sphingomonas =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">2.5</span>, <span class="sc">-</span><span class="fl">2.5</span>, <span class="sc">-</span><span class="fl">2.5</span>, <span class="sc">-</span><span class="fl">2.5</span>, <span class="fl">2.5</span>, <span class="fl">7.5</span>),</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">Bacillus =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.8</span>, <span class="sc">-</span><span class="fl">0.8</span>, <span class="sc">-</span><span class="fl">0.8</span>, <span class="sc">-</span><span class="fl">0.8</span>, <span class="fl">4.2</span>, <span class="sc">-</span><span class="fl">0.8</span>),</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">Sphingobacterium =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.7</span>, <span class="fl">3.3</span>, <span class="fl">3.3</span>, <span class="sc">-</span><span class="fl">1.7</span>, <span class="sc">-</span><span class="fl">1.7</span>, <span class="sc">-</span><span class="fl">1.0</span>),</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">Mycoplasma =</span> <span class="fu">c</span>(<span class="fl">1.7</span>, <span class="fl">1.7</span>, <span class="fl">1.7</span>, <span class="fl">1.7</span>, <span class="sc">-</span><span class="fl">3.3</span>, <span class="sc">-</span><span class="fl">3.3</span>))</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>centered_data_matrix <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(centered_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<button onclick="toggleVisibility('centered-data-container')">
+Show/Hide Centered Data Matrix
+</button>
+<div id="centered-data-container" style="display:none;">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>     Klebsiella Acinetobacter Pantoea Pseudoxanthomonas Serratia
+[1,]       13.3          -0.8    -7.5              -7.5     -3.3
+[2,]        8.3          -0.8    -2.5              -2.5     -3.3
+[3,]        8.3          -0.8    -2.5              -2.5     -3.3
+[4,]        3.3           4.2    -2.5              -2.5      1.7
+[5,]       -6.7          -0.8     2.5               2.5      1.7
+[6,]      -26.7          -0.8    12.5              12.5      6.7
+     Stenotrophomonas Delftia Burkholderia Sphingomonas Bacillus
+[1,]             -1.7       0         -0.8         -2.5     -0.8
+[2,]             -1.7       0         -0.8         -2.5     -0.8
+[3,]             -1.7       0         -0.8         -2.5     -0.8
+[4,]             -1.7       0         -0.8         -2.5     -0.8
+[5,]              3.3       0         -0.8          2.5      4.2
+[6,]              3.3       0          4.2          7.5     -0.8
+     Sphingobacterium Mycoplasma
+[1,]             -1.7        1.7
+[2,]              3.3        1.7
+[3,]              3.3        1.7
+[4,]             -1.7        1.7
+[5,]             -1.7       -3.3
+[6,]             -1.0       -3.3</code></pre>
+</div>
+</div>
+</div>
+<script> function toggleVisibility(id) { var el = document.getElementById(id); el.style.display = (el.style.display === 'none') ? 'block' : 'none'; } </script>
+<p>&nbsp;</p>
+<p>Now our centered data is in a <strong>matrix</strong>, of Fruits x Bacteria, we can use this to work out the covariance matrix. I will show you two different ways to work this out in R.</p>
+<p>Below shows the code for the actual formula, but written in R.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>cov_matrix_1 <span class="ot">&lt;-</span> (<span class="fu">t</span>(centered_data_matrix) <span class="sc">%*%</span> centered_data_matrix) <span class="sc">/</span> (<span class="fu">nrow</span>(centered_data_matrix) <span class="sc">-</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>t()</code>: this function stands for <em>transpose</em>, meaning we will be <em>flipping</em> the rows and columns. ie: we have fruits as rows, bacteria as columns, but we want to flip this.</p>
+<p><code>%*%</code>: this is the symbol for how we multiply matrices.</p>
+<p>Like when we calculated it ourselves above, we our multiplying the centered values of the bacteria from one bacteria to another. Then, dividing the total of this across all the fruits by <strong>n</strong> (the fruits) <strong>-1</strong> (the go-to for calculating a sample size).</p>
+<p>Let’s look at the output from <code>cov_matrix_1</code>:</p>
+<button onclick="toggleVisibility('cov-matrix-output')">
+Show/Hide Manual R <code>cov_matrix_1</code> Output
+</button>
+<div id="cov-matrix-output" style="display:none;">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>                  Klebsiella Acinetobacter Pantoea Pseudoxanthomonas Serratia
+Klebsiella           216.668         3.332 -100.00           -100.00  -56.668
+Acinetobacter          3.332         4.168   -2.50             -2.50    1.668
+Pantoea             -100.000        -2.500   47.50             47.50   25.000
+Pseudoxanthomonas   -100.000        -2.500   47.50             47.50   25.000
+Serratia             -56.668         1.668   25.00             25.00   16.668
+Stenotrophomonas     -33.332        -1.668   15.00             15.00    8.332
+Delftia                0.000         0.000    0.00              0.00    0.000
+Burkholderia         -26.668        -0.832   12.50             12.50    6.668
+Sphingomonas         -60.000        -2.500   27.50             27.50   15.000
+Bacillus              -6.668        -0.832    2.50              2.50    1.668
+Sphingobacterium      12.930        -1.780   -3.25             -3.25   -5.730
+Mycoplasma            33.332         1.668  -15.00            -15.00   -8.332
+                  Stenotrophomonas Delftia Burkholderia Sphingomonas Bacillus
+Klebsiella                 -33.332       0      -26.668       -60.00   -6.668
+Acinetobacter               -1.668       0       -0.832        -2.50   -0.832
+Pantoea                     15.000       0       12.500        27.50    2.500
+Pseudoxanthomonas           15.000       0       12.500        27.50    2.500
+Serratia                     8.332       0        6.668        15.00    1.668
+Stenotrophomonas             6.668       0        3.332        10.00    3.332
+Delftia                      0.000       0        0.000         0.00    0.000
+Burkholderia                 3.332       0        4.168         7.50   -0.832
+Sphingomonas                10.000       0        7.500        17.50    2.500
+Bacillus                     3.332       0       -0.832         2.50    4.168
+Sphingobacterium            -2.870       0       -1.080        -3.95   -1.780
+Mycoplasma                  -6.668       0       -3.332       -10.00   -3.332
+                  Sphingobacterium Mycoplasma
+Klebsiella                   12.93     33.332
+Acinetobacter                -1.78      1.668
+Pantoea                      -3.25    -15.000
+Pseudoxanthomonas            -3.25    -15.000
+Serratia                     -5.73     -8.332
+Stenotrophomonas             -2.87     -6.668
+Delftia                       0.00      0.000
+Burkholderia                 -1.08     -3.332
+Sphingomonas                 -3.95    -10.000
+Bacillus                     -1.78     -3.332
+Sphingobacterium              6.29      2.870
+Mycoplasma                    2.87      6.668</code></pre>
+</div>
+</div>
+</div>
+<script>
+function toggleVisibility(id) {
+  var el = document.getElementById(id);
+  el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
+</script>
+<p>&nbsp;</p>
+<p>Great, now if you compare the covariance matrix values we calculated earlier, for Klebsiella and Acinetobacter, we calculated 3.332 to be the covariance matrix, and for Klebsiella and Klebsiella - we calculated 216.668, this pretty much matches what R has outputted for us!</p>
+<p>&nbsp; Alternatively, R also has the <code>cov()</code> function, which will work out the covariance matrix for you.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>cov_matrix_R <span class="ot">&lt;-</span> <span class="fu">cov</span>(centered_data_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<button onclick="toggleVisibility('cov_matrix_R')">
+Show/Hide R Function <code>cov_matrix_R</code> Output
+</button>
+<div id="cov_matrix_R" style="display:none;">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>                   Klebsiella Acinetobacter Pantoea Pseudoxanthomonas
+Klebsiella         216.666667     3.3333333 -100.00           -100.00
+Acinetobacter        3.333333     4.1666667   -2.50             -2.50
+Pantoea           -100.000000    -2.5000000   47.50             47.50
+Pseudoxanthomonas -100.000000    -2.5000000   47.50             47.50
+Serratia           -56.666667     1.6666667   25.00             25.00
+Stenotrophomonas   -33.333333    -1.6666667   15.00             15.00
+Delftia              0.000000     0.0000000    0.00              0.00
+Burkholderia       -26.666667    -0.8333333   12.50             12.50
+Sphingomonas       -60.000000    -2.5000000   27.50             27.50
+Bacillus            -6.666667    -0.8333333    2.50              2.50
+Sphingobacterium    12.933333    -1.7833333   -3.25             -3.25
+Mycoplasma          33.333333     1.6666667  -15.00            -15.00
+                    Serratia Stenotrophomonas Delftia Burkholderia Sphingomonas
+Klebsiella        -56.666667       -33.333333       0  -26.6666667       -60.00
+Acinetobacter       1.666667        -1.666667       0   -0.8333333        -2.50
+Pantoea            25.000000        15.000000       0   12.5000000        27.50
+Pseudoxanthomonas  25.000000        15.000000       0   12.5000000        27.50
+Serratia           16.666667         8.333333       0    6.6666667        15.00
+Stenotrophomonas    8.333333         6.666667       0    3.3333333        10.00
+Delftia             0.000000         0.000000       0    0.0000000         0.00
+Burkholderia        6.666667         3.333333       0    4.1666667         7.50
+Sphingomonas       15.000000        10.000000       0    7.5000000        17.50
+Bacillus            1.666667         3.333333       0   -0.8333333         2.50
+Sphingobacterium   -5.733333        -2.866667       0   -1.0833333        -3.95
+Mycoplasma         -8.333333        -6.666667       0   -3.3333333       -10.00
+                    Bacillus Sphingobacterium Mycoplasma
+Klebsiella        -6.6666667        12.933333  33.333333
+Acinetobacter     -0.8333333        -1.783333   1.666667
+Pantoea            2.5000000        -3.250000 -15.000000
+Pseudoxanthomonas  2.5000000        -3.250000 -15.000000
+Serratia           1.6666667        -5.733333  -8.333333
+Stenotrophomonas   3.3333333        -2.866667  -6.666667
+Delftia            0.0000000         0.000000   0.000000
+Burkholderia      -0.8333333        -1.083333  -3.333333
+Sphingomonas       2.5000000        -3.950000 -10.000000
+Bacillus           4.1666667        -1.783333  -3.333333
+Sphingobacterium  -1.7833333         6.281667   2.866667
+Mycoplasma        -3.3333333         2.866667   6.666667</code></pre>
+</div>
+</div>
+</div>
+<script>
+function toggleVisibility(id) {
+  var el = document.getElementById(id);
+  el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
+</script>
+<p>&nbsp;</p>
+<p>And again, as you can see from this output, these numbers are very very similar to the ones we calculated! You now know some different ways to calculate the covariance matrix values.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Deep Dive into PCA">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Deep Dive into PCA
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<details>
+<summary>
+What do the co-variance matrix values show?
+</summary>
+<p>The co-variance matrix here shows how these bacterial species vary together across different fruits. Positive values mean they move in the same direction, negative values mean when one increases, the other tends to decrease. For example lets look at our outputs and focus on <em>Klebsiella</em>. <em>Klebsiella</em> and <em>Acinetobacter</em> move together (3.33), while <em>Klebsiella</em> and <em>Pantonea</em> move in opposite directions (-100).</p>
+</details>
+</div>
+</div>
+<p>&nbsp;<br>
+&nbsp;</p>
+</section>
+</section>
+<section id="step-4-generating-eigenvalues-and-eigenvectors." class="level3">
+<h3 data-anchor-id="step-4-generating-eigenvalues-and-eigenvectors.">Step 4: Generating eigenvalues and eigenvectors.</h3>
+<p>Once we have the covariance matrices, we can proceed with the next step of PCA calculations by calculating the <strong>eigenvalues</strong> and <strong>eigenvectors</strong>! As discussed earlier;</p>
+<ul>
+<li><p>The eigen<strong>values</strong> represent the amount of <strong>variance</strong> in each principal component</p></li>
+<li><p>The eigen<strong>vectors</strong> represent the <strong>direction</strong> of principal components.</p></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/eigen.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>This image was generated from ChatGPT.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>However, the maths to calculate the eigenvalues and eigenvectors is VERY VERY complicated, so for now, we are just going to use R…</p>
+<p>If the maths is something you are keen to know to know, <a href="https://math.libretexts.org/Bookshelves/Linear_Algebra/A_First_Course_in_Linear_Algebra_(Kuttler)/07%3A_Spectral_Theory/7.01%3A_Eigenvalues_and_Eigenvectors_of_a_Matrix">this page by Ken Kuttler</a> might help.</p>
+<p>Despite this, it’s probably still sensible to understand a little more how eigenvalues and eigenvectors work. This leads us to something called spectral theory: a branch of mathematics that studies the spectrum of a matrix or operator, including its eigenvalues and eigenvectors. Spectral theory helps us understand how a matrix behaves by analysing these components, offering deep insights into the structure and transformations represented by the matrix.</p>
+<p>We can calculate these using the <code>eigen()</code> function in R, which will output both the values and the vectors.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>eigen <span class="ot">&lt;-</span> <span class="fu">eigen</span>(cov_matrix_R)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<button onclick="toggleVisibility('eigen')">
+Show/Hide Eigen Output
+</button>
+<div id="eigen" style="display:none;">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>eigen() decomposition
+$values
+ [1]  3.552576e+02  1.107888e+01  8.617986e+00  2.993896e+00  7.849813e-15
+ [6]  1.289621e-15  5.405335e-16  3.633270e-17  9.287314e-32 -2.102773e-16
+[11] -1.365406e-15 -3.018445e-14
+$vectors
+             [,1]        [,2]        [,3]        [,4]         [,5]
+ [1,]  0.78063519  0.09246510 -0.09110918  0.05643682  0.442049227
+ [2,]  0.01435545 -0.31761481  0.51438923  0.48199530  0.328877551
+ [3,] -0.36171417  0.28573974  0.01592520  0.19373557  0.001375333
+ [4,] -0.36171417  0.28573974  0.01592520  0.19373557  0.344916440
+ [5,] -0.20228279 -0.34790983  0.29478661  0.11591146  0.208929130
+ [6,] -0.12071823 -0.15461907 -0.37585160  0.04924008  0.088644405
+ [7,]  0.00000000  0.00000000  0.00000000  0.00000000  0.000000000
+ [8,] -0.09592001  0.12432406  0.15624898 -0.41532392  0.143367861
+ [9,] -0.21663824 -0.03029501 -0.21960262 -0.36608385  0.698426108
+[10,] -0.02479821 -0.27894314 -0.53210057  0.46456400 -0.011484218
+[11,]  0.04377806  0.68134994 -0.03738393  0.38576261  0.095757454
+[12,]  0.12071823  0.15461907  0.37585160 -0.04924008 -0.091097936
+               [,6]          [,7]          [,8]          [,9]         [,10]
+ [1,]  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00
+ [2,] -1.273819e-01 -6.464465e-02  3.998530e-02 -2.713994e-16 -4.784163e-02
+ [3,] -4.998453e-01 -5.439577e-02  3.006026e-01 -1.442308e-15 -2.154630e-01
+ [4,]  5.956601e-01  4.090559e-01 -1.610771e-01  1.175142e-15  1.341670e-01
+ [5,]  3.156701e-02 -2.900155e-01 -1.795108e-01  5.385656e-16  1.291376e-01
+ [6,]  1.908142e-01 -4.443074e-01 -4.299966e-01 -4.525482e-15 -5.815663e-01
+ [7,] -9.803617e-16  5.217727e-17 -1.782932e-15  1.000000e+00 -6.518782e-15
+ [8,] -3.687018e-01 -6.606470e-02 -6.204302e-01  1.370891e-15  3.789069e-01
+ [9,] -2.039325e-01  1.040540e-01  2.662426e-01 -1.019423e-15 -1.727683e-01
+[10,] -3.628517e-01  4.076416e-01 -2.741809e-01  3.931050e-16  1.840657e-01
+[11,] -9.581485e-02 -3.546601e-01 -1.395255e-01  2.671662e-16  8.129596e-02
+[12,] -1.527733e-01  4.866930e-01 -3.383947e-01 -5.147566e-15 -6.037232e-01
+           [,11]       [,12]
+ [1,]  0.0000000 -0.41852765
+ [2,]  0.4511154  0.25698386
+ [3,]  0.1227363 -0.58742834
+ [4,]  0.1193344 -0.22457995
+ [5,] -0.6931861 -0.28203086
+ [6,]  0.2169611 -0.07723764
+ [7,]  0.0000000  0.00000000
+ [8,]  0.2845431 -0.09003593
+ [9,] -0.1520000  0.32535310
+[10,] -0.1103916  0.05846761
+[11,] -0.2420706  0.39348064
+[12,] -0.2544753  0.07464622</code></pre>
+</div>
+</div>
+</div>
+<script>
+function toggleVisibility(id) {
+  var el = document.getElementById(id);
+  el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
+</script>
+<p>&nbsp;</p>
+<p>This will output both eigenvalues and eigenvectors. Alternatively, we can look at the value and vectors individually, for the purpose of calculating our principal components for this analysis lets do this, and go through what each eigen is showing.</p>
+<p><strong>The eigenvalues:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>eigen_values <span class="ot">&lt;-</span> eigen<span class="sc">$</span>values</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<button onclick="toggleVisibility('eigen_values')">
+Show/Hide Eigen Values Output
+</button>
+<div id="eigen_values" style="display:none;">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  3.552576e+02  1.107888e+01  8.617986e+00  2.993896e+00  7.849813e-15
+ [6]  1.289621e-15  5.405335e-16  3.633270e-17  9.287314e-32 -2.102773e-16
+[11] -1.365406e-15 -3.018445e-14</code></pre>
+</div>
+</div>
+</div>
+<script>
+function toggleVisibility(id) {
+  var el = document.getElementById(id);
+  el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
+</script>
+<p>&nbsp;</p>
+<p>R has given us 12 eigenvalues because our dataset includes 12 different bacteria types, meaning the covariance matrix is 12×12. Each eigenvalue corresponds to a principal component and tells us how much variance in the data that component explains. As we can see, the first few eigenvalues are large, capturing most of the variation, while the later ones are extremely small — close to zero — and can be ignored. This means we can reduce the dimensionality of our data by focusing on just the components with the largest eigenvalues - we will go more into this later.</p>
+<p>&nbsp;</p>
+<p><strong>The eigenvectors:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>eigen_vectors <span class="ot">&lt;-</span> eigen<span class="sc">$</span>vectors</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<button onclick="toggleVisibility('eigen_vectors')">
+Show/Hide Eigen Vectors Output
+</button>
+<div id="eigen_vectors" style="display:none;">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>             [,1]        [,2]        [,3]        [,4]         [,5]
+ [1,]  0.78063519  0.09246510 -0.09110918  0.05643682  0.442049227
+ [2,]  0.01435545 -0.31761481  0.51438923  0.48199530  0.328877551
+ [3,] -0.36171417  0.28573974  0.01592520  0.19373557  0.001375333
+ [4,] -0.36171417  0.28573974  0.01592520  0.19373557  0.344916440
+ [5,] -0.20228279 -0.34790983  0.29478661  0.11591146  0.208929130
+ [6,] -0.12071823 -0.15461907 -0.37585160  0.04924008  0.088644405
+ [7,]  0.00000000  0.00000000  0.00000000  0.00000000  0.000000000
+ [8,] -0.09592001  0.12432406  0.15624898 -0.41532392  0.143367861
+ [9,] -0.21663824 -0.03029501 -0.21960262 -0.36608385  0.698426108
+[10,] -0.02479821 -0.27894314 -0.53210057  0.46456400 -0.011484218
+[11,]  0.04377806  0.68134994 -0.03738393  0.38576261  0.095757454
+[12,]  0.12071823  0.15461907  0.37585160 -0.04924008 -0.091097936
+               [,6]          [,7]          [,8]          [,9]         [,10]
+ [1,]  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00
+ [2,] -1.273819e-01 -6.464465e-02  3.998530e-02 -2.713994e-16 -4.784163e-02
+ [3,] -4.998453e-01 -5.439577e-02  3.006026e-01 -1.442308e-15 -2.154630e-01
+ [4,]  5.956601e-01  4.090559e-01 -1.610771e-01  1.175142e-15  1.341670e-01
+ [5,]  3.156701e-02 -2.900155e-01 -1.795108e-01  5.385656e-16  1.291376e-01
+ [6,]  1.908142e-01 -4.443074e-01 -4.299966e-01 -4.525482e-15 -5.815663e-01
+ [7,] -9.803617e-16  5.217727e-17 -1.782932e-15  1.000000e+00 -6.518782e-15
+ [8,] -3.687018e-01 -6.606470e-02 -6.204302e-01  1.370891e-15  3.789069e-01
+ [9,] -2.039325e-01  1.040540e-01  2.662426e-01 -1.019423e-15 -1.727683e-01
+[10,] -3.628517e-01  4.076416e-01 -2.741809e-01  3.931050e-16  1.840657e-01
+[11,] -9.581485e-02 -3.546601e-01 -1.395255e-01  2.671662e-16  8.129596e-02
+[12,] -1.527733e-01  4.866930e-01 -3.383947e-01 -5.147566e-15 -6.037232e-01
+           [,11]       [,12]
+ [1,]  0.0000000 -0.41852765
+ [2,]  0.4511154  0.25698386
+ [3,]  0.1227363 -0.58742834
+ [4,]  0.1193344 -0.22457995
+ [5,] -0.6931861 -0.28203086
+ [6,]  0.2169611 -0.07723764
+ [7,]  0.0000000  0.00000000
+ [8,]  0.2845431 -0.09003593
+ [9,] -0.1520000  0.32535310
+[10,] -0.1103916  0.05846761
+[11,] -0.2420706  0.39348064
+[12,] -0.2544753  0.07464622</code></pre>
+</div>
+</div>
+</div>
+<script>
+function toggleVisibility(id) {
+  var el = document.getElementById(id);
+  el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
+</script>
+<p>&nbsp;</p>
+<p>The eigenvectors are set out the same sort of way as our co-variance matrix, in the order of <em>Klebsiella</em>, <em>Acinetobacter</em> and <em>Pantonea</em>. For example, the first eigenvalue shows <strong>0.78063519</strong> for <em>Klebsiella</em> v <em>Klebsiella</em>, the lack of negative value means it is in the opposite direction to <em>Klebsiella</em> and <em>Pantonea</em>, which has a negative value (-0.09110918).</p>
+<p>&nbsp;</p>
+</section>
+<section id="step-5-calculate-the-principal-components" class="level3">
+<h3 data-anchor-id="step-5-calculate-the-principal-components">Step 5: Calculate the Principal Components</h3>
+<p>Now we have found the eigenvalues and eigenvectors we work out the principal components! Let’s make sure to go through this step by step.</p>
+<p>&nbsp;</p>
+<p><em>5.1 We first need to take the centered data matrix we made earlier</em></p>
+<p><code>centered_data_matrix</code></p>
+<p>&nbsp;</p>
+<p><em>5.2 We then need to work out the <strong>eigenvectors</strong> from the <strong>covariance matrix</strong> (we made the eigenvectors from our centered data):</em></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>eigen <span class="ot">&lt;-</span> <span class="fu">eigen</span>(cov_matrix_R)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>eigen_vectors <span class="ot">&lt;-</span> eigen<span class="sc">$</span>vectors</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>&nbsp;</p>
+<p><em>5.3 We choose what eigenvalues we are using</em></p>
+<p>Only the first <strong>4</strong> principal components are actually positive values, principal components 5-12 are negative values, so we can in theory ignore these, and take the first four for now.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>eigen_values <span class="ot">&lt;-</span> eigen<span class="sc">$</span>values[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>eigen_values</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 355.257570  11.078881   8.617986   2.993896</code></pre>
+</div>
+</div>
+<p>&nbsp;</p>
+<p><em>5.4 We calculate the actual PC components</em></p>
+<p>We know that the eigenvectors represent the <em>direction</em> of the principal components, so we first calculate our principal components, based on our centered data, and our eigenvectors, by using the matrix multiplication.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>new_data <span class="ot">&lt;-</span> centered_data_matrix <span class="sc">%*%</span> eigen_vectors</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>Fruit <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Apricot"</span>, <span class="st">"Argan"</span>, <span class="st">"Grapefruit"</span>, <span class="st">"Orange"</span>, <span class="st">"Peach"</span>, <span class="st">"Tangerine"</span>)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>PCA_values <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">Fruit =</span> Fruit,</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">PC1 =</span> new_data[, <span class="dv">1</span>],</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">PC2 =</span> new_data[, <span class="dv">2</span>])</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>PCA_values</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       Fruit        PC1       PC2
+1    Apricot  17.438399 -2.087273
+2      Argan  10.136971  3.714548
+3 Grapefruit  10.136971  3.714548
+4     Orange   5.075269 -3.482150
+5      Peach  -8.834367 -3.053711
+6  Tangerine -34.100923  1.414038</code></pre>
+</div>
+</div>
+<p>&nbsp;</p>
+<p><em>5.5 Generating the PCA plot.</em></p>
+<p>But before we do this, earlier I mentioned that we will go back to the eigen values - this is for now. We took four as they were all positive values, but choosing components is usually based on what explains most of the variance, so we will be fine taking the first two. As they make up for the vast majority of the variance.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>eigen_values <span class="ot">&lt;-</span> eigen_values[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>PCA_variance <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> eigen_values <span class="sc">/</span> <span class="fu">sum</span>(eigen_values), <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Using these <strong>2</strong> PCA values, we can get away with generating just the one PCA plot; this is PCA 1 vs.&nbsp;PCA 2.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>pca_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(PCA_values, <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2, <span class="at">color =</span> Fruit)) <span class="sc">+</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> Fruit), <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">hjust =</span> <span class="fl">1.2</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"PCA of Fruit Samples"</span>,</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">paste0</span>(<span class="st">"Principal Component 1 ("</span>, PCA_variance[<span class="dv">1</span>], <span class="st">"%)"</span>),</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">paste0</span>(<span class="st">"Principal Component 2 ("</span>, PCA_variance[<span class="dv">2</span>], <span class="st">"%)"</span>)</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>),</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>&nbsp;</p>
+<p>Now let’s see this beautiful plot all together! &nbsp;</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="PCA_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>&nbsp; <strong>What can we see?</strong> &nbsp;</p>
+<p>This PCA plot shows variation among different fruit samples based on their principal components. Samples like Orange and Peach cluster closely together, indicating similar microbiome compositions, while Apricot and Argan are positioned farther apart, meaning Medfly reared on these fruits may have greater differences. Grapefruit stands out as more distinct from the other samples. Overall, the plot shows clear groupings and separation among the Medfly microbiotas based on the fruits they were reared on. You can check this against the data shown at the beginning of this page!</p>
+<p>&nbsp;<br>
+&nbsp;</p>
+<p>To summarise this chapter, we have taken a deep dive into PCA, and hopefully what actually it is.</p>
+<p>&nbsp;<br>
+&nbsp;</p>
+</section>
+</section>
+<section id="pca---test-yourself" class="level2">
+<h2 data-anchor-id="pca---test-yourself">PCA - Test Yourself!</h2>
+<p>That probably felt like a lot, and well done for getting through!</p>
+<hr>
+<p><strong>What are the six key steps of PCA you were introduced to?</strong></p>
+<div id="quiz1">
+<form id="quiz-form-1">
+<p><input type="radio" name="q1" value="a"> A. 1. Center the data, 2. Scale the data, 3. Calculate the covariance matrix values, 4. Calculate the eigenvalues and eigenvectors, 5. Calculate the principal component spaces, 6. Generate the PCA plot with these <br> <input type="radio" name="q1" value="b"> B. 1. Normalize the data, 2. Perform clustering, 3. Compute distances, 4. Generate a heatmap, 5. Sort by similarity, 6. Interpret clusters visually<br> <input type="radio" name="q1" value="c"> C. 1. One-hot encode variables, 2. Apply k-means clustering, 3. Compute centroids, 4. Evaluate silhouette scores, 5. Merge similar groups, 6. Visualize group centroids<br> <input type="radio" name="q1" value="d"> D. 1. Calculate correlation matrix, 2. Remove outliers, 3. Build decision trees, 4. Rank variable importance, 5. Apply bootstrapping, 6. Use top features in model<br><br></p>
+<button type="button" onclick="checkAnswer1()">
+Submit
+</button>
+</form>
+<div id="result1" style="margin-top: 1em; font-weight: bold;">
+</div>
+</div>
+<script>
+function checkAnswer1() {
+  const answer = document.querySelector('#quiz-form-1 input[name="q1"]:checked');
+  const result = document.getElementById("result1");
+  if (!answer) {
+    result.textContent = "⚠️ Please select an answer.";
+    result.style.color = "orange";
+    return;
+  }
+  if (answer.value === "a") {
+    result.textContent = "✅ Correct! Those are the core steps involved in PCA.";
+    result.style.color = "green";
+  } else {
+    result.textContent = "❌ Not quite. Try again.";
+    result.style.color = "red";
+  }
+}
+</script>
+<hr>
+<p><strong>Why do we center the data?</strong></p>
+<div id="quiz2">
+<form id="quiz-form-2">
+<p><input type="radio" name="q2" value="a"> A. To ensure eigenvalues are always positive<br> <input type="radio" name="q2" value="b"> B. To convert the data into binary form for easier computation<br> <input type="radio" name="q2" value="c"> C. To ensure that each feature has a mean of zero, allowing PCA to correctly find directions of maximum variance<br> <input type="radio" name="q2" value="d"> D. To standardize the range of each variable to between 0 and 1<br><br></p>
+<button type="button" onclick="checkAnswer2()">
+Submit
+</button>
+</form>
+<div id="result2" style="margin-top: 1em; font-weight: bold;">
+</div>
+</div>
+<script>
+function checkAnswer2() {
+  const answer = document.querySelector('#quiz-form-2 input[name="q2"]:checked');
+  const result = document.getElementById("result2");
+  if (!answer) {
+    result.textContent = "⚠️ Please select an answer.";
+    result.style.color = "orange";
+    return;
+  }
+  if (answer.value === "c") {
+    result.textContent = "✅ Correct! Centering sets the mean of each feature to zero so PCA can identify directions of maximum variance accurately.";
+    result.style.color = "green";
+  } else {
+    result.textContent = "❌ Not quite. Try again.";
+    result.style.color = "red";
+  }
+}
+</script>
+<hr>
+<p><strong>In PCA, what do the eigenvalues and eigenvectors of the covariance matrix represent?</strong></p>
+<div id="quiz3">
+<form id="quiz-form-3">
+<p><input type="radio" name="q3" value="a"> A. Eigenvalues determine the correlation between original variables; eigenvectors show how to cluster them<br> <input type="radio" name="q3" value="b"> B. Eigenvalues represent the amount of variance captured by each principal component; eigenvectors define the direction of these components<br> <input type="radio" name="q3" value="c"> C. Eigenvalues are used to normalize the data; eigenvectors eliminate redundancy<br> <input type="radio" name="q3" value="d"> D. Eigenvalues and eigenvectors sort features in descending order of importance based on their original units<br><br></p>
+<button type="button" onclick="checkAnswer3()">
+Submit
+</button>
+</form>
+<div id="result3" style="margin-top: 1em; font-weight: bold;">
+</div>
+</div>
+<script>
+function checkAnswer3() {
+  const answer = document.querySelector('#quiz-form-3 input[name="q3"]:checked');
+  const result = document.getElementById("result3");
+  if (!answer) {
+    result.textContent = "⚠️ Please select an answer.";
+    result.style.color = "orange";
+    return;
+  }
+  if (answer.value === "b") {
+    result.textContent = "✅ Correct! Eigenvalues indicate how much variance each component explains, and eigenvectors show their directions.";
+    result.style.color = "green";
+  } else {
+    result.textContent = "❌ Not quite. Try again.";
+    result.style.color = "red";
+  }
+}
+</script>
+<hr>
+</section>
+<section id="references" class="level1">
+<h1>References:</h1>
+<p>https://math.libretexts.org/Bookshelves/Linear_Algebra/A_First_Course_in_Linear_Algebra_(Kuttler)/07%3A_Spectral_Theory/7.01%3A_Eigenvalues_and_Eigenvectors_of_a_Matrix</p>
+
+
+</section>
+</main> 
+    <div class="about-footer"><div class="about-links">
+  <a href="mailto:Katie.millar@uea.ac.uk" class="about-link" rel="" target="">
+    <i class="bi bi-envelope"></i>
+     <span class="about-link-text">Email</span>
+  </a>
+  <a href="https://github.com/katherinemillar02" class="about-link" rel="" target="">
+    <i class="bi bi-github"></i>
+     <span class="about-link-text">Github</span>
+  </a>
+  <a href="https://bsky.app/profile/katiemillar.bsky.social" class="about-link" rel="" target="">
+     <span class="about-link-text">Bluesky</span>
+  </a>
+  <a href="https://www.linkedin.com/in/katie-millar-15bb56236/" class="about-link" rel="" target="">
+    <i class="bi bi-linkedin"></i>
+     <span class="about-link-text">LinkedIn</span>
+  </a>
+</div>
+</div>
+  </div>
+</div>
+ <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
