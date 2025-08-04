@@ -1,8 +1,20 @@
 ---
 title: "The Microbial Summary"
-editor: visual
+about:
+  template: marquee
+  links:
+    - icon: envelope
+      text: Email
+      href: mailto:Katie.millar@uea.ac.uk
+    - icon: github
+      text: Github
+      href: https://github.com/katherinemillar02
+    - text: Bluesky
+      href: https://bsky.app/profile/katiemillar.bsky.social
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/katie-millar-15bb56236/
 ---
-
 ```{r echo=FALSE, out.width="100%",fig.align="center", fig.cap="This image was created on Canva."}
 knitr::include_graphics("images/microbialanalysis.png")
 ```
@@ -12,6 +24,14 @@ We have explored **Beta Diversity methods**, **PCA**, and **NMDS** separately, b
 This section will show you how these tools collectively help us interpret complex microbial community differences.
 
 Let's see how well you can integrate these concepts to gain a fuller picture of microbial ecology.
+
+## Alpha Diversity vs. Beta Diversity - when to use them. 
+
+
+
+
+
+
 
 ## PCA vs. NMDS -- What is the difference?
 

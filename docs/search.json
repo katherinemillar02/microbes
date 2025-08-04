@@ -110,5 +110,26 @@
     "title": "Microbial Analysis Technqiues",
     "section": "Study Used: Darrington et al. (2022)",
     "text": "Study Used: Darrington et al. (2022)\nThe study: “Characterisation of the symbionts in the Mediterranean fruit fly gut”\nThis study investigated the gut microbiota of the Mediterranean fruit fly (Ceratitis capitata), a significant agricultural pest, to better understand its microbial associations. The researchers compared the gut bacteria of wild and laboratory-raised flies fed on various diets. They found that while diet strongly influences the gut microbiota, a single bacterium Klebsiella michiganensis/oxytoca (“Medkleb”) was consistently dominant and notably resistant to antibiotics.\n\nData Used on This Website\nThroughout this website, we focus on data from the wild-caught samples in the study. Specifically, the researchers examined how different natural fruit larval diets influence the adult gut microbiome of Mediterranean fruit flies.\nNewly emerged adult female flies (0–3 days old) were collected during the summer of 2014 from a range of fruit hosts:  \n\nMorocco: Argan  \nCrete: Apricots, Oranges, Grapefruits  \nGreece: Peaches, Oranges, Tangerines\n\nThe flies were preserved in ethanol, transported to the UK, and dissected to isolate DNA from their guts. Their microbial communities were then analysed using short-read 16S rRNA gene sequencing.\n\n For full data and analysis, visit the GitHub repository     \nAuthor: Katie Millar\nI am a PhD Student at the University of East Anglia, UK, researching insect-microbe symbioses using the Mediterranean fruitfly. For any of my socials, please click below."
+  },
+  {
+    "objectID": "alpha.html",
+    "href": "alpha.html",
+    "title": "Alpha Diversity Analysis Methods",
+    "section": "",
+    "text": "This image was generated from ChatGPT.\n\n\n\n\n\nWhat is Alpha Diversity?\nAlpha diversity, is diversity within a sample. It how diverse or rich your microbiome sample is in terms of different microorganisms.\nTwo important things are focused on:\n\nSpecies richness: the number of different species present in a sample. Abundance of species, nor their relative distributions are considered.\nSpecies eveness: a measure of relative abundance of different species that make up richness.\n\n\n\nCommon Alpha Diversity Metrics\n\nCHAO1 Index\nShannon Index\nSimpson Index\n\n\n\nCHAO1 Index\nThe CHAO1 Index is a measure of species richness.\n\n\nShannon Diversity Index\nThe Shannon Diversity Index accounts for both how many species are present, and how evenly they are distributed.\n\n\nSimpson Index"
+  },
+  {
+    "objectID": "qmds/alpha.html",
+    "href": "qmds/alpha.html",
+    "title": "Alpha Diversity Analysis Methods",
+    "section": "",
+    "text": "This image was generated from ChatGPT.\n\n\n\n\n\nWhat is Alpha Diversity?\nAlpha diversity, is diversity within a sample. It how diverse or rich your microbiome sample is in terms of different microorganisms.\nTwo important things are focused on:\n\nSpecies richness: the number of different species present in a sample. Abundance of species, nor their relative distributions are considered.\nSpecies eveness: a measure of relative abundance of different species that make up richness.\n\n\nCommon Alpha Diversity Metrics\n\nCHAO1 Index\nShannon Index\nSimpson Index\n\n\n\n\nCHAO1 Index\nThe CHAO1 Index is a measure of species richness.\n\n\nShannon Diversity Index\nThe Shannon Diversity Index accounts for both how many species are present, and how evenly they are distributed.\n\n\nSimpson Index"
+  },
+  {
+    "objectID": "qmds/microbialsummary.html#alpha-diversity-vs.-beta-diversity---when-to-use-them.",
+    "href": "qmds/microbialsummary.html#alpha-diversity-vs.-beta-diversity---when-to-use-them.",
+    "title": "The Microbial Summary",
+    "section": "Alpha Diversity vs. Beta Diversity - when to use them.",
+    "text": "Alpha Diversity vs. Beta Diversity - when to use them."
   }
 ]

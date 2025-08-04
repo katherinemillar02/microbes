@@ -34,7 +34,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
@@ -99,6 +98,10 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Microbial Analysis Introduction</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../qmds/alpha.html"> 
+<span class="menu-text">Alpha Diversity Analysis Methods</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../qmds/beta.html"> 
 <span class="menu-text">Beta Diversity Analysis Methods</span></a>
   </li>  
@@ -129,9 +132,9 @@ ul.task-list li input[type="checkbox"] {
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
-   
   <ul>
-  <li><a href="#pca-vs.-nmds-what-is-the-difference" id="toc-pca-vs.-nmds-what-is-the-difference" class="nav-link active" data-scroll-target="#pca-vs.-nmds-what-is-the-difference">PCA vs.&nbsp;NMDS – What is the difference?</a>
+  <li><a href="#alpha-diversity-vs.-beta-diversity---when-to-use-them." id="toc-alpha-diversity-vs.-beta-diversity---when-to-use-them." class="nav-link active" data-scroll-target="#alpha-diversity-vs.-beta-diversity---when-to-use-them.">Alpha Diversity vs.&nbsp;Beta Diversity - when to use them.</a></li>
+  <li><a href="#pca-vs.-nmds-what-is-the-difference" id="toc-pca-vs.-nmds-what-is-the-difference" class="nav-link" data-scroll-target="#pca-vs.-nmds-what-is-the-difference">PCA vs.&nbsp;NMDS – What is the difference?</a>
   <ul class="collapse">
   <li><a href="#eucledian-distances-pca-vs.-nmds." id="toc-eucledian-distances-pca-vs.-nmds." class="nav-link" data-scroll-target="#eucledian-distances-pca-vs.-nmds.">Eucledian distances: PCA vs.&nbsp;NMDS.</a></li>
   </ul></li>
@@ -139,26 +142,17 @@ ul.task-list li input[type="checkbox"] {
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-about-marquee">
+  <div class="about-image-container">
+  </div>
+  <div class="about-contents">
+    <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">The Microbial Summary</h1>
 </div>
-
-
-
 <div class="quarto-title-meta">
-
-    
-  
-    
   </div>
-  
-
-
-</header>
-
+</header> <main class="content" id="quarto-document-content">
 
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -173,15 +167,18 @@ ul.task-list li input[type="checkbox"] {
 <p>We have explored <strong>Beta Diversity methods</strong>, <strong>PCA</strong>, and <strong>NMDS</strong> separately, but understanding how they relate (or do not relate) to each other could be an essential step in having a true understanding of all of these.</p>
 <p>This section will show you how these tools collectively help us interpret complex microbial community differences.</p>
 <p>Let’s see how well you can integrate these concepts to gain a fuller picture of microbial ecology.</p>
+<section id="alpha-diversity-vs.-beta-diversity---when-to-use-them." class="level2">
+<h2 data-anchor-id="alpha-diversity-vs.-beta-diversity---when-to-use-them.">Alpha Diversity vs.&nbsp;Beta Diversity - when to use them.</h2>
+</section>
 <section id="pca-vs.-nmds-what-is-the-difference" class="level2">
-<h2 class="anchored" data-anchor-id="pca-vs.-nmds-what-is-the-difference">PCA vs.&nbsp;NMDS – What is the difference?</h2>
+<h2 data-anchor-id="pca-vs.-nmds-what-is-the-difference">PCA vs.&nbsp;NMDS – What is the difference?</h2>
 <p>Both <strong>PCA (Principal Component Analysis)</strong> and <strong>NMDS (Non-metric Multidimensional Scaling)</strong> are methods used to <strong>reduce the dimensionality</strong> of complex microbial data and visualise patterns — but they do so in fundamentally different ways.</p>
 <ul>
 <li><p><strong>PCA</strong> is a <strong>linear method</strong> that assumes your data can be explained by axes that maximize variance. It works best when your distances are normally distributed.</p></li>
 <li><p><strong>NMDS</strong>, on the other hand, is a <strong>non-linear, rank-based method</strong>. It doesn’t use the raw distances, but rather the <strong>rank order</strong> of dissimilarities.</p></li>
 </ul>
 <section id="eucledian-distances-pca-vs.-nmds." class="level3">
-<h3 class="anchored" data-anchor-id="eucledian-distances-pca-vs.-nmds.">Eucledian distances: PCA vs.&nbsp;NMDS.</h3>
+<h3 data-anchor-id="eucledian-distances-pca-vs.-nmds.">Eucledian distances: PCA vs.&nbsp;NMDS.</h3>
 <ul>
 <li><p>PCA assumes that the data lies in a linear Euclidean space. It relies on straight-line distances and angles between data points. PCA uses these Euclidean distances implicitly when calculating the covariance matrix, which determines the directions of greatest variance in the dataset.</p></li>
 <li><p>NMDS does not assume linearity or metric relationships. Instead, it works with a dissimilarity matrix, which can be based on Euclidean distances or other measures (like Bray-Curtis or Jaccard). Importantly, NMDS only considers the rank order of the distances — not their actual values — and attempts to preserve these ranks in a lower-dimensional space..</p></li>
@@ -190,8 +187,28 @@ ul.task-list li input[type="checkbox"] {
 
 </section>
 </section>
-
-</main> <!-- /main -->
+</main> 
+    <div class="about-footer"><div class="about-links">
+  <a href="mailto:Katie.millar@uea.ac.uk" class="about-link" rel="" target="">
+    <i class="bi bi-envelope"></i>
+     <span class="about-link-text">Email</span>
+  </a>
+  <a href="https://github.com/katherinemillar02" class="about-link" rel="" target="">
+    <i class="bi bi-github"></i>
+     <span class="about-link-text">Github</span>
+  </a>
+  <a href="https://bsky.app/profile/katiemillar.bsky.social" class="about-link" rel="" target="">
+     <span class="about-link-text">Bluesky</span>
+  </a>
+  <a href="https://www.linkedin.com/in/katie-millar-15bb56236/" class="about-link" rel="" target="">
+    <i class="bi bi-linkedin"></i>
+     <span class="about-link-text">LinkedIn</span>
+  </a>
+</div>
+</div>
+  </div>
+</div>
+ <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -356,13 +373,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   } else {
     toggleColorMode(false);
   }
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Microbial Analysis Introduction – Microbial Analysis</title>
+<title>Alpha Diversity Analysis Methods – Microbial Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +23,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<link href="../hexmedfly.png" rel="icon" type="image/png">
-<script src="../site_libs/quarto-html/quarto.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./hexmedfly.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -80,10 +80,10 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../hexmedfly.png" alt="" class="navbar-logo">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./hexmedfly.png" alt="" class="navbar-logo">
     </a>
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Microbial Analysis</span>
     </a>
   </div>
@@ -94,27 +94,23 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="../qmds/introduction.html" aria-current="page"> 
+    <a class="nav-link" href="./qmds/introduction.html"> 
 <span class="menu-text">Microbial Analysis Introduction</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../qmds/alpha.html"> 
-<span class="menu-text">Alpha Diversity Analysis Methods</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../qmds/beta.html"> 
+    <a class="nav-link" href="./qmds/beta.html"> 
 <span class="menu-text">Beta Diversity Analysis Methods</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../qmds/PCA.html"> 
+    <a class="nav-link" href="./qmds/PCA.html"> 
 <span class="menu-text">PCA</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../qmds/NMDS.html"> 
+    <a class="nav-link" href="./qmds/NMDS.html"> 
 <span class="menu-text">NMDS</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../qmds/microbialsummary.html"> 
+    <a class="nav-link" href="./qmds/microbialsummary.html"> 
 <span class="menu-text">The Microbial Summary</span></a>
   </li>  
 </ul>
@@ -133,8 +129,11 @@ ul.task-list li input[type="checkbox"] {
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
   <ul>
-  <li><a href="#alpha-diversity-vs.-beta-diversity" id="toc-alpha-diversity-vs.-beta-diversity" class="nav-link active" data-scroll-target="#alpha-diversity-vs.-beta-diversity"><strong>Alpha Diversity vs.&nbsp;Beta Diversity?</strong></a></li>
-  <li><a href="#why-do-we-look-at-microbial-analysis" id="toc-why-do-we-look-at-microbial-analysis" class="nav-link" data-scroll-target="#why-do-we-look-at-microbial-analysis"><strong>Why do we look at Microbial Analysis?</strong></a></li>
+  <li><a href="#what-is-alpha-diversity" id="toc-what-is-alpha-diversity" class="nav-link active" data-scroll-target="#what-is-alpha-diversity">What is Alpha Diversity?</a></li>
+  <li><a href="#common-alpha-diversity-metrics" id="toc-common-alpha-diversity-metrics" class="nav-link" data-scroll-target="#common-alpha-diversity-metrics">Common Alpha Diversity Metrics</a></li>
+  <li><a href="#chao1-index" id="toc-chao1-index" class="nav-link" data-scroll-target="#chao1-index">CHAO1 Index</a></li>
+  <li><a href="#shannon-diversity-index" id="toc-shannon-diversity-index" class="nav-link" data-scroll-target="#shannon-diversity-index">Shannon Diversity Index</a></li>
+  <li><a href="#simpson-index" id="toc-simpson-index" class="nav-link" data-scroll-target="#simpson-index">Simpson Index</a></li>
   </ul>
 </nav>
     </div>
@@ -145,57 +144,49 @@ ul.task-list li input[type="checkbox"] {
   <div class="about-contents">
     <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Microbial Analysis Introduction</h1>
+<h1 class="title">Alpha Diversity Analysis Methods</h1>
 </div>
 <div class="quarto-title-meta">
   </div>
 </header> <main class="content" id="quarto-document-content">
 
-<p>Techniques for measuring microbial diversity usually fall under <strong>Alpha Diversity</strong> and <strong>Beta Diversity</strong>.</p>
-<p>&nbsp;</p>
-<section id="alpha-diversity-vs.-beta-diversity" class="level3">
-<h3 data-anchor-id="alpha-diversity-vs.-beta-diversity"><strong>Alpha Diversity vs.&nbsp;Beta Diversity?</strong></h3>
-<p>&nbsp; <strong>Alpha Diversity</strong> describes <strong>the diversity within a single sample or environment</strong>, while <strong>Beta Diversity</strong> describes <strong>the differences in diversity between two or more samples or environments</strong>.</p>
-<p>&nbsp; &nbsp;</p>
-<div style="display: flex; align-items: flex-start; gap: 20px; margin-bottom: 30px;">
-<div style="flex: 1 0 45%; max-width: 45%;">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/beta1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p><img src="images/beta1.png" class="img-fluid figure-img" style="width:50.0%"></p>
 <figcaption>This image was generated from ChatGPT.</figcaption>
 </figure>
 </div>
 </div>
 </div>
-</div>
-<div style="flex: 1; padding-left: 20px;">
-<p>Alpha Diversity refers to the diversity <strong>within</strong> a sample. For example, orange vs.&nbsp;blue vs.&nbsp;green vs.&nbsp;pink.</p>
-</div>
-</div>
-<div style="display: flex; align-items: flex-start; gap: 20px;">
-<div style="flex: 0 0 45%; max-width: 45%;">
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/beta2.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption>This image was generated from ChatGPT.</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div style="flex: 1; padding-left: 20px;">
-<p>Beta diversity refers to the overall diversity <strong>between</strong> samples.For example, how the colours on the left <em>collectively</em> compare to the colours on the right.</p>
-</div>
-</div>
-<p>These may seem easy to remember on the surface, but they can easily be forgotten!</p>
+<section id="what-is-alpha-diversity" class="level1">
+<h1>What is Alpha Diversity?</h1>
+<p>Alpha diversity, is diversity <strong>within</strong> a sample. It how diverse or rich your microbiome sample is in terms of different microorganisms.</p>
+<p>Two important things are focused on:</p>
+<ul>
+<li><strong>Species richness</strong>: the number of different species present in a sample. Abundance of species, nor their relative distributions are considered.</li>
+<li><strong>Species eveness</strong>: a measure of relative abundance of different species that make up richness.</li>
+</ul>
 </section>
-<section id="why-do-we-look-at-microbial-analysis" class="level3">
-<h3 data-anchor-id="why-do-we-look-at-microbial-analysis"><strong>Why do we look at Microbial Analysis?</strong></h3>
-<p>Microbial analysis is the process of detecting, identifying, and/or quantifying microorganisms (like bacteria, fungi, viruses, and archaea) in various samples. This process is essential for understanding ecological interactions, diagnosing disease, ensuring food safety, and monitoring industrial or agricultural systems. In research, it helps uncover the roles microbes play in host health, nutrient cycling, and symbiotic relationships, as seen in studies of insect gut microbiotas like that of the Mediterranean fruit fly. Analysis of microbial communities can help you to better understand, manage and utilise microbial relations in natural and applied settings.</p>
+<section id="common-alpha-diversity-metrics" class="level1">
+<h1>Common Alpha Diversity Metrics</h1>
+<ul>
+<li>CHAO1 Index</li>
+<li>Shannon Index</li>
+<li>Simpson Index</li>
+</ul>
+</section>
+<section id="chao1-index" class="level1">
+<h1>CHAO1 Index</h1>
+<p>The CHAO1 Index is a measure of <strong>species richness</strong>.</p>
+</section>
+<section id="shannon-diversity-index" class="level1">
+<h1>Shannon Diversity Index</h1>
+<p>The Shannon Diversity Index accounts for both how many species are present, and how evenly they are distributed.</p>
+</section>
+<section id="simpson-index" class="level1">
+<h1>Simpson Index</h1>
 
 
 </section>

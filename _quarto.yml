@@ -20,6 +20,8 @@ website:
     left:
       - text: Microbial Analysis Introduction
         file: qmds/introduction.qmd
+      - text: Alpha Diversity Analysis Methods
+        file: qmds/alpha.qmd
       - text: Beta Diversity Analysis Methods
         file: qmds/beta.qmd
       - text: PCA
