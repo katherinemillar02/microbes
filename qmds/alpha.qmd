@@ -39,12 +39,19 @@ Two important things are focused on:
  
 # CHAO1 Index 
 
-The CHAO1 Index is a measure of **species richness**. This is employed to estimate the number of OTUs present in a sample. 
-
+The CHAO1 Index is a measure of **species richness**. This is employed to estimate the number of OTUs present in a sample. It is non-parametric, meaning the data is not required to fit a normal distribution. This can be important for rare species that are usually so low they are missed in the counts, it does this to estimate the total number of species. It is good for skewed data, like microbiome data. 
 
 
 # Shannon Diversity Index 
 
-The Shannon Diversity Index accounts for both how many species are present, and how evenly they are distributed. 
+The Shannon Diversity Index accounts for both, how many species are present, and how evenly they are distributed. It summarises the diversity in the population while assuming all species are represented in a sample. 
+
+The Shannon Diveristy formula: 
+
+$$
+H 
+$$
 
 # Simpson Index
+
+The Simpson Diversity Index is used to calculate a measure of diversity, which takes into account the number of taxa, as well as abundance. If one type of microorganism dominates the sample - the simpson index will show lower diversity. Only a few rare species will not effect the diversity of a sample. 
