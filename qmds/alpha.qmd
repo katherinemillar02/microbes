@@ -37,26 +37,102 @@ Two important things are focused on:
 
 # CHAO1 Index
 
-The CHAO1 Index is a measure of **species richness**. This is employed to estimate the number of OTUs present in a sample. It is non-parametric, meaning the data is not required to fit a normal distribution. This can be important for rare species that are usually so low they are missed in the counts, it does this to estimate the total number of species. It is good for skewed data, like microbiome data.
+The **CHAO1 Index** is a **non-parametric** estimator used to measure **species richness**,  focusing on  the total number of Operational Taxonomic Units (OTUs), or Amplicon Sequence Variance (ASVs) in a sample. It is particularly useful in  microbiome research, where the data are often highly skewed and many species are rare or underrepresented.
+
+To put it in simple words, the CHAO1 index is brilliant for identifying rare species. To be specific it accounts for species that only appear once (singletons) or twice (doubletons) in a dataset, showing true total species richness. 
+
+
+$$
+\text{CHAO1} = S_{\text{obs}} + \frac{F_1^2}{2F_2}
+$$
+ 
+
+$$
+ S_{\text{obs}}= \text{Number of observed species (ASVs or OTUS)}
+$$
+
+$$
+F_{1} = \text{Number of singleton species (species observed only once)}
+$$
+
+
+$$
+F_{2} = \text{Number of doubleton species (species observed only twice)}
+$$
+ 
+
+### CHAO1 Index in action:
+
+Let's use this with some bacteria we found in the Darrington dataset, based on relative proportions but that has been regenerated to generate some total counts.
+
+
+::::: columns
+
+**Sample 1: Medfly from Morocco (Argan 🌰)**
+
+**Bacterial composition (relative proportions), these counts are generated based on relative proportions:**
+
+| Bacterium          | Count |
+|--------------------|------------|
+| *Klebsiella*       | 270       |
+| *Pantonea*         | 54       |
+| *Commensalibacter* | 36       |
+| *Spingomonas*       | 1       |
+| *Serratia* | 1        |
+| *Acinetobacter* | 2        |
+| *Delftia* | 1      |
+:::
+
+ 
+
+$$
+F_1 = 3 \\
+F_2 = 1 \\
+$$
+ 
+$$
+\begin{align*}
+\text{CHAO1} &= 7 + \frac{3^2}{2 \times 1} \\
+             &= 7 + \frac{9}{2} \\
+             &= 7 + 4.5 = 11.5
+\end{align*}
+$$
+
+ 
+$$
+\text{CHAO1}  = 11.5 
+$$
+ 
+
+#### **What does this value mean?**
+
+A CHAO1 index value of **11.5** means the estimated total species richness (or number of OTUs/ASVs) in the sample is about 11.5 species. Although we saw there were 7 different species, our CHAO1 index tells us that there is likely a few more species that were not detected. This estimates reflects the statistical calculation.
+
 
 # Shannon Diversity Index
 
-The Shannon Diversity Index accounts for both, how many species are present, and how evenly they are distributed. It summarises the diversity in the population while assuming all species are represented in a sample.
+The Shannon Diversity Index accounts for both, how many species are present, and how evenly they are distributed. It summarises the diversity in the population while assuming all species are represented in a sample. Both for species richness and eveness. 
 
 The Shannon Diveristy formula:
 $$
 H' = -\sum_{i=1}^{S} p_i \log p_i
 $$
 
--   ( H' ) = Shannon diversity index\
--   ( S ) = total number of species\
--   ( p~i~ ) = relative proportion of individuals belonging to the species
 
+$$
+ {\text{H'}}= \text{Shannon diversity index}
+$$
+$$
+ {\text{S}}= \text{Total number of species}
+$$
+$$
+ p_{\text{i}}= \text{Relative proportion of individuals belonging to the species}
+$$
 
 Let's see this in action using this dataset:
 
 ::::: columns
-::: {.column width="50%"}
+
 **Sample 1 - Medfly from Morocco (Argan 🌰)**
 
 **Bacterial composition (relative proportions):**
@@ -69,18 +145,112 @@ Let's see this in action using this dataset:
 :::
 
 
--0.75 x log(0.75) =  0.2157616
--0.15 x log(0.15) =  0.284568
--0.10 x log(0.10) = 0.2302585
+$$
+\begin{aligned}
+&-0.75 \times \log(0.75) = 0.2157616 \\
+&-0.15 \times \log(0.15) = 0.284568 \\
+&-0.10 \times \log(0.10) = 0.2302585 \\
+&-0.2157616 + 0.284568 + 0.2302585 = 0.7305881 \\
+&\ H' = 0.7305881
+\end{aligned}
+$$
 
-0.2157616 + 0.284568 + 0.2302585 = 0.7305881
 
-H' = 0.7305881
-
-
+#### **What does this value mean?**
+There is no strict limit of the Shannon Index, but limits can be from 0 (this would mean very low diversity), upwards of around 3 or 4 (meaning very high diversity). So our value of 0.7 would mean there are multiple species within our sample, but there is uneven distribution as diversity is not the highest.
 
 
 
 # Simpson Index
 
 The Simpson Diversity Index is used to calculate a measure of diversity, which takes into account the number of taxa, as well as abundance. If one type of microorganism dominates the sample - the simpson index will show lower diversity. Only a few rare species will not effect the diversity of a sample.
+
+
+# Test your understanding!
+
+-------------------------------
+
+**What does Shannon Diversity look for?**
+
+:::: {#quiz1}
+<form id="quiz-form-1">
+
+  <input type="radio" name="q1" value="a"> A. Species richness only<br>
+  <input type="radio" name="q1" value="b"> B. Species evenness and richness<br>
+  <input type="radio" name="q1" value="c"> C. Only species evenness<br>
+  <input type="radio" name="q1" value="d"> D. Genetic diversity within species<br><br>
+  <button type="button" onclick="checkAnswer1()">Submit</button>
+
+</form>
+
+::: {#result1 style="margin-top: 1em; font-weight: bold;"}
+:::
+::::
+
+```{=html}
+<script>
+function checkAnswer1() {
+  const answer = document.querySelector('#quiz-form-1 input[name="q1"]:checked');
+  const result = document.getElementById("result1");
+
+  if (!answer) {
+    result.textContent = "⚠️ Please select an answer.";
+    result.style.color = "orange";
+    return;
+  }
+
+  if (answer.value === "b") {
+    result.textContent = "✅ Correct! Shannon Diversity accounts for both species richness and evenness.";
+    result.style.color = "green";
+  } else {
+    result.textContent = "❌ Not quite, try again.";
+    result.style.color = "red";
+  }
+}
+</script>
+
+
+-------------------------------
+
+**What does the CHAO1 index look for?**
+
+:::: {#quiz1}
+<form id="quiz-form-1">
+
+  <input type="radio" name="q1" value="a"> A. Species richness, with a particular focus on rare species<br>
+  <input type="radio" name="q1" value="b"> B. Measures species evenness<br>
+  <input type="radio" name="q1" value="c"> C. Measures genetic diversity within species<br>
+  <input type="radio" name="q1" value="d"> D. Estimates species turnover between communities<br><br>
+
+  <button type="button" onclick="checkAnswer1()">Submit</button>
+
+</form>
+
+::: {#result1 style="margin-top: 1em; font-weight: bold;"}
+:::
+::::
+
+```{=html}
+<script>
+function checkAnswer1() {
+  const answer = document.querySelector('#quiz-form-1 input[name="q1"]:checked');
+  const result = document.getElementById("result1");
+
+  if (!answer) {
+    result.textContent = "⚠️ Please select an answer.";
+    result.style.color = "orange";
+    return;
+  }
+
+  if (answer.value === "a") {
+    result.textContent = "✅ Correct! CHAO1 estimates species richness, including unseen rare species.";
+    result.style.color = "green";
+  } else {
+    result.textContent = "❌ Not quite, try again.";
+    result.style.color = "red";
+  }
+}
+</script>
+
+
+-------------------------------
