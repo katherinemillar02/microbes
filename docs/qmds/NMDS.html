@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Microbial Analysis - Non-Metric Multidimensional Scaling (NMDS)</title>
+<title>Non-Metric Multidimensional Scaling (NMDS) – Microbial Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -81,7 +81,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -90,14 +96,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -105,9 +140,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a href="../index.html" class="navbar-brand navbar-brand-logo">
     <img src="../hexmedfly.png" alt="" class="navbar-logo">
     </a>
@@ -116,40 +151,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../qmds/introduction.html" rel="" target="">
- <span class="menu-text">Microbial Analysis Introduction</span></a>
+    <a class="nav-link" href="../qmds/introduction.html"> 
+<span class="menu-text">Microbial Analysis Introduction</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../qmds/alpha.html" rel="" target="">
- <span class="menu-text">Alpha Diversity Analysis Methods</span></a>
+    <a class="nav-link" href="../qmds/alpha.html"> 
+<span class="menu-text">Alpha Diversity Analysis Methods</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../qmds/beta.html" rel="" target="">
- <span class="menu-text">Beta Diversity Analysis Methods</span></a>
+    <a class="nav-link" href="../qmds/beta.html"> 
+<span class="menu-text">Beta Diversity Analysis Methods</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../qmds/PCA.html" rel="" target="">
- <span class="menu-text">PCA</span></a>
+    <a class="nav-link" href="../qmds/PCA.html"> 
+<span class="menu-text">PCA</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../qmds/NMDS.html" rel="" target="" aria-current="page">
- <span class="menu-text">NMDS</span></a>
+    <a class="nav-link active" href="../qmds/NMDS.html" aria-current="page"> 
+<span class="menu-text">NMDS</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../qmds/microbialsummary.html" rel="" target="">
- <span class="menu-text">The Microbial Summary</span></a>
+    <a class="nav-link" href="../qmds/microbialsummary.html"> 
+<span class="menu-text">The Microbial Summary</span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools ms-auto">
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
-          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -192,7 +227,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/NMDS5.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Credit: This image was created on Canva..</figcaption>
+<figcaption>Credit: This image was created on Canva..</figcaption>
 </figure>
 </div>
 </div>
@@ -265,7 +300,7 @@ Plot the NMDS scores in 2D (or 3D) space, where the <em>distance between points<
 <div class="column" style="width:50%;">
 <p><strong>Sample 1 - Medfly from Morocco (Argan 🌰)</strong></p>
 <p><strong>Bacterial composition (relative proportions):</strong></p>
-<table class="table">
+<table class="caption-top table">
 <thead>
 <tr class="header">
 <th>Bacterium</th>
@@ -290,7 +325,7 @@ Plot the NMDS scores in 2D (or 3D) space, where the <em>distance between points<
 </div><div class="column" style="width:50%;">
 <p><strong>Sample 2 - Medfly from Greece (Peach 🍑)</strong></p>
 <p><strong>Bacterial composition (relative proportions):</strong></p>
-<table class="table">
+<table class="caption-top table">
 <thead>
 <tr class="header">
 <th>Bacterium</th>
@@ -350,7 +385,7 @@ Peach 0.5897436 0.0000000</code></pre>
 <p>If you can remember, in <a href="../qmds/beta.html"><strong>Beta Diversity Analysis</strong></a>: we calculated the Bray-Curtis Dissimilarity for these bacteria across these two samples, to be 0.6, our R output shows the value to be 0.589 - which is somewhat similar. So we are on track, and we at least know how to calculate dissimilarity!</p>
 <p>Now, since one of the key purposes of NMDS is to reduce complex multivariate data into a simple 2D representation, let’s scale things up by bringing in more samples from the <a href="https://www.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000801#tab2">Darrington et al.&nbsp;(2022)</a> dataset.</p>
 <div style="overflow-x: auto;">
-<table class="table">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 7%">
 <col style="width: 7%">
@@ -531,7 +566,7 @@ Did you notice the other 0 Bray-Curtis value?
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/NMDSbreakdown.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Credit: This image was created on Canva.</figcaption>
+<figcaption>Credit: This image was created on Canva.</figcaption>
 </figure>
 </div>
 </div>
@@ -637,7 +672,7 @@ function toggleVisibility(id) {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/summary.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Credit: This image was made on Canva.</figcaption>
+<figcaption>Credit: This image was made on Canva.</figcaption>
 </figure>
 </div>
 </div>
@@ -648,7 +683,7 @@ function toggleVisibility(id) {
 <p>Let’s take a step back, with some <strong>random numbers</strong> to exemplify this. Below is an example Bray-Curtis dissimilarity matrix for 4 sites. Note that diagonal entries are 0 because a site is identical to itself:</p>
 <div class="cell">
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
 <th style="text-align: left;">Site</th>
@@ -697,7 +732,7 @@ function toggleVisibility(id) {
 <p>Next, <code>metaMDS()</code> ranks these pairwise values from most similar (lowest dissimilarity) to most dissimilar (highest dissimilarity). For example, the pair S1 and S2 has the lowest dissimilarity value of 0.3, so is classed as rank 1. While S3 and S4 have the highestr dissimilarity of 0.8, so is classed as rank 6. If you remember from the Beta Diversity chapter, in Bray Curtis 0 is most similar, while 1 is most dissimilar.</p>
 <div class="cell">
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
 <th style="text-align: left;">Pair</th>
@@ -749,7 +784,7 @@ function toggleVisibility(id) {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/random.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">An example of how <code>metaMDS()</code> will generate random points. Credit: This image was generated in ChatGPT.</figcaption>
+<figcaption>An example of how <code>metaMDS()</code> will generate random points. Credit: This image was generated in ChatGPT.</figcaption>
 </figure>
 </div>
 </div>
@@ -775,7 +810,7 @@ d &amp;= \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} \\
 <p><strong>Step 3.4</strong>: We can then rank the <strong>Euclidean distances</strong> we found</p>
 <div class="cell">
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
 <th style="text-align: left;">Pair</th>
@@ -823,7 +858,7 @@ d &amp;= \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} \\
 <p>&nbsp; <strong>Step 3.5</strong>: Compare the Bray Curtis and the <strong>Euclidean distances</strong> ranks together.</p>
 <div class="cell">
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 8%">
 <col style="width: 16%">
@@ -892,7 +927,11 @@ d &amp;= \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} \\
 <p><em>To help: we can visualise this comparison in a Shephard diagram</em></p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="NMDS_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="NMDS_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>&nbsp;</p>
@@ -917,7 +956,7 @@ d &amp;= \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} \\
 <p>To make it a bit easier, lets first put a table together so we can start plugging in the values.</p>
 <div class="cell">
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 6%">
 <col style="width: 12%">
@@ -1046,7 +1085,7 @@ An inquisitive thought might be, why do we use ranks, if these aren’t used in 
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/example1.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<figcaption class="figure-caption">Credit: This image was made on Canva.</figcaption>
+<figcaption>Credit: This image was made on Canva.</figcaption>
 </figure>
 </div>
 </div>
@@ -1057,7 +1096,7 @@ An inquisitive thought might be, why do we use ranks, if these aren’t used in 
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/example2.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<figcaption class="figure-caption">Credit: This image was made on Canva.</figcaption>
+<figcaption>Credit: This image was made on Canva.</figcaption>
 </figure>
 </div>
 </div>
@@ -1102,7 +1141,11 @@ An inquisitive thought might be, why do we use ranks, if these aren’t used in 
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="NMDS_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="NMDS_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>&nbsp;</p>
@@ -1293,6 +1336,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
   }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
   const toggleColorMode = (alternate) => {
     // Switch the stylesheets
     const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
@@ -1359,13 +1429,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1393,18 +1465,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1436,11 +1497,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1450,8 +1550,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1463,7 +1572,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1507,6 +1739,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1532,6 +1765,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1592,6 +1851,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 

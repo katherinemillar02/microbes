@@ -22,36 +22,65 @@ about:
 
 # What is Alpha Diversity?
 
-Alpha diversity, is diversity **within** a sample. It how diverse or rich your microbiome sample is in terms of different microorganisms. 
+Alpha diversity, is diversity **within** a sample. It how diverse or rich your microbiome sample is in terms of different microorganisms.
 
-Two important things are focused on: 
+Two important things are focused on:
 
-  - **Species richness**: the number of different species present in a sample. Abundance of species, nor their relative distributions are considered. 
-  - **Species eveness**: a measure of relative abundance of different species that make up richness. 
-  
+-   **Species richness**: the number of different species present in a sample. Abundance of species, nor their relative distributions are considered.
+-   **Species eveness**: a measure of relative abundance of different species that make up richness.
 
-#### **Common Alpha Diversity Metrics** 
+#### **Common Alpha Diversity Metrics**
 
- - CHAO1 Index
- - Shannon Index 
- - Simpson Index 
- 
- 
-# CHAO1 Index 
+-   CHAO1 Index
+-   Shannon Index
+-   Simpson Index
 
-The CHAO1 Index is a measure of **species richness**. This is employed to estimate the number of OTUs present in a sample. It is non-parametric, meaning the data is not required to fit a normal distribution. This can be important for rare species that are usually so low they are missed in the counts, it does this to estimate the total number of species. It is good for skewed data, like microbiome data. 
+# CHAO1 Index
 
+The CHAO1 Index is a measure of **species richness**. This is employed to estimate the number of OTUs present in a sample. It is non-parametric, meaning the data is not required to fit a normal distribution. This can be important for rare species that are usually so low they are missed in the counts, it does this to estimate the total number of species. It is good for skewed data, like microbiome data.
 
-# Shannon Diversity Index 
+# Shannon Diversity Index
 
-The Shannon Diversity Index accounts for both, how many species are present, and how evenly they are distributed. It summarises the diversity in the population while assuming all species are represented in a sample. 
+The Shannon Diversity Index accounts for both, how many species are present, and how evenly they are distributed. It summarises the diversity in the population while assuming all species are represented in a sample.
 
-The Shannon Diveristy formula: 
-
+The Shannon Diveristy formula:
 $$
-H 
+H' = -\sum_{i=1}^{S} p_i \log p_i
 $$
+
+-   ( H' ) = Shannon diversity index\
+-   ( S ) = total number of species\
+-   ( p~i~ ) = relative proportion of individuals belonging to the species
+
+
+Let's see this in action using this dataset:
+
+::::: columns
+::: {.column width="50%"}
+**Sample 1 - Medfly from Morocco (Argan 🌰)**
+
+**Bacterial composition (relative proportions):**
+
+| Bacterium          | Proportion |
+|--------------------|------------|
+| *Klebsiella*       | 0.75       |
+| *Pantonea*         | 0.15       |
+| *Commensalibacter* | 0.10       |
+:::
+
+
+-0.75 x log(0.75) =  0.2157616
+-0.15 x log(0.15) =  0.284568
+-0.10 x log(0.10) = 0.2302585
+
+0.2157616 + 0.284568 + 0.2302585 = 0.7305881
+
+H' = 0.7305881
+
+
+
+
 
 # Simpson Index
 
-The Simpson Diversity Index is used to calculate a measure of diversity, which takes into account the number of taxa, as well as abundance. If one type of microorganism dominates the sample - the simpson index will show lower diversity. Only a few rare species will not effect the diversity of a sample. 
+The Simpson Diversity Index is used to calculate a measure of diversity, which takes into account the number of taxa, as well as abundance. If one type of microorganism dominates the sample - the simpson index will show lower diversity. Only a few rare species will not effect the diversity of a sample.
