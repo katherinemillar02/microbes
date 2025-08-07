@@ -28,11 +28,6 @@ Let's see how well you can integrate these concepts to gain a fuller picture of 
 ## Alpha Diversity vs. Beta Diversity - when to use them. 
 
 
-
-
-
-
-
 ## PCA vs. NMDS -- What is the difference?
 
 Both **PCA (Principal Component Analysis)** and **NMDS (Non-metric Multidimensional Scaling)** are methods used to **reduce the dimensionality** of complex microbial data and visualise patterns --- but they do so in fundamentally different ways.

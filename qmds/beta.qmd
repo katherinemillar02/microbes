@@ -438,6 +438,6 @@ function checkAnswer5() {
 
 # References:
 
-Su, X., 2021. Elucidating the beta-diversity of the microbiome: from global alignment to local alignment. *Msystems*, *6*(4), pp.10-1128.
+[Beta Diversity of the Microbiome, Su, 2011](https://journals.asm.org/doi/10.1128/msystems.00363-21).
 
 :::::::
