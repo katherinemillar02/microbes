@@ -24,10 +24,8 @@ website:
         file: qmds/alpha.qmd
       - text: Beta Diversity Analysis Methods
         file: qmds/beta.qmd
-      - text: PCA
-        file: qmds/PCA.qmd
-      - text: NMDS
-        file: qmds/NMDS.qmd
+      - text: Visualisation Methods
+        file: qmds/visualisation.qmd
       - text: The Microbial Summary
         file: qmds/microbialsummary.qmd
 

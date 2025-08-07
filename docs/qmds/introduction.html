@@ -98,12 +98,8 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Beta Diversity Analysis Methods</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../qmds/PCA.html" rel="" target="">
- <span class="menu-text">PCA</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../qmds/NMDS.html" rel="" target="">
- <span class="menu-text">NMDS</span></a>
+    <a class="nav-link" href="../qmds/visualisation.html" rel="" target="">
+ <span class="menu-text">Visualisation Methods</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../qmds/microbialsummary.html" rel="" target="">
@@ -125,8 +121,14 @@ ul.task-list li input[type="checkbox"] {
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
   <ul>
-  <li><a href="#alpha-diversity-vs.-beta-diversity" id="toc-alpha-diversity-vs.-beta-diversity" class="nav-link active" data-scroll-target="#alpha-diversity-vs.-beta-diversity"><strong>Alpha Diversity vs.&nbsp;Beta Diversity?</strong></a></li>
+  <li><a href="#everything-microbial-analysis" id="toc-everything-microbial-analysis" class="nav-link active" data-scroll-target="#everything-microbial-analysis"><strong>Everything Microbial Analysis…</strong></a></li>
+  <li><a href="#covered-topics" id="toc-covered-topics" class="nav-link" data-scroll-target="#covered-topics">Covered Topics</a></li>
+  <li><a href="#study-used-darrington-et-al.-2022" id="toc-study-used-darrington-et-al.-2022" class="nav-link" data-scroll-target="#study-used-darrington-et-al.-2022">Study Used: Darrington et al.&nbsp;(2022)</a>
+  <ul class="collapse">
+  <li><a href="#data-used-on-this-website" id="toc-data-used-on-this-website" class="nav-link" data-scroll-target="#data-used-on-this-website">Data Used on This Website</a></li>
+  <li><a href="#alpha-diversity-vs.-beta-diversity" id="toc-alpha-diversity-vs.-beta-diversity" class="nav-link" data-scroll-target="#alpha-diversity-vs.-beta-diversity"><strong>Alpha Diversity vs.&nbsp;Beta Diversity?</strong></a></li>
   <li><a href="#why-do-we-look-at-microbial-analysis" id="toc-why-do-we-look-at-microbial-analysis" class="nav-link" data-scroll-target="#why-do-we-look-at-microbial-analysis"><strong>Why do we look at Microbial Analysis?</strong></a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -144,7 +146,64 @@ ul.task-list li input[type="checkbox"] {
 </header> <main class="content" id="quarto-document-content">
 
 <p>Techniques for measuring microbial diversity usually fall under <strong>Alpha Diversity</strong> and <strong>Beta Diversity</strong>.</p>
+<section id="everything-microbial-analysis" class="level2">
+<h2 data-anchor-id="everything-microbial-analysis"><strong>Everything Microbial Analysis…</strong></h2>
+<p>Welcome! This site is designed to help you build a solid understanding of microbial analysis techniques from the beginning. With a focus on beta diversity methods, and visualisation techniques such as PCA and NMDS, looking through the key concepts and practical applications. Using real-world datasets, hopefully this can be used to help identify and interpret differences in microbial diversity with confidence.</p>
+<p><strong>Why do we look at microbial analysis?</strong> It is important to understand, for example, what is in a microbiota. Methods such as alpha and beta which can be seen on this site.</p>
 <p>&nbsp;</p>
+<div class="cell" data-layout-align="left">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="hexmedfly.png" class="img-fluid figure-img" style="width:30.0%"></p>
+<figcaption class="figure-caption">This image was created on Canva.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>&nbsp; This site will cover methods to calculate <strong>Beta Diversity</strong> in microbial communities, including commonly used metrics such as <strong>Bray-Curtis</strong> and <strong>Jaccard</strong>. It will also introduce key visualisation techniques for exploring differences in microbiome composition, such as <strong>Principal Component Analysis (PCA)</strong> and <strong>Non-metric Multidimensional Scaling (NMDS)</strong>.</p>
+<p>&nbsp;</p>
+</section>
+<section id="covered-topics" class="level2">
+<h2 data-anchor-id="covered-topics">Covered Topics</h2>
+<ul>
+<li><a href="qmds/beta.qmd"><strong>Beta Diversity Analysis Methods</strong></a>: An overview of key techniques used to calculate beta diversity, including Bray-Curtis and Jaccard indices.</li>
+<li><strong>Visualisation Methods</strong>
+<ul>
+<li><a href="qmds/PCA.qmd"><strong>PCA</strong></a>: A guide to visualising microbial community differences using PCA.</li>
+<li><a href="qmds/NMDS.qmd"><strong>NMDS</strong></a>: A guide to visualising microbial community differences using NMDS.</li>
+</ul></li>
+</ul>
+</section>
+<section id="study-used-darrington-et-al.-2022" class="level2">
+<h2 data-anchor-id="study-used-darrington-et-al.-2022">Study Used: Darrington et al.&nbsp;(2022)</h2>
+<p>The study: <a href="https://www.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000801">“Characterisation of the symbionts in the Mediterranean fruit fly gut”</a></p>
+<p>This study investigated the gut microbiota of the Mediterranean fruit fly (<em>Ceratitis capitata</em>), a significant agricultural pest, to better understand its microbial associations. The researchers compared the gut bacteria of wild and laboratory-raised flies fed on various diets. They found that while diet strongly influences the gut microbiota, a single bacterium <em>Klebsiella michiganensis/oxytoca</em> (“Medkleb”) was consistently dominant and notably resistant to antibiotics.</p>
+<section id="data-used-on-this-website" class="level3">
+<h3 data-anchor-id="data-used-on-this-website">Data Used on This Website</h3>
+<p>Throughout this website, we focus on data from the <strong>wild-caught samples</strong> in the study. Specifically, the researchers examined how different natural fruit larval diets influence the adult gut microbiome of Mediterranean fruit flies.</p>
+<p>Newly emerged adult female flies (0–3 days old) were collected during the summer of 2014 from a range of fruit hosts: &nbsp;</p>
+<ul>
+<li><p><strong>Morocco</strong>: Argan &nbsp;</p></li>
+<li><p><strong>Crete</strong>: Apricots, Oranges, Grapefruits &nbsp;</p></li>
+<li><p><strong>Greece</strong>: Peaches, Oranges, Tangerines</p></li>
+</ul>
+<p>The flies were preserved in ethanol, transported to the UK, and dissected to isolate DNA from their guts. Their microbial communities were then analysed using short-read 16S rRNA gene sequencing.</p>
+<p><span style="display: inline-flex; align-items: center;"></span></p>
+<p><a href="https://github.com/Philip-Leftwich/Characterisation-of-the-symbionts-in-the-Mediterranean-fruitfly-gut" target="_blank" style="text-decoration: none; color: inherit;"> For full data and analysis, visit the <strong>GitHub repository</strong> <svg xmlns="http://www.w3.org/2000/svg" height="20" viewbox="0 0 16 16" width="20" style="vertical-align: middle; margin-right: 6px;"> <path fill-rule="evenodd" fill="#000000" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 
+      6.53 5.47 7.59.4.07.55-.17.55-.38 
+      0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52
+      -.01-.53.63-.01 1.08.58 1.23.82.72 1.21 
+      1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2
+      -3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08
+      -.2-.36-1.01.08-2.11 0 0 .67-.21 2.2.82.64-.18 
+      1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 
+      2.2-.82 2.2-.82.44 1.1.16 1.91.08 2.11.51.56.82 
+      1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 
+      1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 
+      8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path> </svg> </a> </p>
+<p>&nbsp;</p>
+</section>
 <section id="alpha-diversity-vs.-beta-diversity" class="level3">
 <h3 data-anchor-id="alpha-diversity-vs.-beta-diversity"><strong>Alpha Diversity vs.&nbsp;Beta Diversity?</strong></h3>
 <p>&nbsp; <strong>Alpha Diversity</strong> describes <strong>the diversity within a single sample or environment</strong>, while <strong>Beta Diversity</strong> describes <strong>the differences in diversity between two or more samples or environments</strong>.</p>
@@ -190,6 +249,7 @@ ul.task-list li input[type="checkbox"] {
 <p>Microbial analysis is the process of detecting, identifying, and/or quantifying microorganisms (like bacteria, fungi, viruses, and archaea) in various samples. This process is essential for understanding ecological interactions, diagnosing disease, ensuring food safety, and monitoring industrial or agricultural systems. In research, it helps uncover the roles microbes play in host health, nutrient cycling, and symbiotic relationships, as seen in studies of insect gut microbiotas like that of the Mediterranean fruit fly. Analysis of microbial communities can help you to better understand, manage and utilise microbial relations in natural and applied settings.</p>
 
 
+</section>
 </section>
 </main> 
     <div class="about-footer"><div class="about-links">

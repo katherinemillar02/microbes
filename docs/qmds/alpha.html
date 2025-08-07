@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -100,12 +134,8 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Beta Diversity Analysis Methods</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../qmds/PCA.html" rel="" target="">
- <span class="menu-text">PCA</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../qmds/NMDS.html" rel="" target="">
- <span class="menu-text">NMDS</span></a>
+    <a class="nav-link" href="../qmds/visualisation.html" rel="" target="">
+ <span class="menu-text">Visualisation Methods</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../qmds/microbialsummary.html" rel="" target="">
@@ -133,7 +163,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#chao1-index-in-action" id="toc-chao1-index-in-action" class="nav-link" data-scroll-target="#chao1-index-in-action">CHAO1 Index in action:</a></li>
   </ul></li>
   <li><a href="#shannon-diversity-index" id="toc-shannon-diversity-index" class="nav-link" data-scroll-target="#shannon-diversity-index">Shannon Diversity Index</a></li>
-  <li><a href="#simpson-index" id="toc-simpson-index" class="nav-link" data-scroll-target="#simpson-index">Simpson Index</a></li>
+  <li><a href="#simpsons-index" id="toc-simpsons-index" class="nav-link" data-scroll-target="#simpsons-index">Simpson’s Index</a></li>
   <li><a href="#test-your-understanding" id="toc-test-your-understanding" class="nav-link" data-scroll-target="#test-your-understanding">Test your understanding!</a></li>
   </ul>
 </nav>
@@ -265,7 +295,8 @@ H' = -\sum_{i=1}^{S} p_i \log p_i
 \]</span></p>
 <p><span class="math display">\[
 {\text{H'}}= \text{Shannon diversity index}
-\]</span> <span class="math display">\[
+\]</span></p>
+<p><span class="math display">\[
 {\text{S}}= \text{Total number of species}
 \]</span> <span class="math display">\[
 p_{\text{i}}= \text{Relative proportion of individuals belonging to the species}
@@ -276,21 +307,37 @@ p_{\text{i}}= \text{Relative proportion of individuals belonging to the species}
 <thead>
 <tr class="header">
 <th>Bacterium</th>
-<th>Proportion</th>
+<th>Count</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><em>Klebsiella</em></td>
-<td>0.75</td>
+<td>270</td>
 </tr>
 <tr class="even">
 <td><em>Pantonea</em></td>
-<td>0.15</td>
+<td>54</td>
 </tr>
 <tr class="odd">
 <td><em>Commensalibacter</em></td>
-<td>0.10</td>
+<td>36</td>
+</tr>
+<tr class="even">
+<td><em>Spingomonas</em></td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td><em>Serratia</em></td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td><em>Acinetobacter</em></td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td><em>Delftia</em></td>
+<td>1</td>
 </tr>
 </tbody>
 </table>
@@ -303,15 +350,109 @@ p_{\text{i}}= \text{Relative proportion of individuals belonging to the species}
 &amp;-0.2157616 + 0.284568 + 0.2302585 = 0.7305881 \\
 &amp;\ H' = 0.7305881
 \end{aligned}
-\]</span></p>
+\]</span> Let’s test our R understanding by running it in there.</p>
+<p>shannon_log10 &lt;- diversity(bacteria_counts, index = “shannon”)</p>
 <section id="what-does-this-value-mean-1" class="level4">
 <h4 data-anchor-id="what-does-this-value-mean-1"><strong>What does this value mean?</strong></h4>
 <p>There is no strict limit of the Shannon Index, but limits can be from 0 (this would mean very low diversity), upwards of around 3 or 4 (meaning very high diversity). So our value of 0.7 would mean there are multiple species within our sample, but there is uneven distribution as diversity is not the highest.</p>
 </section>
 </section>
-<section id="simpson-index" class="level1">
-<h1>Simpson Index</h1>
+<section id="simpsons-index" class="level1">
+<h1>Simpson’s Index</h1>
 <p>The Simpson Diversity Index is used to calculate a measure of diversity, which takes into account the number of taxa, as well as abundance. If one type of microorganism dominates the sample - the simpson index will show lower diversity. Only a few rare species will not effect the diversity of a sample.</p>
+<p><span class="math display">\[
+D = 1 - _{}^{} \frac{n(n - 1)}{N(N - 1)}
+\]</span></p>
+<p><span class="math display">\[
+{\text{D}}= \text{Simpson's Index}
+\]</span></p>
+<p><span class="math display">\[
+{\text{n}}= \text{Number of individuals in single species}
+\]</span></p>
+<p><span class="math display">\[
+{\text{N}}= \text{Number of individuals in total population}
+\]</span></p>
+<p>Let’s use our count data from earlier!</p>
+<div class="columns">
+<p><strong>Sample 1: Medfly from Morocco (Argan 🌰)</strong></p><p><strong>Bacterial composition (relative proportions), these counts are generated based on relative proportions:</strong></p><table class="table">
+<thead>
+<tr class="header">
+<th>Bacterium</th>
+<th>Count (n)</th>
+<th>n(n-1)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><em>Klebsiella</em></td>
+<td>270</td>
+<td>72,630</td>
+</tr>
+<tr class="even">
+<td><em>Pantonea</em></td>
+<td>54</td>
+<td>2,862</td>
+</tr>
+<tr class="odd">
+<td><em>Commensalibacter</em></td>
+<td>36</td>
+<td>1,260</td>
+</tr>
+<tr class="even">
+<td><em>Spingomonas</em></td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td><em>Serratia</em></td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td><em>Acinetobacter</em></td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td><em>Delftia</em></td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td><strong>Total</strong></td>
+<td>N = 365</td>
+<td>n(n-1) = 76,752</td>
+</tr>
+</tbody>
+</table><p><span class="math display">\[
+D = 1 - \frac{76752}{365(364)} = \frac{76752}{132860} = 0.5776908
+\]</span> <span class="math display">\[
+D = 1 - 0.5776908 = 0.4223092
+\]</span></p>
+</div>
+<p>Cool, our simpson’s index is <strong>0.4223092</strong></p>
+<p>Now, I will be showing you how to do this in R. Using the <code>vegan()</code> package introduced earlier.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's first put these counts into a dataframe. </span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>bacteria_counts <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Klebsiella =</span> <span class="dv">270</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Pantonea =</span> <span class="dv">54</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Commensalibacter =</span> <span class="dv">36</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Spingomonas =</span> <span class="dv">1</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">Serratia =</span> <span class="dv">1</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">Acinetobacter =</span> <span class="dv">2</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">Delftia =</span> <span class="dv">1</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Then, using vegan(), we use diversity(), with the index "simpson" </span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegan)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>simpson_index <span class="ot">&lt;-</span> <span class="fu">diversity</span>(bacteria_counts, <span class="at">index =</span> <span class="st">"simpson"</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>simpson_index</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4211372</code></pre>
+</div>
+</div>
+<p>Both calculating it ourselves, and using the R function, we get 0.42 - nice one!</p>
 </section>
 <section id="test-your-understanding" class="level1">
 <h1>Test your understanding!</h1>
@@ -324,6 +465,7 @@ p_{\text{i}}= \text{Relative proportion of individuals belonging to the species}
 <div id="result1" style="margin-top: 1em; font-weight: bold;">
 </div>
 </div>
+<p>```{=html}</p>
 <script>
 function checkAnswer1() {
   const answer = document.querySelector('#quiz-form-1 input[name="q1"]:checked');
@@ -344,14 +486,17 @@ function checkAnswer1() {
 </script>
 <hr>
 <p><strong>What does the CHAO1 index look for?</strong></p>
-<div id="quiz1">
+<div>
 <form id="quiz-form-1">
 <p><input type="radio" name="q1" value="a"> A. Species richness, with a particular focus on rare species<br> <input type="radio" name="q1" value="b"> B. Measures species evenness<br> <input type="radio" name="q1" value="c"> C. Measures genetic diversity within species<br> <input type="radio" name="q1" value="d"> D. Estimates species turnover between communities<br><br></p>
-<p><button type="button" onclick="checkAnswer1()">Submit</button></p>
+<button type="button" onclick="checkAnswer1()">
+Submit
+</button>
 </form>
-<div id="result1" style="margin-top: 1em; font-weight: bold;">
+<div style="margin-top: 1em; font-weight: bold;">
 </div>
 </div>
+<p>```{=html}</p>
 <script>
 function checkAnswer1() {
   const answer = document.querySelector('#quiz-form-1 input[name="q1"]:checked');
@@ -371,6 +516,12 @@ function checkAnswer1() {
 }
 </script>
 <hr>
+<p>
+Congratulations! You have now completed learning about Alpha Diversity, please click the button below to begin learning about Beta Diversity Analysis methods!
+</p>
+<div style="text-align: right; margin-top: 2em;">
+<p><a href="../qmds/beta.html" class="btn btn-primary" role="button"> Turn to Beta Diversity →</a></p>
+</div>
 
 
 </section>
