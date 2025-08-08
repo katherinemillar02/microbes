@@ -105,9 +105,11 @@ The flies were preserved in ethanol, transported to the UK, and dissected to iso
 
 
 
-### **Alpha Diversity vs. Beta Diversity?**
+## Getting into the background: **Alpha Diversity vs. Beta Diversity**
 
-Now you have been introduced to a small background of everything, I will lightly introduce you to alpha vs. beta diversity, learning these core definitions can really help your understanding of community analysis. 
+Now that you have a brief background on this website, we can start thinking about microbial communities and how they are analysed. A good starting point is to introduce key concepts
+such as; **Alpha** and **Beta** diversity.   Gaining an understanding of these measures provides a strong foundation for studying microbial community structure and variation, and serves as a gateway into more advanced community analysis techniques. 
+
 
   **Alpha Diversity** describes **the diversity within a single sample or environment**, while **Beta Diversity** describes **the differences in diversity between two or more samples or environments**.
 
@@ -121,7 +123,7 @@ knitr::include_graphics("images/beta1.png")
 :::
 
 ::: {style="flex: 1; padding-left: 20px;"}
-Alpha Diversity refers to the diversity **within** a sample. For example, orange vs. blue vs. green vs. pink.
+Alpha Diversity refers to the diversity **within** a sample. For example, Orange vs. Blue vs. Green vs. Pink.
 :::
 :::::
 
@@ -141,7 +143,7 @@ These may seem easy to remember on the surface, but they can easily be forgotten
 
 
 
-<p>Now, you're tight on this, let's get started, please click the next page to begin!</p>
+<p>Now, you're tight on the discrete dufferences between the two, let's get started, please click the next page to begin!</p>
 
 ::: {style="text-align: right; margin-top: 2em;"}
 <a href="alpha.qmd" class="btn btn-primary" role="button"> Turn to Alpha

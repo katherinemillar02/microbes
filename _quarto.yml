@@ -18,7 +18,7 @@ website:
       image: hexmedfly.png
       alt: "Header Logo"
     left:
-      - text: Microbial Analysis Introduction
+      - text: Microbial Analysis
         file: qmds/introduction.qmd
       - text: Alpha Diversity Analysis Methods
         file: qmds/alpha.qmd

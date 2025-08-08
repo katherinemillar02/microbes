@@ -36,11 +36,24 @@ Two important things are focused on:
 -   **Species eveness**: a measure of relative abundance of different
     species that make up richness.
 
-#### **Common Alpha Diversity Metrics**
+#### **Common Alpha Diversity Metrics:**
 
--   CHAO1 Index
--   Shannon Index
--   Simpson Index
+-   **CHAO1 Index:** a non-parametric estimator used to estimate species
+    richness (the total number of species actually in a community).
+    Which is especially important when some species are rare and may not
+    be observed.
+-   **Shannon Index:** a measure of diversity within a community, that
+    considers both species richness and evenness. This is more sensitive
+    to the presence of rare species. A higher Shannon index indicates
+    greater diversity within a community.
+-   **Simpson Index:** a measure of diversity within a community, that
+    considers both species richness and evenness. This is more sensitive
+    to the dominance of a few species. A higher Simpson index indicates
+    greater diversity within a community.
+
+ 
+
+Now let's take some time to go into each of these methods in detail:
 
 # CHAO1 Index
 
@@ -54,6 +67,8 @@ To put it in simple words, the CHAO1 index is brilliant for identifying
 rare species. To be specific it accounts for species that only appear
 once (singletons) or twice (doubletons) in a dataset, showing true total
 species richness.
+
+The CHAO1 Index formula is:
 
 $$
 \text{CHAO1} = S_{\text{obs}} + \frac{F_1^2}{2F_2}
@@ -73,15 +88,16 @@ $$  
 
 ### CHAO1 Index in action:
 
-Let's use this with some bacteria we found in the Darrington dataset,
-based on relative proportions but that has been regenerated to generate
-some total counts.
+Let's use this with some bacteria we found in the [Darrington et al.
+(2022)](https://www.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000801#tab2)
+dataset. This is based on relative proportions of bacteria, but that has
+been regenerated to generate total counts of bacteria.
 
 ::: columns
-**Sample 1: Medfly from Morocco (Argan 🌰)**
+**Medfly from Morocco (Argan 🌰)**
 
-**Bacterial composition (relative proportions), these counts are
-generated based on relative proportions:**
+*Bacterial composition counts, these counts are generated based on
+relative proportions:*
 
 | Bacterium          | Count |
 |--------------------|-------|
@@ -95,40 +111,53 @@ generated based on relative proportions:**
 :::
 
 
-
  
 
-$$
+We first find our F~1~ values, these are our singletons - bacteria in
+our sample that only appear once. In our sample, we only have 3 of these
+(*Spingomonas*, *Serratia* and *Delftia*). $$
 F_1 = 3 \\
+$$ We then find our F~2~ values, these are our doubletons - bacteria in
+our sample that only appear twice In our sample, we only have 1 of these
+( *Acinetobacter*). $$   
 F_2 = 1 \\
-$$   $$
+$$  
+
+Now, let's plug these into our **CHAO1** formula: $$
 \begin{align*}
-\text{CHAO1} &= 7 + \frac{3^2}{2 \times 1} \\
-             &= 7 + \frac{9}{2} \\
-             &= 7 + 4.5 = 11.5
+\text{CHAO1} &= 5 + \frac{3^2}{2 \times 1} \\
+             &= 5 + \frac{9}{2} \\
+             &= 5 + 4.5 = 9.5
 \end{align*}
 $$
 
-  $$
-\text{CHAO1}  = 11.5 
+$$
+\text{CHAO1}  = 9.5 
 $$  
 
 #### **What does this value mean?**
 
-A CHAO1 index value of **11.5** means the estimated total species
-richness (or number of OTUs/ASVs) in the sample is about 11.5 species.
+A CHAO1 index value of **9.5** means the estimated total species
+richness (or number of OTUs/ASVs) in the sample is about 9.5 species.
 Although we saw there were 7 different species, our CHAO1 index tells us
 that there is likely a few more species that were not detected. This
 estimates reflects the statistical calculation.
+
+CHAO1 has told us about, rare - possibly underrepresented samples.
+Keeping on the topic of investigating for rare species, I introduce to
+you; the **Shannon Diversity Index**. Although this metric is a measure
+of both species richness and eveness, it has a paritcular focus on
+rareity in samples.
 
 # Shannon Diversity Index
 
 The Shannon Diversity Index accounts for both, how many species are
 present, and how evenly they are distributed. It summarises the
 diversity in the population while assuming all species are represented
-in a sample. Both for species richness and eveness.
+in a sample. Both for species richness and evenness.
 
 The Shannon Diveristy formula:
+
 $$
 H' = -\sum_{i=1}^{S} p_i \log p_i
 $$
@@ -139,7 +168,8 @@ $$
 
 $$
  {\text{S}}= \text{Total number of species}
-$$ 
+$$
+
 $$
  p_{\text{i}}= \text{Relative proportion of individuals belonging to the species}
 $$
@@ -162,21 +192,59 @@ Let's see this in action using this dataset:
 | *Delftia*          | 1     |
 :::
 
+
+Let's first compute our relative proportions:
+
+Our total count is: 270+54+36+1+1+2+1=365
+
+| Bacterium          | Count | p~i~             |
+|--------------------|-------|------------------|
+| *Klebsiella*       | 270   | 270/365 = 0.7397 |
+| *Pantonea*         | 54    |  0.1479        |
+| *Commensalibacter* | 36    |0.0986                  |
+| *Spingomonas*      | 1     | 0.0027                 |
+| *Serratia*         | 1     |   0.0027               |
+| *Acinetobacter*    | 2     |    0.0055              |
+| *Delftia*          | 1     |  0.0027                |
+
+
+
 $$
 \begin{aligned}
-&-0.75 \times \log(0.75) = 0.2157616 \\
-&-0.15 \times \log(0.15) = 0.284568 \\
-&-0.10 \times \log(0.10) = 0.2302585 \\
-&-0.2157616 + 0.284568 + 0.2302585 = 0.7305881 \\
-&\ H' = 0.7305881
+&-0.7397 \times \log(0.7397) = 0.2221 \\
+&-0.1479 \times \log(0.1479) = 0.2812 \\
+&-0.0986 \times \log(0.0986) = 0.2280 \\
+&-0.0027 \times \log(0.0027) = 0.0166 \\
+&-0.0027 \times \log(0.0027) = 0.0166 \\
+&-0.0055 \times \log(0.0055) = 0.0305 \\
+&-0.0027 \times \log(0.0027) = 0.0166 \\
+& \\
+&H' = 0.2221 + 0.2812 + 0.2280 + 0.0166 + 0.0166 + 0.0305 + 0.0166 = \boxed{0.8116}
 \end{aligned}
 $$
+
+
+
+
 Let's test our R understanding by running it in there.
 
-shannon_log10 <- diversity(bacteria_counts, index = "shannon")
+```{r, message=FALSE}
 
+library(vegan)
+bacteria_counts <- c(
+  Klebsiella = 270,
+  Pantonea = 54,
+  Commensalibacter = 36,
+  Spingomonas = 1,
+  Serratia = 1,
+  Acinetobacter = 2,
+  Delftia = 1
+)
 
-
+shannon <- diversity(bacteria_counts, index = "shannon")
+shannon
+```
+Very cool, the R function confirms R calculations!
 
 
 
@@ -185,9 +253,11 @@ shannon_log10 <- diversity(bacteria_counts, index = "shannon")
 
 There is no strict limit of the Shannon Index, but limits can be from 0
 (this would mean very low diversity), upwards of around 3 or 4 (meaning
-very high diversity). So our value of 0.7 would mean there are multiple
-species within our sample, but there is uneven distribution as diversity
+very high diversity). So our value of 0.7 would mean while there are clearly multiple
+species within our sample, there is uneven distribution and our diversity
 is not the highest.
+
+Hopefully now that we understand the Shannon Index, we can move onto the final metric we are looking at, this is the Simpson Index. Like the Shannon index, it is a measure of diversity within a community, but rather than focusing on more rare species, it focuses on the more dominant species. 
 
 # Simpson's Index
 
@@ -199,7 +269,7 @@ diversity of a sample.
 
 $$
 D = 1 - _{}^{} \frac{n(n - 1)}{N(N - 1)}
-$$ 
+$$
 
 $$
  {\text{D}}= \text{Simpson's Index}
@@ -221,21 +291,22 @@ Let's use our count data from earlier!
 **Bacterial composition (relative proportions), these counts are
 generated based on relative proportions:**
 
-| Bacterium          | Count (n)  | n(n-1)  |
-|--------------------|------------|---------|
-| *Klebsiella*       | 270        | 72,630  |
-| *Pantonea*         | 54         | 2,862   |
-| *Commensalibacter* | 36         | 1,260   |
-| *Spingomonas*      | 1          | 0       |
-| *Serratia*         | 1          | 0       |
-| *Acinetobacter*    | 2          | 2       |
-| *Delftia*          | 1          | 0       |
-| **Total**          | N = 365    | n(n-1) = 76,752         |
-
+| Bacterium          | Count (n) | n(n-1)          |
+|--------------------|-----------|-----------------|
+| *Klebsiella*       | 270       | 72,630          |
+| *Pantonea*         | 54        | 2,862           |
+| *Commensalibacter* | 36        | 1,260           |
+| *Spingomonas*      | 1         | 0               |
+| *Serratia*         | 1         | 0               |
+| *Acinetobacter*    | 2         | 2               |
+| *Delftia*          | 1         | 0               |
+| **Total**          | N = 365   | n(n-1) = 76,752 |
 
 $$
 D = 1 - \frac{76752}{365(364)} = \frac{76752}{132860} = 0.5776908
 $$ 
+
+
 $$
 D = 1 - 0.5776908 = 0.4223092
 $$
@@ -243,10 +314,8 @@ $$
 
 Cool, our simpson's index is **0.4223092**
 
-
-
-Now, I will be showing you how to do this in R. Using the `vegan()` package introduced earlier. 
-
+Now, I will be showing you how to do this in R. Using the `vegan()`
+package introduced earlier.
 
 ```{r, message=FALSE}
 # Let's first put these counts into a dataframe. 
@@ -266,11 +335,8 @@ simpson_index <- diversity(bacteria_counts, index = "simpson")
 simpson_index
 ```
 
-Both calculating it ourselves, and using the R function, we get 0.42 - nice one!
-
-
-
-
+Both calculating it ourselves, and using the R function, we get 0.42 -
+nice one!
 
 # Test your understanding!
 
@@ -294,7 +360,7 @@ diversity within species<br><br>
 :::
 :::
 
-\`\`\`{=html}
+
 
 ```{=html}
 <script>
@@ -325,18 +391,19 @@ function checkAnswer1() {
 
 <div>
 
-<form id="quiz-form-1">
+<form id="quiz-form-2">
 
-<input type="radio" name="q1" value="a"> A. Species richness, with a
+<input type="radio" name="q2" value="a"> A. Species richness, with a
 particular focus on rare species<br>
-<input type="radio" name="q1" value="b"> B. Measures species
-evenness<br> <input type="radio" name="q1" value="c"> C. Measures
+<input type="radio" name="q2" value="b"> B. Measures species
+evenness<br> <input type="radio" name="q2" value="c"> C. Measures
 genetic diversity within species<br>
-<input type="radio" name="q1" value="d"> D. Estimates species turnover
+<input type="radio" name="q2" value="d"> D. Estimates species turnover
 between communities<br><br>
 
-<button type="button" onclick="checkAnswer1()">Submit</button>
-
+<button type="button" onclick="checkAnswer2()">
+Submit
+</button>
 </form>
 
 ::: {style="margin-top: 1em; font-weight: bold;"}
@@ -344,12 +411,11 @@ between communities<br><br>
 
 </div>
 
-\`\`\`{=html}
 
 ```{=html}
 <script>
-function checkAnswer1() {
-  const answer = document.querySelector('#quiz-form-1 input[name="q1"]:checked');
+function checkAnswer2() {
+  const answer = document.querySelector('#quiz-form-2 input[name="q2"]:checked');
   const result = document.getElementById("result1");
 
   if (!answer) {
