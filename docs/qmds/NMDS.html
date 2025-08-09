@@ -123,23 +123,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link" href="../qmds/introduction.html" rel="" target="">
- <span class="menu-text">Microbial Analysis Introduction</span></a>
+ <span class="menu-text">Overview</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../qmds/alpha.html" rel="" target="">
- <span class="menu-text">Alpha Diversity Analysis Methods</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-diversity-metrics" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Diversity Metrics</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-diversity-metrics">    
+        <li>
+    <a class="dropdown-item" href="../qmds/alpha.html" rel="" target="">
+ <span class="dropdown-text">Alpha Diversity Analysis Methods</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../qmds/beta.html" rel="" target="">
- <span class="menu-text">Beta Diversity Analysis Methods</span></a>
+        <li>
+    <a class="dropdown-item" href="../qmds/beta.html" rel="" target="">
+ <span class="dropdown-text">Beta Diversity Analysis Methods</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../qmds/visualisation.html" rel="" target="">
- <span class="menu-text">Visualisation Methods</span></a>
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-ordination-methods" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Ordination Methods</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-ordination-methods">    
+        <li>
+    <a class="dropdown-item" href="../qmds/PCA.html" rel="" target="">
+ <span class="dropdown-text">Principal Component Analysis (PCA)</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../qmds/NMDS.html" rel="" target="">
+ <span class="dropdown-text">Non-Metric Multidimensional Scaling (NMDS)</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
     <a class="nav-link" href="../qmds/microbialsummary.html" rel="" target="">
- <span class="menu-text">The Microbial Summary</span></a>
+ <span class="menu-text">Microbial Methods Overview</span></a>
   </li>  
 </ul>
             <div class="quarto-navbar-tools ms-auto">
@@ -157,7 +175,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
   <ul>
-  <li><a href="#a-background-to-nmds" id="toc-a-background-to-nmds" class="nav-link active" data-scroll-target="#a-background-to-nmds">A background to NMDS</a></li>
+  <li><a href="#non-metric-multidimensional-scaling" id="toc-non-metric-multidimensional-scaling" class="nav-link active" data-scroll-target="#non-metric-multidimensional-scaling">Non-metric MultiDimensional Scaling</a>
+  <ul class="collapse">
+  <li><a href="#a-background-to-nmds" id="toc-a-background-to-nmds" class="nav-link" data-scroll-target="#a-background-to-nmds">A background to NMDS</a></li>
   <li><a href="#nmds-in-action" id="toc-nmds-in-action" class="nav-link" data-scroll-target="#nmds-in-action"><strong>NMDS in action</strong></a>
   <ul class="collapse">
   <li><a href="#step-1-find-the-bray-curtis-dissimilarity-values" id="toc-step-1-find-the-bray-curtis-dissimilarity-values" class="nav-link" data-scroll-target="#step-1-find-the-bray-curtis-dissimilarity-values">Step 1: Find the Bray-Curtis dissimilarity values</a></li>
@@ -165,8 +185,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#step-3-understanding-how-dissimilarity-values-become-our-nmds-scores." id="toc-step-3-understanding-how-dissimilarity-values-become-our-nmds-scores." class="nav-link" data-scroll-target="#step-3-understanding-how-dissimilarity-values-become-our-nmds-scores.">Step 3: Understanding how dissimilarity values become our NMDS scores.</a></li>
   <li><a href="#step-4-visualising-your-nmds-results" id="toc-step-4-visualising-your-nmds-results" class="nav-link" data-scroll-target="#step-4-visualising-your-nmds-results">Step 4: Visualising your NMDS results!</a></li>
   </ul></li>
+  </ul></li>
   <li><a href="#nmds---test-yourself" id="toc-nmds---test-yourself" class="nav-link" data-scroll-target="#nmds---test-yourself">NMDS - Test Yourself!</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References:</a></li>
   </ul>
 </nav>
     </div>
@@ -183,6 +203,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </header> <main class="content" id="quarto-document-content">
 
+<section id="non-metric-multidimensional-scaling" class="level1">
+<h1>Non-metric MultiDimensional Scaling</h1>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -888,7 +910,7 @@ d &amp;= \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} \\
 <p><em>To help: we can visualise this comparison in a Shephard diagram</em></p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="NMDS_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+<p><img src="NMDS_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>&nbsp;</p>
@@ -1098,11 +1120,12 @@ An inquisitive thought might be, why do we use ranks, if these aren’t used in 
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="NMDS_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+<p><img src="NMDS_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>&nbsp;</p>
 <p>And finally, we have our NMDS plot! We can see that Tangerine, Grapefruit and Argan have fairly similar bacterial compositions, while Peach and Apricot are more dissimilar.</p>
+</section>
 </section>
 </section>
 <section id="nmds---test-yourself" class="level1">
@@ -1215,12 +1238,6 @@ function checkAnswer4() {
   }
 }
 </script>
-</section>
-<section id="references" class="level1">
-<h1>References:</h1>
-<p>https://uw.pressbooks.pub/appliedmultivariatestatistics/chapter/nmds/#:~:text=The%20NMDS%20algorithm%20involves%20calculating,between%20these%20two%20sets%20of</p>
-<p>https://matrixcalc.org/vectors.html</p>
-<p>https://math.libretexts.org/Bookshelves/Linear_Algebra/A_First_Course_in_Linear_Algebra_(Kuttler)/07%3A_Spectral_Theory/7.01%3A_Eigenvalues_and_Eigenvectors_of_a_Matrix</p>
 
 
 </section>

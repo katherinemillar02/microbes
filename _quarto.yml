@@ -18,15 +18,21 @@ website:
       image: hexmedfly.png
       alt: "Header Logo"
     left:
-      - text: Microbial Analysis
+      - text: Overview
         file: qmds/introduction.qmd
-      - text: Alpha Diversity Analysis Methods
-        file: qmds/alpha.qmd
-      - text: Beta Diversity Analysis Methods
-        file: qmds/beta.qmd
-      - text: Visualisation Methods
-        file: qmds/visualisation.qmd
-      - text: The Microbial Summary
+        
+      - text: Diversity Metrics
+        menu: 
+          - qmds/alpha.qmd
+          - qmds/beta.qmd
+      - text: Ordination Methods
+        menu: 
+          - qmds/PCA.qmd
+          - qmds/NMDS.qmd
+        
+        
+        
+      - text: Microbial Methods Overview
         file: qmds/microbialsummary.qmd
 
 page-footer: |

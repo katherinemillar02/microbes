@@ -24,6 +24,16 @@ library(ggplot2)
 
 ```
 
+# Non-metric MultiDimensional Scaling
+
+```{r echo=FALSE, message=FALSE}
+library(tidyverse)
+library(vegan)
+library(vegan)
+library(ggplot2)
+
+```
+
 ```{r echo=FALSE, out.width="100%", fig.align="center", fig.cap="Credit: This image was created on Canva.."}
 
 knitr::include_graphics("images/NMDS5.png")
@@ -770,12 +780,3 @@ function checkAnswer4() {
   }
 }
 </script>
-
-
-# References:
-
-https://uw.pressbooks.pub/appliedmultivariatestatistics/chapter/nmds/#:\~:text=The%20NMDS%20algorithm%20involves%20calculating,between%20these%20two%20sets%20of
-
-https://matrixcalc.org/vectors.html
-
-https://math.libretexts.org/Bookshelves/Linear_Algebra/A_First_Course_in_Linear_Algebra\_(Kuttler)/07%3A_Spectral_Theory/7.01%3A_Eigenvalues_and_Eigenvectors_of_a_Matrix
