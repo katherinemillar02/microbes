@@ -558,7 +558,7 @@ D = 1 - 0.5776908 = 0.4223092
 <p><strong>What does Shannon Diversity look for?</strong></p>
 <div id="quiz1">
 <form id="quiz-form-1">
-<p><input type="radio" name="q1" value="a"> A. Species richness only<br> <input type="radio" name="q1" value="b"> B. Species evenness and richness<br> <input type="radio" name="q1" value="c"> C. Only species evenness<br> <input type="radio" name="q1" value="d"> D. Genetic diversity within species<br><br> <button type="button" onclick="checkAnswer1()">Submit</button></p>
+<p><input type="radio" name="q1" value="a"> A. Species richness only<br> <input type="radio" name="q1" value="b"> B. Species evenness and richness, with a focus on rare species<br> <input type="radio" name="q1" value="c"> C. Only species evenness<br> <input type="radio" name="q1" value="d"> D. Genetic diversity within species<br><br> <button type="button" onclick="checkAnswer1()">Submit</button></p>
 </form>
 <div id="result1" style="margin-top: 1em; font-weight: bold;">
 </div>
@@ -590,13 +590,13 @@ function checkAnswer1() {
 Submit
 </button>
 </form>
-<div style="margin-top: 1em; font-weight: bold;">
+<div id="result2" style="margin-top: 1em; font-weight: bold;">
 </div>
 </div>
 <script>
 function checkAnswer2() {
   const answer = document.querySelector('#quiz-form-2 input[name="q2"]:checked');
-  const result = document.getElementById("result1");
+  const result = document.getElementById("result2");
   if (!answer) {
     result.textContent = "⚠️ Please select an answer.";
     result.style.color = "orange";
@@ -604,6 +604,36 @@ function checkAnswer2() {
   }
   if (answer.value === "a") {
     result.textContent = "✅ Correct! CHAO1 estimates species richness, including unseen rare species.";
+    result.style.color = "green";
+  } else {
+    result.textContent = "❌ Not quite, try again.";
+    result.style.color = "red";
+  }
+}
+</script>
+<hr>
+<p><strong>What does the Simpson Index look for?</strong></p>
+<div>
+<form id="quiz-form-3">
+<p><input type="radio" name="q3" value="a"> A. Measures the proportion of endemic species unique to a geographic area <br> <input type="radio" name="q3" value="b"> B. Measures species richness and evenness, with a focus on dominant species <br> <input type="radio" name="q3" value="c"> C. Measures genetic diversity within species<br> <input type="radio" name="q3" value="d"> D. Measures species richness and evenness, with a focus on rare species <br><br></p>
+<button type="button" onclick="checkAnswer2()">
+Submit
+</button>
+</form>
+<div id="result3" style="margin-top: 1em; font-weight: bold;">
+</div>
+</div>
+<script>
+function checkAnswer2() {
+  const answer = document.querySelector('#quiz-form-3 input[name="q3"]:checked');
+  const result = document.getElementById("result3");
+  if (!answer) {
+    result.textContent = "⚠️ Please select an answer.";
+    result.style.color = "orange";
+    return;
+  }
+  if (answer.value === "b") {
+    result.textContent = "✅ Correct! Simpsons index does  look for genetic diversity based on species richness and evenness, but with a focus on dominant species.";
     result.style.color = "green";
   } else {
     result.textContent = "❌ Not quite, try again.";

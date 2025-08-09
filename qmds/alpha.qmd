@@ -349,7 +349,7 @@ nice one!
 
 <input type="radio" name="q1" value="a"> A. Species richness only<br>
 <input type="radio" name="q1" value="b"> B. Species evenness and
-richness<br> <input type="radio" name="q1" value="c"> C. Only species
+richness, with a focus on rare species<br> <input type="radio" name="q1" value="c"> C. Only species
 evenness<br> <input type="radio" name="q1" value="d"> D. Genetic
 diversity within species<br><br>
 <button type="button" onclick="checkAnswer1()">Submit</button>
@@ -385,6 +385,12 @@ function checkAnswer1() {
 </script>
 ```
 
+
+
+
+
+
+
 ------------------------------------------------------------------------
 
 **What does the CHAO1 index look for?**
@@ -406,7 +412,7 @@ Submit
 </button>
 </form>
 
-::: {style="margin-top: 1em; font-weight: bold;"}
+::: {#result2 style="margin-top: 1em; font-weight: bold;"}
 :::
 
 </div>
@@ -416,7 +422,7 @@ Submit
 <script>
 function checkAnswer2() {
   const answer = document.querySelector('#quiz-form-2 input[name="q2"]:checked');
-  const result = document.getElementById("result1");
+  const result = document.getElementById("result2");
 
   if (!answer) {
     result.textContent = "⚠️ Please select an answer.";
@@ -436,6 +442,57 @@ function checkAnswer2() {
 ```
 
 ------------------------------------------------------------------------
+
+
+**What does the Simpson Index look for?**
+
+<div>
+
+<form id="quiz-form-3">
+
+<input type="radio" name="q3" value="a"> A. Measures the proportion of endemic species unique to a geographic area <br>
+<input type="radio" name="q3" value="b"> B. Measures species richness and
+evenness, with a focus on dominant species <br> <input type="radio" name="q3" value="c"> C. Measures
+genetic diversity within species<br>
+<input type="radio" name="q3" value="d"> D.  Measures species richness and
+evenness, with a focus on rare species <br><br>
+
+<button type="button" onclick="checkAnswer2()">
+Submit
+</button>
+</form>
+
+::: {#result3 style="margin-top: 1em; font-weight: bold;"}
+:::
+
+</div>
+
+
+```{=html}
+<script>
+function checkAnswer2() {
+  const answer = document.querySelector('#quiz-form-3 input[name="q3"]:checked');
+  const result = document.getElementById("result3");
+
+  if (!answer) {
+    result.textContent = "⚠️ Please select an answer.";
+    result.style.color = "orange";
+    return;
+  }
+
+  if (answer.value === "b") {
+    result.textContent = "✅ Correct! Simpsons index does  look for genetic diversity based on species richness and evenness, but with a focus on dominant species.";
+    result.style.color = "green";
+  } else {
+    result.textContent = "❌ Not quite, try again.";
+    result.style.color = "red";
+  }
+}
+</script>
+```
+
+------------------------------------------------------------------------
+
 
 <p>Congratulations! You have now completed learning about Alpha
 Diversity, please click the button below to begin learning about Beta
