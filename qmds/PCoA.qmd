@@ -3,7 +3,13 @@ title: "Principal Co-ordinate Analysis (PCoA)"
 editor: visual
 ---
 
+**Principal Coordinates Analysis (PCoA)**, also known as classical multidimensional scaling (MDS), although this is sometimes challenged - is another common ordination technique. 
 
-**Principal Coordinates Analysis (PCoA)**, also known as classical multidimensional scaling (MDS), although this is sometimes challenged. 
 
-This is an ordination technique used to analyse or visualise relationships between samples based on their pairwise differences. It reduces the dimensionality of the data while preserving as much of its original structure as possible. PCoA is particularly useful when working with distance or dissimilarity matrices. 
+```{r echo=FALSE, out.width="60%", fig.align="center", fig.cap= "Credit: This image was created on Canva."}
+knitr::include_graphics("images/PCoA.png")
+```
+
+
+
+This is an ordination technique used to analyse or visualise relationships between samples based on their pairwise differences. It reduces the dimensionality of the data while preserving as much of its original structure as possible. PCoA is particularly useful when working with distance or dissimilarity matrices.
