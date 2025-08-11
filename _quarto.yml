@@ -28,6 +28,7 @@ website:
       - text: Ordination Methods
         menu: 
           - qmds/PCA.qmd
+          - qmds/PCoA.qmd
           - qmds/NMDS.qmd
         
         

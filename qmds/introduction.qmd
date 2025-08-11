@@ -1,5 +1,5 @@
 ---
-title: "Microbial Analysis"
+title: "An Introduction to Microbial Analysis"
 about:
   template: marquee
   links:
@@ -20,22 +20,20 @@ about:
 knitr::include_graphics("hexmedfly.png")
 ```
 
-Welcome! This site is designed to help you build a solid understanding of microbial community analysis. It focuses on alpha and beta diversity techniques and visualisation tools like PCA and NMDS, using real-world datasets and practical applications.
+## Microbial Analysis background:
+
+Welcome! This website is designed to help you explore the world of microbial community analysis. Looking into key concepts such as diversity metrics — including alpha and beta diversity, and visualisation and ordination techniques like PCA, PCoA and NMDS. Showing how these work using published datasets, helping you apply these methods to look at meaningful patterns in microbial and community data.
 
 #### **Why do we look at microbial analysis?** 
 
 Understanding what’s in a microbiota and how it changes across environments is key to answering many ecological and biological questions.
 
  
-
-Microbial analysis reveals:
+**Microbial analysis reveals:**
 
 -   What microbes are present
-
 -   How communities vary across conditions
-
 -   What factors shape these communities
-
  
 
 #### **What can I learn on this website?**
@@ -53,24 +51,28 @@ This site introduces essential methods for calculating both **Alpha Diversity** 
   - Bray-Curtis dissimilarity
   - Jaccard index
 
-In addition, you’ll learn how to visualise microbial community differences using multivariate techniques such as:
+In addition to learning Alpha and Diversity metrics, you’ll learn how to visualise microbial community differences using multivariate techniques such as:
 
-[**Visualisation Methods:**](qmds/visualisation)
+**Visualisation and Ordination Methods:**
 
- - **Principal Component Analysis (PCA)**
- - **Non-metric Multidimensional Scaling (NMDS)**
+ - [**Principal Component Analysis (PCA)**](PCA.qmd)
+ - [**Principal Co-Ordinate Analysis (PCoA)**](PCoA.qmd)
+ - [**Non-metric Multidimensional Scaling (NMDS)**](NMDS.qmd)
 
-These tools will help you identify and interpret variation in microbiome composition with confidence.
+These tools will help you identify and interpret variation in microbial composition with confidence.
 
 
  
 
 
-## Study Used: Darrington et al. (2022)
+## Data Used: Darrington et al. (2022)
 
-The study: ["Characterisation of the symbionts in the Mediterranean fruit fly gut"](https://www.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000801)
+Throughout this website, we use data extracted from a study looking at the microbiota compostion of the pest insect, the Medfly: 
+
+["Characterisation of the symbionts in the Mediterranean fruit fly gut"](https://www.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000801)
 
 This study investigated the gut microbiota of the Mediterranean fruit fly (*Ceratitis capitata*), a significant agricultural pest, to better understand its microbial associations. The researchers compared the gut bacteria of wild and laboratory-raised flies fed on various diets. They found that while diet strongly influences the gut microbiota, a single bacterium *Klebsiella michiganensis/oxytoca* ("Medkleb") was consistently dominant and notably resistant to antibiotics.
+
 
 ### Data Used on This Website
 
@@ -101,9 +103,8 @@ The flies were preserved in ethanol, transported to the UK, and dissected to iso
       1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 
       8.013 0 0016 8c0-4.42-3.58-8-8-8z" /> </svg> </a> </span>
 
- 
 
-
+------------------------------------------------------------------
 
 ## Getting into the background: **Alpha Diversity vs. Beta Diversity**
 

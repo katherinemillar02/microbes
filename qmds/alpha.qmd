@@ -457,7 +457,7 @@ genetic diversity within species<br>
 <input type="radio" name="q3" value="d"> D.  Measures species richness and
 evenness, with a focus on rare species <br><br>
 
-<button type="button" onclick="checkAnswer2()">
+<button type="button" onclick="checkAnswer3()">
 Submit
 </button>
 </form>
@@ -493,6 +493,56 @@ function checkAnswer2() {
 
 ------------------------------------------------------------------------
 
+**Both Shannon’s and Simpson’s indices measure community diversity by considering both species evenness and richness. What is the key difference between them?**
+
+<div>
+
+<form id="quiz-form-4">
+
+<input type="radio" name="q4" value="a"> 
+A. Shannon’s index is calculated only from the number of species, while Simpson’s index is calculated only from the abundance of species. <br>
+<input type="radio" name="q4" value="b"> 
+B. Simpson's focuses more on dominant species, Shannon's focuses more on rare species <br> 
+<input type="radio" name="q4" value="c">
+C.  Shannon’s index increases as the number of dominant species increases, while Simpson’s index decreases.<br>
+<input type="radio" name="q4" value="d"> 
+D. Shannon’s index uses a logarithmic scale, while Simpson’s index uses an exponential scale <br><br>
+
+<button type="button" onclick="checkAnswer4()">
+Submit
+</button>
+</form>
+
+::: {#result4 style="margin-top: 1em; font-weight: bold;"}
+:::
+
+</div>
+
+
+```{=html}
+<script>
+function checkAnswer4() {
+  const answer = document.querySelector('#quiz-form-4 input[name="q4"]:checked');
+  const result = document.getElementById("result4");
+
+  if (!answer) {
+    result.textContent = "⚠️ Please select an answer.";
+    result.style.color = "orange";
+    return;
+  }
+
+  if (answer.value === "b") {
+    result.textContent = "✅ Correct!";
+    result.style.color = "green";
+  } else {
+    result.textContent = "❌ Not quite, try again.";
+    result.style.color = "red";
+  }
+}
+</script>
+```
+
+------------------------------------------------------------------------
 
 <p>Congratulations! You have now completed learning about Alpha
 Diversity, please click the button below to begin learning about Beta
