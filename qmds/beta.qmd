@@ -10,13 +10,11 @@ Beta Diversity, as discussed is a measure of dissimilarity or similarity between
 
 There are many methods which can be used to calculate Beta Diversity, in this section, you will be introduced to:
 
-#### **Bray-Curtis Dissimilarity**
-
-#### **Jaccard Dissimilarity**
+ **Bray-Curtis Dissimilarity** and  **Jaccard Dissimilarity**
 
  
 
-### Bray-Curtis Dissimilarity, ***BC**~ij~*
+# Bray-Curtis Dissimilarity
 
 A statistical method founded by J. Roger Bray and John T. Curtis.
 

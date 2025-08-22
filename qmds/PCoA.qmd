@@ -12,4 +12,45 @@ knitr::include_graphics("images/PCoA.png")
 
 
 
-This is an ordination technique used to analyse or visualise relationships between samples based on their pairwise differences. It reduces the dimensionality of the data while preserving as much of its original structure as possible. PCoA is particularly useful when working with distance or dissimilarity matrices.
+### What is PCoA? 
+
+  - PCoA is used to analyse or visualise relationships between samples, based on their **pairwise distances** or **dissimilarities**. 
+  - It reduces dimensionality, while preserving as much of the original structure as possible. 
+  - Unlike [**PCA**](PCA.qmd), **PCoA** can be applied to **non-Euclidean distances**, such as [**Bray–Curtis**](beta.qmd#bray-curtis-dissimilarity) or [**Jaccard**](beta.qmd#jaccard-dissimilarity). This means it is more fleixble, and it does not have to satisfy any rules. 
+  - The general goal of PCoA is to represent possible non-Eucledian distances with a set of Eucledian co-ordinates. 
+  - Like most ordination methods, PCoA will project the pairwise distance samples into a co-ordinate system, where axes that best preserve the original distances are selected. Closely related samples cluster together, and dissimilar samples will spread further apart. 
+  - The general principle is that this reflects is that *n* sample units can be illustrated in only one dimension! 
+
+
+
+
+ 
+ 
+ 
+
+### How do we PCoA?
+
+1. **Generate a distance matrix** 
+
+ - A dissimilarity matrix is created from the original data. 
+ - The matrix is centralised (to adjust it for eigen-decomposition). 
+ 
+2. **Eigen-decomposition** 
+
+ - The centralised matrix undergoes eigen-decomposition. 
+ - Like PCA, The eigenvalues we generate represent the variance explained; eigenvectors define new co-ordinate axes (also like what we learnt in PCA)! 
+
+3. **Select pricipal coordinates**
+ - Coordinates corresponding to the largest eigenvalues are kept, as these are the best representation of the data. 
+ 
+ 4. **Project samples**  
+ - Each sample is assigned coordinates in this reduced space, this is the visualisation. 
+ 
+        
+      
+### PCA vs PCoA: 
+  - PCoA is a special type of PCA, because it does not need Eucledian distances. 
+  - PCA needs Eucledian distances. 
+  - In PCoA, distance matrixes can be used.. 
+
+  

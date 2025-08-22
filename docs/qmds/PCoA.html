@@ -141,7 +141,15 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#what-is-pcoa" id="toc-what-is-pcoa" class="nav-link active" data-scroll-target="#what-is-pcoa">What is PCoA?</a></li>
+  <li><a href="#how-do-we-pcoa" id="toc-how-do-we-pcoa" class="nav-link" data-scroll-target="#how-do-we-pcoa">How do we PCoA?</a></li>
+  <li><a href="#pca-vs-pcoa" id="toc-pca-vs-pcoa" class="nav-link" data-scroll-target="#pca-vs-pcoa">PCA vs PCoA:</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -174,9 +182,57 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
-<p>This is an ordination technique used to analyse or visualise relationships between samples based on their pairwise differences. It reduces the dimensionality of the data while preserving as much of its original structure as possible. PCoA is particularly useful when working with distance or dissimilarity matrices.</p>
+<section id="what-is-pcoa" class="level3">
+<h3 class="anchored" data-anchor-id="what-is-pcoa">What is PCoA?</h3>
+<ul>
+<li>PCoA is used to analyse or visualise relationships between samples, based on their <strong>pairwise distances</strong> or <strong>dissimilarities</strong>.</li>
+<li>It reduces dimensionality, while preserving as much of the original structure as possible.</li>
+<li>Unlike <a href="../qmds/PCA.html"><strong>PCA</strong></a>, <strong>PCoA</strong> can be applied to <strong>non-Euclidean distances</strong>, such as <a href="../qmds/beta.html#bray-curtis-dissimilarity"><strong>Bray–Curtis</strong></a> or <a href="../qmds/beta.html#jaccard-dissimilarity"><strong>Jaccard</strong></a>. This means it is more fleixble, and it does not have to satisfy any rules.</li>
+<li>The general goal of PCoA is to represent possible non-Eucledian distances with a set of Eucledian co-ordinates.</li>
+<li>Like most ordination methods, PCoA will project the pairwise distance samples into a co-ordinate system, where axes that best preserve the original distances are selected. Closely related samples cluster together, and dissimilar samples will spread further apart.</li>
+<li>The general principle is that this reflects is that <em>n</em> sample units can be illustrated in only one dimension!</li>
+</ul>
+</section>
+<section id="how-do-we-pcoa" class="level3">
+<h3 class="anchored" data-anchor-id="how-do-we-pcoa">How do we PCoA?</h3>
+<ol type="1">
+<li><strong>Generate a distance matrix</strong></li>
+</ol>
+<ul>
+<li>A dissimilarity matrix is created from the original data.</li>
+<li>The matrix is centralised (to adjust it for eigen-decomposition).</li>
+</ul>
+<ol start="2" type="1">
+<li><strong>Eigen-decomposition</strong></li>
+</ol>
+<ul>
+<li>The centralised matrix undergoes eigen-decomposition.</li>
+<li>Like PCA, The eigenvalues we generate represent the variance explained; eigenvectors define new co-ordinate axes (also like what we learnt in PCA)!</li>
+</ul>
+<ol start="3" type="1">
+<li><strong>Select pricipal coordinates</strong></li>
+</ol>
+<ul>
+<li>Coordinates corresponding to the largest eigenvalues are kept, as these are the best representation of the data.</li>
+</ul>
+<ol start="4" type="1">
+<li><strong>Project samples</strong><br>
+</li>
+</ol>
+<ul>
+<li>Each sample is assigned coordinates in this reduced space, this is the visualisation.</li>
+</ul>
+</section>
+<section id="pca-vs-pcoa" class="level3">
+<h3 class="anchored" data-anchor-id="pca-vs-pcoa">PCA vs PCoA:</h3>
+<ul>
+<li>PCoA is a special type of PCA, because it does not need Eucledian distances.</li>
+<li>PCA needs Eucledian distances.</li>
+<li>In PCoA, distance matrixes can be used..</li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
