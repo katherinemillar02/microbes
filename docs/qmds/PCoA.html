@@ -124,6 +124,17 @@ ul.task-list li input[type="checkbox"] {
   </li>  
     </ul>
   </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tephritid-microbiota" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Tephritid Microbiota</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-tephritid-microbiota">    
+        <li>
+    <a class="dropdown-item" href="../qmds/tephritidecology.html" rel="" target="">
+ <span class="dropdown-text">Distribution of Tephritid Pests</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
     <a class="nav-link" href="../qmds/microbialsummary.html" rel="" target="">
  <span class="menu-text">Microbial Methods Overview</span></a>
@@ -187,14 +198,168 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>PCoA is used to analyse or visualise relationships between samples, based on their <strong>pairwise distances</strong> or <strong>dissimilarities</strong>.</li>
 <li>It reduces dimensionality, while preserving as much of the original structure as possible.</li>
-<li>Unlike <a href="../qmds/PCA.html"><strong>PCA</strong></a>, <strong>PCoA</strong> can be applied to <strong>non-Euclidean distances</strong>, such as <a href="../qmds/beta.html#bray-curtis-dissimilarity"><strong>Bray–Curtis</strong></a> or <a href="../qmds/beta.html#jaccard-dissimilarity"><strong>Jaccard</strong></a>. This means it is more fleixble, and it does not have to satisfy any rules.</li>
+<li>Unlike <a href="../qmds/PCA.html"><strong>PCA</strong></a>, <strong>PCoA</strong> can be applied to <strong>non-Euclidean distances</strong>, such as <a href="../qmds/beta.html#bray-curtis-dissimilarity"><strong>Bray–Curtis</strong></a> or <a href="../qmds/beta.html#jaccard-dissimilarity"><strong>Jaccard</strong></a>. This means it is more flexible, and it does not have to satisfy any rules.</li>
 <li>The general goal of PCoA is to represent possible non-Eucledian distances with a set of Eucledian co-ordinates.</li>
 <li>Like most ordination methods, PCoA will project the pairwise distance samples into a co-ordinate system, where axes that best preserve the original distances are selected. Closely related samples cluster together, and dissimilar samples will spread further apart.</li>
 <li>The general principle is that this reflects is that <em>n</em> sample units can be illustrated in only one dimension!</li>
+<li>This is different to NMDS because, NMDs uses rank order distance.</li>
 </ul>
 </section>
 <section id="how-do-we-pcoa" class="level3">
 <h3 class="anchored" data-anchor-id="how-do-we-pcoa">How do we PCoA?</h3>
+<p>Let’s be a bit simple and go through R.</p>
+<div style="overflow-x: auto;">
+<table class="table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Fruit</th>
+<th><em>Klebsiella</em></th>
+<th><em>Acinetobacter</em></th>
+<th><em>Pantoea</em></th>
+<th><em>Pseudoxanthomonas</em></th>
+<th><em>Serratia</em></th>
+<th><em>Stenotrophomonas</em></th>
+<th><em>Delftia</em></th>
+<th><em>Burkholderia</em></th>
+<th><em>Sphingomonas</em></th>
+<th><em>Bacillus</em></th>
+<th><em>Sphingobacterium</em></th>
+<th><em>Mycoplasma</em></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Apricot</td>
+<td>80%</td>
+<td>10%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>5%</td>
+</tr>
+<tr class="even">
+<td>Argan</td>
+<td>75%</td>
+<td>10%</td>
+<td>5%</td>
+<td>5%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>5%</td>
+<td>5%</td>
+</tr>
+<tr class="odd">
+<td>GF</td>
+<td>75%</td>
+<td>10%</td>
+<td>5%</td>
+<td>5%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>5%</td>
+<td>5%</td>
+</tr>
+<tr class="even">
+<td>Orange</td>
+<td>70%</td>
+<td>15%</td>
+<td>5%</td>
+<td>5%</td>
+<td>5%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+<td>5%</td>
+</tr>
+<tr class="odd">
+<td>Peach</td>
+<td>60%</td>
+<td>10%</td>
+<td>10%</td>
+<td>10%</td>
+<td>5%</td>
+<td>5%</td>
+<td>0%</td>
+<td>0%</td>
+<td>5%</td>
+<td>5%</td>
+<td>0%</td>
+<td>0%</td>
+</tr>
+<tr class="even">
+<td>Tang</td>
+<td>40%</td>
+<td>10%</td>
+<td>20%</td>
+<td>20%</td>
+<td>10%</td>
+<td>5%</td>
+<td>0%</td>
+<td>5%</td>
+<td>10%</td>
+<td>0%</td>
+<td>0%</td>
+<td>0%</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>&nbsp;</p>
+<p>As demonstrated briefly above, if we are using R to calculate the Bray-Curtis dissimilarity values, we first want to put our data into a dataframe containing the relative abundance of our bacteria for each of the six fruit samples. As we did earlier we will use <code>"bray"</code> in the <code>vegdist()</code> function in R to calculate the Bray-Curtis dissimilarity values. Ensuring we are making a dataframe where row names have been ommited.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>          Apricot     Argan        GF    Orange     Peach      Tang
+Apricot 0.0000000 0.1000000 0.1000000 0.1500000 0.3170732 0.5348837
+Argan   0.1000000 0.0000000 0.0000000 0.0952381 0.2558140 0.4666667
+GF      0.1000000 0.0000000 0.0000000 0.0952381 0.2558140 0.4666667
+Orange  0.1500000 0.0952381 0.0952381 0.0000000 0.2093023 0.4222222
+Peach   0.3170732 0.2558140 0.2558140 0.2093023 0.0000000 0.2608696
+Tang    0.5348837 0.4666667 0.4666667 0.4222222 0.2608696 0.0000000</code></pre>
+</div>
+</div>
+<p>In R we can use cmdscale because PCoA is supposodley the same as classical multidimendional scaling.</p>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 6 rows containing missing values or values outside the scale range
+(`geom_path()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="PCoA_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Makes sense.</p>
 <ol type="1">
 <li><strong>Generate a distance matrix</strong></li>
 </ol>
@@ -202,6 +367,7 @@ ul.task-list li input[type="checkbox"] {
 <li>A dissimilarity matrix is created from the original data.</li>
 <li>The matrix is centralised (to adjust it for eigen-decomposition).</li>
 </ul>
+<p>Let’s use the Darrington dataset and R to work this out.</p>
 <ol start="2" type="1">
 <li><strong>Eigen-decomposition</strong></li>
 </ol>

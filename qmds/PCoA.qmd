@@ -16,10 +16,11 @@ knitr::include_graphics("images/PCoA.png")
 
   - PCoA is used to analyse or visualise relationships between samples, based on their **pairwise distances** or **dissimilarities**. 
   - It reduces dimensionality, while preserving as much of the original structure as possible. 
-  - Unlike [**PCA**](PCA.qmd), **PCoA** can be applied to **non-Euclidean distances**, such as [**Bray–Curtis**](beta.qmd#bray-curtis-dissimilarity) or [**Jaccard**](beta.qmd#jaccard-dissimilarity). This means it is more fleixble, and it does not have to satisfy any rules. 
+  - Unlike [**PCA**](PCA.qmd), **PCoA** can be applied to **non-Euclidean distances**, such as [**Bray–Curtis**](beta.qmd#bray-curtis-dissimilarity) or [**Jaccard**](beta.qmd#jaccard-dissimilarity). This means it is more flexible, and it does not have to satisfy any rules. 
   - The general goal of PCoA is to represent possible non-Eucledian distances with a set of Eucledian co-ordinates. 
   - Like most ordination methods, PCoA will project the pairwise distance samples into a co-ordinate system, where axes that best preserve the original distances are selected. Closely related samples cluster together, and dissimilar samples will spread further apart. 
   - The general principle is that this reflects is that *n* sample units can be illustrated in only one dimension! 
+  - This is different to NMDS because, NMDs uses rank order distance. 
 
 
 
@@ -27,18 +28,104 @@ knitr::include_graphics("images/PCoA.png")
  
  
  
-
 ### How do we PCoA?
+
+Let's be a bit simple and go through R. 
+
+
+
+
+::: {style="overflow-x: auto;"}
+| Fruit   | *Klebsiella* | *Acinetobacter* | *Pantoea* | *Pseudoxanthomonas* | *Serratia* | *Stenotrophomonas* | *Delftia* | *Burkholderia* | *Sphingomonas* | *Bacillus* | *Sphingobacterium* | *Mycoplasma* |
+|------|------|------|------|------|------|------|------|------|------|------|------|------|
+| Apricot | 80%          | 10%             | 0%        | 0%                  | 0%         | 0%                 | 0%        | 0%             | 0%             | 0%         | 0%                 | 5%           |
+| Argan   | 75%          | 10%             | 5%        | 5%                  | 0%         | 0%                 | 0%        | 0%             | 0%             | 0%         | 5%                 | 5%           |
+| GF      | 75%          | 10%             | 5%        | 5%                  | 0%         | 0%                 | 0%        | 0%             | 0%             | 0%         | 5%                 | 5%           |
+| Orange  | 70%          | 15%             | 5%        | 5%                  | 5%         | 0%                 | 0%        | 0%             | 0%             | 0%         | 0%                 | 5%           |
+| Peach   | 60%          | 10%             | 10%       | 10%                 | 5%         | 5%                 | 0%        | 0%             | 5%             | 5%         | 0%                 | 0%           |
+| Tang    | 40%          | 10%             | 20%       | 20%                 | 10%        | 5%                 | 0%        | 5%             | 10%            | 0%         | 0%                 | 0%           |
+:::
+
+ 
+
+As demonstrated briefly above, if we are using R to calculate the Bray-Curtis dissimilarity values, we first want to put our data into a dataframe containing the relative abundance of our bacteria for each of the six fruit samples. As we did earlier we will use `"bray"` in the `vegdist()` function in R to calculate the Bray-Curtis dissimilarity values. Ensuring we are making a dataframe where row names have been ommited.
+
+```{r, echo=FALSE, message=FALSE}
+library(vegan)
+
+df_2 <- data.frame(
+  Klebsiella = c(80, 75, 75, 70, 60, 40),
+  Acinetobacter = c(10, 10, 10, 15, 10, 10),
+  Pantoea = c(0, 5, 5, 5, 10, 20),
+  Pseudoxanthomonas = c(0, 5, 5, 5, 10, 20),
+  Serratia = c(0, 0, 0, 5, 5, 10),
+  Stenotrophomonas = c(0, 0, 0, 0, 5, 5),
+  Delftia = c(0, 0, 0, 0, 0, 0),
+  Burkholderia = c(0, 0, 0, 0, 0, 5),
+  Sphingomonas = c(0, 0, 0, 0, 5, 10),
+  Bacillus = c(0, 0, 0, 0, 5, 0),
+  Sphingobacterium = c(0, 5, 5, 0, 0, 0),
+  Mycoplasma = c(5, 5, 5, 5, 0, 0)
+)
+
+bray_curtis <- vegdist(df_2, method = "bray")
+bray_curtis_matrix <- as.matrix(bray_curtis)
+fruit_names <- c("Apricot", "Argan", "GF", "Orange", "Peach", "Tang")
+rownames(bray_curtis_matrix) <- fruit_names
+colnames(bray_curtis_matrix) <- fruit_names
+
+bray_curtis_matrix
+
+```
+
+
+In R we can use cmdscale because PCoA is supposodley the same as classical multidimendional scaling. 
+```{r, echo=FALSE, message=FALSE}
+library(tidyverse)
+pcoa_result <- cmdscale(bray_curtis_matrix, eig = TRUE, k = 2)
+
+
+points <- as.data.frame(pcoa_result$points)
+colnames(points) <- c("PCoA1", "PCoA2")
+points$Management <- df_2$Management
+variance <- round(100 * pcoa_result$eig / sum(pcoa_result$eig), 2)
+
+
+ggplot(points, aes(x = PCoA1, y = PCoA2, colour = fruit_names)) +
+ geom_point(size = 3) +
+ stat_ellipse(level = 0.95, linetype = 2, alpha = 0.3) +
+ labs(
+ title = "PCoA Analysis (Bray-Curtis)",
+ x = paste0("PCoA1 (", variance[1], "%)"),
+ y = paste0("PCoA2 (", variance[2], "%)")
+ ) +
+ theme_minimal()
+```
+
+
+Makes sense. 
+
+
+
+
+
 
 1. **Generate a distance matrix** 
 
  - A dissimilarity matrix is created from the original data. 
  - The matrix is centralised (to adjust it for eigen-decomposition). 
  
+Let's use the Darrington dataset and R to work this out. 
+
+
+ 
 2. **Eigen-decomposition** 
 
  - The centralised matrix undergoes eigen-decomposition. 
- - Like PCA, The eigenvalues we generate represent the variance explained; eigenvectors define new co-ordinate axes (also like what we learnt in PCA)! 
+ - Like PCA, The eigenvalues we generate represent the variance explained; eigenvectors define new co-ordinate axes (also like what we learnt in PCA)!
+ 
+ 
+ 
 
 3. **Select pricipal coordinates**
  - Coordinates corresponding to the largest eigenvalues are kept, as these are the best representation of the data. 

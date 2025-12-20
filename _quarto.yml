@@ -30,9 +30,9 @@ website:
           - qmds/PCA.qmd
           - qmds/PCoA.qmd
           - qmds/NMDS.qmd
-        
-        
-        
+      - text: Tephritid Microbiota
+        menu: 
+          - qmds/tephritidecology.qmd
       - text: Microbial Methods Overview
         file: qmds/microbialsummary.qmd
 
