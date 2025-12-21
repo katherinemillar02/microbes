@@ -1,0 +1,39 @@
+---
+title: "Sequencing Techniques"
+editor: visual
+---
+
+This section will take you through any sequencing techniques.
+
+**Amplicon Sequencing**:
+- Amplicon sequencing is a targeted DNA sequencing approach used to identify and compare specific genetic regions across many samples.
+- There are different types, but for bacteria and archaea specifically, we use the 16S rRNA gene. 
+- Within amplicon sequencing, there are two types: (i) short-read sequencing and (ii) long-read sequencing. 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.width="50%", fig.align="center",fig.cap="This image was generated taken from ClipartMax"}
+      
+knitr::include_graphics("images/eppendorftube.png")
+
+```
+
+**An overview of how it works:**
+1. DNA extraction from samples (e.g. gut, soil, feces, fruit, insect tissue)
+
+Samples such as gut contents, soil, feces, fruit, insect tissue, etc, are first collected. DNA is extracted from these samples using a commercial DNA extraction kit or laboratory protocol. This process breaks open cells and isolates total DNA, which is then purified and stored in a solution (the DNA extract) for downstream analysis.
+
+
+
+
+
+
+2. PCR amplification of a target gene region using primers that bind conserved sites
+
+3. Indexing/barcoding so many samples can be pooled together
+
+4. High-throughput sequencing (commonly Illumina platforms)
+
+5. Bioinformatic analysis to infer taxonomic identity or genetic variation
+
+
+
+**Shotgun Metagenomics**:

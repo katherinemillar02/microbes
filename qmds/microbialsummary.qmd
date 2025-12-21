@@ -41,3 +41,42 @@ Both **PCA (Principal Component Analysis)** and **NMDS (Non-metric Multidimensio
 -   PCA assumes that the data lies in a linear Euclidean space. It relies on straight-line distances and angles between data points. PCA uses these Euclidean distances implicitly when calculating the covariance matrix, which determines the directions of greatest variance in the dataset.
 
 -   NMDS does not assume linearity or metric relationships. Instead, it works with a dissimilarity matrix, which can be based on Euclidean distances or other measures (like Bray-Curtis or Jaccard). Importantly, NMDS only considers the rank order of the distances --- not their actual values --- and attempts to preserve these ranks in a lower-dimensional space..
+
+
+
+## Getting into the background: **Alpha Diversity vs. Beta Diversity**
+
+Now that you have a brief background on this website, we can start thinking about microbial communities and how they are analysed. A good starting point is to introduce key concepts
+such as; **Alpha** and **Beta** diversity.   Gaining an understanding of these measures provides a strong foundation for studying microbial community structure and variation, and serves as a gateway into more advanced community analysis techniques. 
+
+
+  **Alpha Diversity** describes **the diversity within a single sample or environment**, while **Beta Diversity** describes **the differences in diversity between two or more samples or environments**.
+
+   
+
+::::: {style="display: flex; align-items: flex-start; gap: 20px; margin-bottom: 30px;"}
+::: {style="flex: 1 0 45%; max-width: 45%;"}
+```{r echo=FALSE, out.width="100%", fig.align="center", fig.cap="This image was generated from ChatGPT."}
+knitr::include_graphics("images/beta1.png")
+```
+:::
+
+::: {style="flex: 1; padding-left: 20px;"}
+Alpha Diversity refers to the diversity **within** a sample. For example, Orange vs. Blue vs. Green vs. Pink.
+:::
+:::::
+
+::::: {style="display: flex; align-items: flex-start; gap: 20px;"}
+::: {style="flex: 0 0 45%; max-width: 45%;"}
+```{r echo=FALSE, out.width="100%", fig.align="center", fig.cap="This image was generated from ChatGPT."}
+   knitr::include_graphics("images/beta2.png") 
+```
+:::
+
+::: {style="flex: 1; padding-left: 20px;"}
+Beta diversity refers to the overall diversity **between** samples.For example, how the colours on the left *collectively* compare to the colours on the right.
+:::
+:::::
+
+These may seem easy to remember on the surface, but they can easily be forgotten!
+

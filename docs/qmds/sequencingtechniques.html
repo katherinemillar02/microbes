@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Beta Diversity Analysis Methods – Microbial Analysis</title>
+<title>Sequencing Techniques – Microbial Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -71,35 +71,6 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -170,7 +141,7 @@ window.Quarto = {
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="../qmds/sequencingtechniques.html"> 
+    <a class="nav-link active" href="../qmds/sequencingtechniques.html" aria-current="page"> 
 <span class="menu-text">Profiling the Microbiota</span></a>
   </li>  
 </ul>
@@ -185,24 +156,15 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#bray-curtis-dissimilarity" id="toc-bray-curtis-dissimilarity" class="nav-link active" data-scroll-target="#bray-curtis-dissimilarity">Bray-Curtis Dissimilarity</a></li>
-  <li><a href="#jaccard-dissimilarity" id="toc-jaccard-dissimilarity" class="nav-link" data-scroll-target="#jaccard-dissimilarity">Jaccard Dissimilarity</a></li>
-  <li><a href="#bray-curtis-vs.-jaccard" id="toc-bray-curtis-vs.-jaccard" class="nav-link" data-scroll-target="#bray-curtis-vs.-jaccard">Bray-Curtis vs.&nbsp;Jaccard</a></li>
-  <li><a href="#test-your-understanding" id="toc-test-your-understanding" class="nav-link" data-scroll-target="#test-your-understanding">Test your understanding!</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Beta Diversity Analysis Methods</h1>
+<h1 class="title">Sequencing Techniques</h1>
 </div>
 
 
@@ -219,513 +181,29 @@ window.Quarto = {
 </header>
 
 
-<p>Beta Diversity, as discussed is a measure of dissimilarity or similarity between two different communities.</p>
+<p>This section will take you through any sequencing techniques.</p>
+<p><strong>Amplicon Sequencing</strong>: - Amplicon sequencing is a targeted DNA sequencing approach used to identify and compare specific genetic regions across many samples. - There are different types, but for bacteria and archaea specifically, we use the 16S rRNA gene. - Within amplicon sequencing, there are two types: (i) short-read sequencing and (ii) long-read sequencing.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/beta2.png" class="img-fluid figure-img" style="width:50.0%"></p>
-<figcaption>This image was generated from ChatGPT.</figcaption>
+<p><img src="images/eppendorftube.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<figcaption>This image was generated taken from ClipartMax</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>There are many methods which can be used to calculate Beta Diversity, in this section, you will be introduced to:</p>
-<p><strong>Bray-Curtis Dissimilarity</strong> and <strong>Jaccard Dissimilarity</strong></p>
-<p>&nbsp;</p>
-<section id="bray-curtis-dissimilarity" class="level1">
-<h1>Bray-Curtis Dissimilarity</h1>
-<p>A statistical method founded by J. Roger Bray and John T. Curtis.</p>
-<div class="cell" data-layout-align="left">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-left">
-<figure class="figure">
-<p><img src="images/braycurtishistory.png" class="img-fluid figure-img" style="width:45.0%"></p>
-<figcaption>This image was generated with ChatGPT.</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>Bray-Curtis Dissimilarity can be described as a statistic used to quantify the <strong>dissimilarity</strong> in composition of species (in this context, microbes) between <strong>two</strong> different sites. It works by a formula (explained below) outputting a value between 0 and 1, with 0 meaning the sites are exactly the same, to very similar, and 1 being they are very dissimilar.</p>
-<p>&nbsp;</p>
-<p>The formula used in <strong>Bray-Curtis Dissimilarity</strong> is shown below:</p>
-<p>&nbsp;</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/mathsanalysis.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="442"></p>
-</figure>
-</div>
-</div>
-</div>
-<section id="bray-curtis-dissimilarity-in-action" class="level4">
-<h4 class="anchored" data-anchor-id="bray-curtis-dissimilarity-in-action"><strong>Bray-Curtis Dissimilarity in action</strong></h4>
-<p>Lets go through an example of how <strong>Bray-Curtis Dissimilarity</strong> works, using data from <a href="https://www.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000801#tab2">Darrington et al.&nbsp;(2022)</a>.</p>
-<p>Because Bray-Curtis Dissimilarity is based on a calculation of two different sites, we will use Medfly larval samples taken from two different fruits (Argan 🌰 and Peach 🍑, taken from Morocco and Greece respectively). That have been sequenced through 16S rRNA sequencing.</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><strong>Sample 1 - Medfly from Morocco (Argan 🌰)</strong></p>
-<p><strong>Bacterial composition (relative proportions):</strong></p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Bacterium</th>
-<th>Proportion</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><em>Klebsiella</em></td>
-<td>0.75</td>
-</tr>
-<tr class="even">
-<td><em>Pantonea</em></td>
-<td>0.15</td>
-</tr>
-<tr class="odd">
-<td><em>Commensalibacter</em></td>
-<td>0.10</td>
-</tr>
-</tbody>
-</table>
-</div><div class="column" style="width:50%;">
-<p><strong>Sample 2 - Medfly from Greece (Peach 🍑)</strong></p>
-<p><strong>Bacterial composition (relative proportions):</strong></p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Bacterium</th>
-<th>Proportion</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><em>Klebsiella</em></td>
-<td>0.25</td>
-</tr>
-<tr class="even">
-<td><em>Pantonea</em></td>
-<td>0.50</td>
-</tr>
-<tr class="odd">
-<td><em>Serratia</em></td>
-<td>0.05</td>
-</tr>
-<tr class="even">
-<td><em>Spinghobacterium</em></td>
-<td>0.15</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>&nbsp;</p>
-<p><strong>Calculating Bray-Curtis Dissimilarity (<em>BC<sub>ij</sub></em>)</strong></p>
-<p>C<sub>ij</sub> = the sum of <strong>lower</strong> counts found at both sites</p>
-<blockquote class="blockquote">
-<p>C<sub>ij</sub> = 0.25 + 0.15 = 0.4</p>
-</blockquote>
-<p>The only bacteria these two samples have in common are <em>Klebsiella</em> and <em>Pantonea</em>, the lowest values of which are 0.25 of <em>Klebsiella</em> (from the peach samples), and 0.15 of <em>Pantonea</em> (from the argan samples).</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Deep Dive into Bray Curtis Dissimilarity">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Deep Dive into Bray Curtis Dissimilarity
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<details>
-<summary>
-Why use the lower counts?
-</summary>
-<p>In Bray-Curtis dissimilarity, the overlap between two samples is measured by summing the <strong>minimum (lower)</strong> values for each species across the two samples. This captures the <em>shared abundance</em>—how much both sites have in common—while ignoring excess that exists only in one site. The lower count for each taxon tells you the maximum that can be considered “shared” between the two samples.</p>
-<p>For example, if one site has <em>Klebsiella</em> at 0.75 and the other at 0.25, only <strong>0.25</strong> is considered as the shared amount.</p>
-</details>
-</div>
-</div>
-<p>S<sub>i</sub> = total number on site i - Argan</p>
-<blockquote class="blockquote">
-<p>S<sub>i</sub> = 0.75 + 0.15 + 0.1 = 1</p>
-</blockquote>
-<p>S<sub>j</sub> = total number on site j - Peach</p>
-<blockquote class="blockquote">
-<p>S<sub>j</sub> = 0.25 + 0.5 + 0.05 + 0.15 = 1</p>
-</blockquote>
-<div class="callout callout-style-default callout-tip callout-titled" title="Deep Dive into Bray Curtis Dissimilarity">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Deep Dive into Bray Curtis Dissimilarity
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<details>
-<summary>
-Why do we work out the total counts on each site?
-</summary>
-<p>By dividing by the total abundance across both sites, we <strong>normalise</strong> the shared abundance, accounting for differences in sample size or total population. This allows the measure to reflect <strong>relative similarity</strong> rather than absolute counts, ensuring the value ranges between 0 (identical) and 1 (completely different).</p>
-<p>In other words, calculating totals ensures that the Bray-Curtis dissimilarity is <strong>scale-independent</strong> and fair across samples of different sizes.</p>
-</details>
-</div>
-</div>
-<p>Now that we have:</p>
-<p><span class="math display">\[
-C_{ij} = 0.4 \\
-\]</span> <span class="math display">\[
-S_i = 1 \\
-\]</span> <span class="math display">\[
-S_j = 1
-\]</span></p>
-<p>The Bray-Curtis formula is:</p>
-<p><span class="math display">\[
-BC_{ij} = 1 - \frac{2 C_{ij}}{S_i + S_j}
-\]</span></p>
-<p>Plugging in the values:</p>
-<p><span class="math display">\[
-BC_{ij} = 1 - \frac{2*0.4}{1 + 1}
-\]</span></p>
-<p>Calculate the division:</p>
-<p><span class="math display">\[
-\frac{0.8}{2} = 0.4
-\]</span></p>
-<p>Finally:</p>
-<p><span class="math display">\[
-BC_{ij} = 1 - 0.4 = \mathbf{0.6}
-\]</span></p>
-<p><strong>Interpretation:</strong><br>
-Using this formula we have worked out the Bray-Curtis Dissimilarity of the two Medfly microbiotas from Argan and Peach to be <strong>0.6</strong>.</p>
-<p>Now let’s go into what this means. Below shows the scale, where Bray-Curtis dissimilarity will range from 0 - 1, with 1 being the largest amount of dissimilarity between the two samples.</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/braycurtisscale.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>From the scale, we can conclude that two samples are not similar, not are they massively dissimilar. But they are more dissimilar than similar! You might be able to see this makes somewhat sense by going back to the dataframe. To put it simply, a Bray-Curtis dissimilarity of <strong>0.6</strong> indicates moderate dissimilarity between the two sites.</p>
-<p>&nbsp;</p>
-</section>
-</section>
-<section id="jaccard-dissimilarity" class="level1">
-<h1>Jaccard Dissimilarity</h1>
-<p>Jaccard distance does not take abundances into account; just the presence of microbes in one or both samples.</p>
-<p>The Jaccard dissimilarity is defined as:</p>
-<p><span class="math display">\[
-\text{Jaccard}_{ij} = 1 - \frac{|A \cap B|}{|A \cup B|}
-\]</span></p>
-<p><strong>A ∩ B</strong> is the number of <em>shared</em> species (present in both sites).</p>
-<p>&nbsp; <strong>A ∪ B</strong> is the total number of <em>unique</em> species across both sites.</p>
-<p>&nbsp;</p>
-<p>Lets take the two samples we used to calculate Bray Curtis Dissimilarity from the <a href="https://www.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000801#tab2">Darrington et al.&nbsp;(2022)</a> data again.</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><strong>Sample 1 - Medfly from Morocco (Argan 🌰)</strong></p>
-<p><strong>Bacterial composition (relative proportions):</strong></p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Bacterium</th>
-<th>Proportion</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><em>Klebsiella</em></td>
-<td>0.75</td>
-</tr>
-<tr class="even">
-<td><em>Pantonea</em></td>
-<td>0.15</td>
-</tr>
-<tr class="odd">
-<td><em>Commensalibacter</em></td>
-<td>0.10</td>
-</tr>
-</tbody>
-</table>
-</div><div class="column" style="width:50%;">
-<p><strong>Sample 2 - Medfly from Greece (Peach 🍑)</strong></p>
-<p><strong>Bacterial composition (relative proportions):</strong></p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Bacterium</th>
-<th>Proportion</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><em>Klebsiella</em></td>
-<td>0.25</td>
-</tr>
-<tr class="even">
-<td><em>Pantonea</em></td>
-<td>0.50</td>
-</tr>
-<tr class="odd">
-<td><em>Serratia</em></td>
-<td>0.05</td>
-</tr>
-<tr class="even">
-<td><em>Spinghobacterium</em></td>
-<td>0.15</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>In both the Argan sample, and the Peach sample, there is <em>Klebsiella</em> and <em>Pantonea</em>, this means there are <strong>2</strong> samples which are the same.</p>
-<p>In the Argan sample, there is <em>Klebsiella</em>, <em>Pantonea</em> and <em>Commensalibacter</em>. In the Peach sample, there is <em>Klebsiella</em>, <em>Pantonea</em>, <em>Serratia</em> and <em>Spinghobacterium</em>, so there are <strong>5</strong> different bacterias present across both of these samples.</p>
-<p>Putting this into a equation is:</p>
-<p><span class="math display">\[
-\text{Jaccard}_{ij} = 1 - \frac{2}{5}
-\]</span></p>
-<p><span class="math display">\[
-\text{Jaccard}_{ij} = \frac{2}{5} = 0.4
-\]</span> <span class="math display">\[
-\text{Jaccard}_{ij} = 1 - 0.4 = 0.6
-\]</span></p>
-<p>Our Jaccard value is <strong>0.6</strong>. Jaccard uses the same dissimilarity scale as Bray Curtis, with 0 being very similar, and 1 being completley dissimilar, so this means, like Bray Curtis, there is <em>moderate</em> dissimilarity.</p>
-</section>
-<section id="bray-curtis-vs.-jaccard" class="level1">
-<h1>Bray-Curtis vs.&nbsp;Jaccard</h1>
-<p>An important concept to understand, and something worth testing yourself on, is the difference between the <strong>Bray-Curtis</strong> and <strong>Jaccard</strong> dissimilarity measures.</p>
-<ul>
-<li><p><strong>Bray-Curtis</strong> considers the <strong>actual abundance</strong> of each bacterial species. It quantifies how different two samples are based on the amount of each bacteria present.</p></li>
-<li><p><strong>Jaccard</strong>, by contrast, uses only <strong>presence or absence</strong> data. It ignores the amount of each species are found and focuses solely on whether a species is present in either sample.</p></li>
-</ul>
-<p>&nbsp;</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 23%">
-<col style="width: 30%">
-<col style="width: 46%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Metric</th>
-<th>Considers Abundance?</th>
-<th>Based On</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Bray-Curtis</strong></td>
-<td>Yes</td>
-<td>The actual count data of the bacteria</td>
-</tr>
-<tr class="even">
-<td><strong>Jaccard</strong></td>
-<td>No</td>
-<td>Presence/absence of the bacteria</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
-<p>In short:</p>
-<ul>
-<li><strong>Bray-Curtis</strong> → <em>The quantity of each bacteria matters</em></li>
-<li><strong>Jaccard</strong> → <em>Only the presence/absence of each bacteria matters</em></li>
-</ul>
-</section>
-<section id="test-your-understanding" class="level1">
-<h1>Test your understanding!</h1>
-<hr>
-<p><strong>Which of the following best describes the difference between Jaccard and Bray-Curtis dissimilarity?</strong></p>
-<div id="quiz1">
-<form id="quiz-form-1">
-<p><input type="radio" name="q1" value="a"> A. Jaccard uses relative abundance, Bray-Curtis uses only presence/absence<br> <input type="radio" name="q1" value="b"> B. Jaccard uses presence/absence, Bray-Curtis uses abundance<br> <input type="radio" name="q1" value="c"> C. Both use only abundance data<br> <input type="radio" name="q1" value="d"> D. They are mathematically identical<br><br></p>
-<button type="button" onclick="checkAnswer1()">
-<p>Submit</p>
-</button>
-</form>
-<div id="result1" style="margin-top: 1em; font-weight: bold;">
-
-</div>
-</div>
-<script>
-function checkAnswer1() {
-  const answer = document.querySelector('#quiz-form-1 input[name="q1"]:checked');
-  const result = document.getElementById("result1");
-
-  if (!answer) {
-    result.textContent = "⚠️ Please select an answer.";
-    result.style.color = "orange";
-    return;
-  }
-
-  if (answer.value === "b") {
-    result.textContent = "✅ Correct! Jaccard uses presence/absence, Bray-Curtis uses abundance.";
-    result.style.color = "green";
-  } else {
-    result.textContent = "❌ Not quite., try again";
-    result.style.color = "red";
-  }
-}
-</script>
-<hr>
-<p><strong>Both Bray-Curtis and Jaccard use a dissimilarity scale of 0–1. What does this mean?</strong></p>
-<div id="quiz2">
-<form id="quiz-form-2">
-<p><input type="radio" name="q2" value="a"> A. 0 means completely different, 1 means identical<br> <input type="radio" name="q2" value="b"> B. 0 means identical, 1 means completely different<br> <input type="radio" name="q2" value="c"> C. Both always give the same result<br> <input type="radio" name="q2" value="d"> D. The scale measures sample size<br><br></p>
-<button type="button" onclick="checkAnswer2()">
-<p>Submit</p>
-</button>
-</form>
-<div id="result2" style="margin-top: 1em; font-weight: bold;">
-
-</div>
-</div>
-<script>
-function checkAnswer2() {
-  const answer = document.querySelector('#quiz-form-2 input[name="q2"]:checked');
-  const result = document.getElementById("result2");
-
-  if (!answer) {
-    result.textContent = "⚠️ Please select an answer.";
-    result.style.color = "orange";
-    return;
-  }
-
-  if (answer.value === "b") {
-    result.textContent = "✅ Correct! A value of 0 means identical, and 1 means completely different.";
-    result.style.color = "green";
-  } else {
-    result.textContent = "❌ Not quite., try again";
-    result.style.color = "red";
-  }
-}
-</script>
-<hr>
-<p><strong>In both Bray-Curtis and Jaccard dissimilarity, the formula starts with “1 -”. Why is that?</strong></p>
-<div id="quiz3">
-<form id="quiz-form-3">
-<p><input type="radio" name="q3" value="a"> A. To invert similarity into dissimilarity<br> <input type="radio" name="q3" value="b"> B. Because the equation calculates diversity directly<br> <input type="radio" name="q3" value="c"> C. To normalize the values between 0 and 1<br> <input type="radio" name="q3" value="d"> D. It’s an arbitrary choice without meaning<br><br></p>
-<button type="button" onclick="checkAnswer3()">
-Submit
-</button>
-</form>
-<div id="result3" style="margin-top: 1em; font-weight: bold;">
-
-</div>
-</div>
-<script>
-function checkAnswer3() {
-  const answer = document.querySelector('#quiz-form-3 input[name="q3"]:checked');
-  const result = document.getElementById("result3");
-
-  if (!answer) {
-    result.textContent = "⚠️ Please select an answer.";
-    result.style.color = "orange";
-    return;
-  }
-
-  if (answer.value === "a") {
-    result.textContent = "✅ Correct! The '1 -' part inverts similarity measures into a dissimilarity scale.";
-    result.style.color = "green";
-  } else {
-    result.textContent = "❌ Not quite., Try again";
-    result.style.color = "red";
-  }
-}
-</script>
-<hr>
-<form id="quiz-form-5">
-<p>
-<strong>Calculate the Bray-Curtis and Jaccard dissimilarity between the following two samples:</strong>
-</p>
-<div class="columns">
-<div class="column" style="width:100%;">
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Bacterial Species</th>
-<th>Sample from Greece</th>
-<th>Sample from Victoria, AU</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><em>Bacillus</em></td>
-<td>2</td>
-<td>0</td>
-</tr>
-<tr class="even">
-<td><em>Lactobacillus</em></td>
-<td>8</td>
-<td>2</td>
-</tr>
-<tr class="odd">
-<td><em>Streptococcus</em></td>
-<td>0</td>
-<td>4</td>
-</tr>
-<tr class="even">
-<td><em>Escherichia</em></td>
-<td>2</td>
-<td>2</td>
-</tr>
-<tr class="odd">
-<td><em>Clostridium</em></td>
-<td>0</td>
-<td>6</td>
-</tr>
-<tr class="even">
-<td><em>Pseudomonas</em></td>
-<td>2</td>
-<td>2</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Test data set</strong>: this table compares the presence of selected bacterial genera (%) in the Melon fruit fly, with gut samples from Greece and Victoria, Australia.</p>
-</div><div class="column" style="width:100%;">
-<p><label for="bc">Bray-Curtis dissimilarity:</label><br> <input type="text" id="bc" name="bc" style="width: 100%; padding: 8px;"><br><br></p>
-<p><label for="jac">Jaccard dissimilarity:</label><br> <input type="text" id="jac" name="jac" style="width: 100%; padding: 8px;"><br><br></p>
-<button type="button" onclick="checkAnswer5()">
-Submit
-</button>
-
-<div id="result5" style="margin-top: 1em; font-weight: bold;">
-
-</div>
-</div><script>
-function checkAnswer5() {
-  const bc = parseFloat(document.getElementById("bc").value.trim());
-  const jac = parseFloat(document.getElementById("jac").value.trim());
-  const result = document.getElementById("result5");
-
-  if (isNaN(bc) || isNaN(jac)) {
-    result.textContent = "⚠️ Please enter numeric answers for both dissimilarities.";
-    result.style.color = "orange";
-    return;
-  }
-
-  const isCorrectBC = Math.abs(bc - 0.6) < 0.001;
-  const isCorrectJaccard = Math.abs(jac - 0.5) < 0.001;
-
-  if (isCorrectBC && isCorrectJaccard) {
-    result.textContent = "✅ Correct! Bray-Curtis is 0.6 and Jaccard is 0.5";
-    result.style.color = "green";
-  } else {
-    result.textContent = "❌ Not quite. Try checking your calculations again .";
-    result.style.color = "red";
-  }
-}
-</script><section id="references" class="level1">
-<h1>References:</h1>
-<p><a href="https://journals.asm.org/doi/10.1128/msystems.00363-21">Beta Diversity of the Microbiome, Su, 2011</a>.</p>
-</section>
-</div></form>
+<p><strong>An overview of how it works:</strong> 1. DNA extraction from samples (e.g.&nbsp;gut, soil, feces, fruit, insect tissue)</p>
+<p>Samples such as gut contents, soil, feces, fruit, insect tissue, etc, are first collected. DNA is extracted from these samples using a commercial DNA extraction kit or laboratory protocol. This process breaks open cells and isolates total DNA, which is then purified and stored in a solution (the DNA extract) for downstream analysis.</p>
+<ol start="2" type="1">
+<li><p>PCR amplification of a target gene region using primers that bind conserved sites</p></li>
+<li><p>Indexing/barcoding so many samples can be pooled together</p></li>
+<li><p>High-throughput sequencing (commonly Illumina platforms)</p></li>
+<li><p>Bioinformatic analysis to infer taxonomic identity or genetic variation</p></li>
+</ol>
+<p><strong>Shotgun Metagenomics</strong>:</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

@@ -21,20 +21,19 @@ website:
       - text: Overview
         file: qmds/introduction.qmd
         
-      - text: Diversity Metrics
+      - text: Diversity Metrics and Ordination Methods
         menu: 
           - qmds/alpha.qmd
           - qmds/beta.qmd
-      - text: Ordination Methods
-        menu: 
           - qmds/PCA.qmd
           - qmds/PCoA.qmd
           - qmds/NMDS.qmd
+          - qmds/microbialsummary.qmd
       - text: Tephritid Microbiota
         menu: 
           - qmds/tephritidecology.qmd
-      - text: Microbial Methods Overview
-        file: qmds/microbialsummary.qmd
+      - text: Profiling the Microbiota
+        file: qmds/sequencingtechniques.qmd
 
 page-footer: |
   <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; font-size: 0.9em;">
