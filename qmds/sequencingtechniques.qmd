@@ -10,18 +10,10 @@ This section will take you through any sequencing techniques.
 - There are different types, but for bacteria and archaea specifically, we use the 16S rRNA gene. 
 - Within amplicon sequencing, there are two types: (i) short-read sequencing and (ii) long-read sequencing. 
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, out.width="50%", fig.align="center",fig.cap="This image was generated taken from ClipartMax"}
-      
-knitr::include_graphics("images/eppendorftube.png")
-
-```
-
 **An overview of how it works:**
 1. DNA extraction from samples (e.g. gut, soil, feces, fruit, insect tissue)
 
 Samples such as gut contents, soil, feces, fruit, insect tissue, etc, are first collected. DNA is extracted from these samples using a commercial DNA extraction kit or laboratory protocol. This process breaks open cells and isolates total DNA, which is then purified and stored in a solution (the DNA extract) for downstream analysis.
-
-
 
 
 
