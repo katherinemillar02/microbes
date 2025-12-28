@@ -5,74 +5,82 @@ editor: visual
 
 This section will take you through any sequencing techniques.
 
-
-
 ## Amplicon Sequencing
 
 Amplicon sequencing is a targeted DNA sequencing approach used to identify and compare specific genetic regions across many samples. For bacteria and archaea, this typically focuses on the **16S rRNA gene**.
 
+There are nine hypervariable regions in the 16S rRNA gene, it also contains conserved regions. 
+
+
 Within amplicon sequencing, there are two main types:
 
-1. **Short-read sequencing**  
-   Produces high-accuracy reads of relatively short DNA fragments, commonly used for microbial community profiling.
-   
-Sequencing platforms for high-throughput sequencing: 
-Illumina
-The most widely used short-read sequencing platform; based on sequencing-by-synthesis, offering very high accuracy and throughput.
+### Short-read sequencing:
 
-2. **Long-read sequencing**  
-   Produces longer DNA reads, allowing better resolution of complex genomic regions and full-length 16S rRNA gene sequencing.
+\
+Produces high-accuracy reads of relatively short DNA fragments, commonly used for microbial community profiling.
 
-Sequencing platforms for high-throughput sequencing: 
-Sequencing platforms for high-throughput sequencing:
-Pacific Biosciences (PacBio)
-Uses single-molecule real-time (SMRT) sequencing to generate highly accurate long reads (HiFi reads), well suited for full-length 16S rRNA sequencing and genome assembly.
-Oxford Nanopore Technologies (ONT)
-Sequences DNA by measuring changes in electrical current as molecules pass through nanopores; enables ultra-long reads and real-time sequencing, though with higher raw error rates than short-read platforms.
+It is called short-read sequencing because it only sequences a section of the 16S rRNA gene. In short read sequences only certain hypervariable regions will be selected. There are a range of hypervariable regions used:     
+     
+  **V1 - V3**       
+  **V3**        
+  **V3 - V4**       
+  **V4**     
 
- 
- 
-**An overview of how it works:**.     
+There is only one main sequencing platform used for high-through put sequencing, and this is **Illumina.**
 
+\
+**Illumina:**
 
-1. DNA extraction from samples is conducted (e.g. gut, soil, feces, fruit, insect tissue)
+-    Illumina uses sequencing-by-synthesis (SBS) chemistry. This includes fluorescently labelled, reversible terminator nucleotides being incorporated one base at a time and imaged after each cycle.
+
+-    Illuimina is known for havig high accuracy: Illumina platforms typically achieve ≥99.9% per-base accuracy, making them a gold standard for applications where low error rates are critical (e.g. variant calling, microbial community profiling).
+
+-   Depending on the instrument used (e.g. MiSeq, NextSeq, NovaSeq), Illumina can generate millions to billions of reads per run, enabling large-scale population studies and deep metagenomic sequencing.
+
+-   The cost per base is very low.
+
+### Long-read sequencing:
+
+\
+Produces longer DNA reads, allowing better resolution of complex genomic regions and full-length 16S rRNA gene sequencing.
+
+Sequencing platforms for high-throughput sequencing: **Pacific Biosciences (PacBio)** Uses single-molecule real-time (SMRT) sequencing to generate highly accurate long reads (HiFi reads), well suited for full-length 16S rRNA sequencing and genome assembly.
+
+**Oxford Nanopore Technologies (ONT)** Sequences DNA by measuring changes in electrical current as molecules pass through nanopores; enables ultra-long reads and real-time sequencing, though with higher raw error rates than short-read platforms.
+
+### How amplicon sequencing works:
+
+1.  DNA extraction from samples is conducted (e.g. gut, soil, feces, fruit, insect tissue)
 
 Samples such as gut contents, soil, feces, fruit, insect tissue, etc, are first collected. DNA is extracted from these samples using a commercial DNA extraction kit or laboratory protocol. This process breaks open cells and isolates total DNA, which is then purified and stored in a solution (the DNA extract) for downstream analysis.
 
-
-2. In the lab, PCR amplification is used to target a specific gene region using primers that bind conserved sites.       
+2.  In the lab, PCR amplification is used to target a specific gene region using primers that bind conserved sites.
 
 Once a DNA sample has been extracted, a PCR reaction mix is prepared. This typically includes:
 
-- The extracted DNA as a template  
-- Forward and reverse primers (chosen based on short-read or long-read sequencing)  
-- DNA polymerase, nucleotides (dNTPs), buffer, and other necessary solutions  
+-   The extracted DNA as a template\
+-   Forward and reverse primers (chosen based on short-read or long-read sequencing)\
+-   DNA polymerase, nucleotides (dNTPs), buffer, and other necessary solutions
 
 The PCR reaction is then carried out using standard thermal cycling steps:
 
-- **Initial denaturation** – separates the DNA strands  
-- **Denaturation** – repeated in cycles to keep strands separate  
-- **Annealing** – primers bind to the target regions  
-- **Extension** – DNA polymerase synthesizes new DNA  
-  
- 
-These steps are repeated for multiple cycles to amplify the target region.      
+-   **Initial denaturation** – separates the DNA strands\
+-   **Denaturation** – repeated in cycles to keep strands separate\
+-   **Annealing** – primers bind to the target regions\
+-   **Extension** – DNA polymerase synthesizes new DNA
 
+These steps are repeated for multiple cycles to amplify the target region.
 
-3. Indexing/barcoding so many samples can be pooled together.       
+3.  Indexing/barcoding so many samples can be pooled together.
 
-Indexing (barcoding) is the process of adding a short, unique DNA sequence (an index or barcode) to each sample during library preparation. Because each sample gets a different index, many samples can be pooled together and sequenced in a single run. After sequencing, the reads are demultiplexed—sorted back to their original samples—based on these index sequences.   
+Indexing (barcoding) is the process of adding a short, unique DNA sequence (an index or barcode) to each sample during library preparation. Because each sample gets a different index, many samples can be pooled together and sequenced in a single run. After sequencing, the reads are demultiplexed—sorted back to their original samples—based on these index sequences.
 
+4.  High-throughput sequencing.
 
-4. High-throughput sequencing.       
+Depending on whether short-read or long-read sequencing is used, high-throughput sequencing is used.
 
-Depending on whether short-read or long-read sequencing is used, high-throughput sequencing is used.       
+5.  Bioinformatic analysis to infer taxonomic identity or genetic variation.
 
-
-5. Bioinformatic analysis to infer taxonomic identity or genetic variation.   
-
-A pipeline is used to analyse the data.   
-
-
+A pipeline is used to analyse the data.
 
 ## Shotgun Metagenomics

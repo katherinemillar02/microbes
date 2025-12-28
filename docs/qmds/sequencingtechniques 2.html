@@ -161,12 +161,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#amplicon-sequencing" id="toc-amplicon-sequencing" class="nav-link active" data-scroll-target="#amplicon-sequencing">Amplicon Sequencing</a>
-  <ul class="collapse">
-  <li><a href="#short-read-sequencing" id="toc-short-read-sequencing" class="nav-link" data-scroll-target="#short-read-sequencing">Short-read sequencing:</a></li>
-  <li><a href="#long-read-sequencing" id="toc-long-read-sequencing" class="nav-link" data-scroll-target="#long-read-sequencing">Long-read sequencing:</a></li>
-  <li><a href="#how-amplicon-sequencing-works" id="toc-how-amplicon-sequencing-works" class="nav-link" data-scroll-target="#how-amplicon-sequencing-works">How amplicon sequencing works:</a></li>
-  </ul></li>
+  <li><a href="#amplicon-sequencing" id="toc-amplicon-sequencing" class="nav-link active" data-scroll-target="#amplicon-sequencing">Amplicon Sequencing</a></li>
   <li><a href="#shotgun-metagenomics" id="toc-shotgun-metagenomics" class="nav-link" data-scroll-target="#shotgun-metagenomics">Shotgun Metagenomics</a></li>
   </ul>
 </nav>
@@ -197,36 +192,18 @@ ul.task-list li input[type="checkbox"] {
 <section id="amplicon-sequencing" class="level2">
 <h2 class="anchored" data-anchor-id="amplicon-sequencing">Amplicon Sequencing</h2>
 <p>Amplicon sequencing is a targeted DNA sequencing approach used to identify and compare specific genetic regions across many samples. For bacteria and archaea, this typically focuses on the <strong>16S rRNA gene</strong>.</p>
-<p>There are nine hypervariable regions in the 16S rRNA gene, it also contains conserved regions.</p>
 <p>Within amplicon sequencing, there are two main types:</p>
-<section id="short-read-sequencing" class="level3">
-<h3 class="anchored" data-anchor-id="short-read-sequencing">Short-read sequencing:</h3>
-<p><br>
-Produces high-accuracy reads of relatively short DNA fragments, commonly used for microbial community profiling.</p>
-<p>It is called short-read sequencing because it only sequences a section of the 16S rRNA gene. In short read sequences only certain hypervariable regions will be selected. There are a range of hypervariable regions used:</p>
-<p><strong>V1 - V3</strong><br>
-<strong>V3</strong><br>
-<strong>V3 - V4</strong><br>
-<strong>V4</strong></p>
-<p>There is only one main sequencing platform used for high-through put sequencing, and this is <strong>Illumina.</strong></p>
-<p><br>
-<strong>Illumina:</strong></p>
-<ul>
-<li><p>Illumina uses sequencing-by-synthesis (SBS) chemistry. This includes fluorescently labelled, reversible terminator nucleotides being incorporated one base at a time and imaged after each cycle.</p></li>
-<li><p>Illuimina is known for havig high accuracy: Illumina platforms typically achieve ≥99.9% per-base accuracy, making them a gold standard for applications where low error rates are critical (e.g.&nbsp;variant calling, microbial community profiling).</p></li>
-<li><p>Depending on the instrument used (e.g.&nbsp;MiSeq, NextSeq, NovaSeq), Illumina can generate millions to billions of reads per run, enabling large-scale population studies and deep metagenomic sequencing.</p></li>
-<li><p>The cost per base is very low.</p></li>
-</ul>
-</section>
-<section id="long-read-sequencing" class="level3">
-<h3 class="anchored" data-anchor-id="long-read-sequencing">Long-read sequencing:</h3>
-<p><br>
-Produces longer DNA reads, allowing better resolution of complex genomic regions and full-length 16S rRNA gene sequencing.</p>
-<p>Sequencing platforms for high-throughput sequencing: <strong>Pacific Biosciences (PacBio)</strong> Uses single-molecule real-time (SMRT) sequencing to generate highly accurate long reads (HiFi reads), well suited for full-length 16S rRNA sequencing and genome assembly.</p>
-<p><strong>Oxford Nanopore Technologies (ONT)</strong> Sequences DNA by measuring changes in electrical current as molecules pass through nanopores; enables ultra-long reads and real-time sequencing, though with higher raw error rates than short-read platforms.</p>
-</section>
-<section id="how-amplicon-sequencing-works" class="level3">
-<h3 class="anchored" data-anchor-id="how-amplicon-sequencing-works">How amplicon sequencing works:</h3>
+<ol type="1">
+<li><strong>Short-read sequencing</strong><br>
+Produces high-accuracy reads of relatively short DNA fragments, commonly used for microbial community profiling.</li>
+</ol>
+<p>Sequencing platforms for high-throughput sequencing: Illumina The most widely used short-read sequencing platform; based on sequencing-by-synthesis, offering very high accuracy and throughput.</p>
+<ol start="2" type="1">
+<li><strong>Long-read sequencing</strong><br>
+Produces longer DNA reads, allowing better resolution of complex genomic regions and full-length 16S rRNA gene sequencing.</li>
+</ol>
+<p>Sequencing platforms for high-throughput sequencing: Sequencing platforms for high-throughput sequencing: Pacific Biosciences (PacBio) Uses single-molecule real-time (SMRT) sequencing to generate highly accurate long reads (HiFi reads), well suited for full-length 16S rRNA sequencing and genome assembly. Oxford Nanopore Technologies (ONT) Sequences DNA by measuring changes in electrical current as molecules pass through nanopores; enables ultra-long reads and real-time sequencing, though with higher raw error rates than short-read platforms.</p>
+<p><strong>An overview of how it works:</strong>.</p>
 <ol type="1">
 <li>DNA extraction from samples is conducted (e.g.&nbsp;gut, soil, feces, fruit, insect tissue)</li>
 </ol>
@@ -265,7 +242,6 @@ Produces longer DNA reads, allowing better resolution of complex genomic regions
 <li>Bioinformatic analysis to infer taxonomic identity or genetic variation.</li>
 </ol>
 <p>A pipeline is used to analyse the data.</p>
-</section>
 </section>
 <section id="shotgun-metagenomics" class="level2">
 <h2 class="anchored" data-anchor-id="shotgun-metagenomics">Shotgun Metagenomics</h2>
