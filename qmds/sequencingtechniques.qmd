@@ -9,7 +9,7 @@ This section will take you through any sequencing techniques.
 
 Amplicon sequencing is a targeted DNA sequencing approach used to identify and compare specific genetic regions across many samples. For bacteria and archaea, this typically focuses on the **16S rRNA gene**.
 
-There are nine hypervariable regions in the 16S rRNA gene, it also contains conserved regions. 
+There are nine hypervariable regions in the 16S rRNA gene, it also contains conserved regions. It is 1500 bp.
 
 
 Within amplicon sequencing, there are two main types:
@@ -21,10 +21,10 @@ Produces high-accuracy reads of relatively short DNA fragments, commonly used fo
 
 It is called short-read sequencing because it only sequences a section of the 16S rRNA gene. In short read sequences only certain hypervariable regions will be selected. There are a range of hypervariable regions used:     
      
-  **V1 - V3**       
-  **V3**        
-  **V3 - V4**       
-  **V4**     
+  **V1 - V3**: bp 27–534 of the 16S gene.        
+  **V3**       bp 341–534 of the 16S gene.      
+  **V3 - V4**  bp 341–806 of the 16S gene.      
+  **V4** bp 515–806 of the 16S gene.      
 
 There is only one main sequencing platform used for high-through put sequencing, and this is **Illumina.**
 
