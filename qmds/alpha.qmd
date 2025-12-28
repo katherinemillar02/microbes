@@ -19,10 +19,18 @@ editor:
     wrap: 72
 ---
 
-```{r echo=FALSE, message=FALSEout.width="50%", fig.align="center", fig.cap="This image was generated from ChatGPT."}
+```{r}
+#| echo: false
+#| message: false
+#| out-width: "50%"
+#| fig-align: center
+#| fig-cap: "This image was generated from ChatGPT."
+
 library(vegan)
-   knitr::include_graphics("images/beta1.png") 
+knitr::include_graphics("images/beta1.png")
+
 ```
+
 
 # What is Alpha Diversity?
 
