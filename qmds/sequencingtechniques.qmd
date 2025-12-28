@@ -69,7 +69,9 @@ Indexing (barcoding) is the process of adding a short, unique DNA sequence (an i
 Depending on whether short-read or long-read sequencing is used, high-throughput sequencing is used.       
 
 
-5. Bioinformatic analysis to infer taxonomic identity or genetic variation.            
+5. Bioinformatic analysis to infer taxonomic identity or genetic variation.   
+
+A pipeline is used to analyse the data.   
 
 
 
