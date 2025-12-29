@@ -7,33 +7,57 @@ This section will take you through any sequencing techniques.
 
 ## Amplicon Sequencing
 
-Amplicon sequencing is a targeted DNA sequencing approach used to identify and compare specific genetic regions across many samples. For bacteria and archaea, this typically focuses on the **16S rRNA gene**.
-
-There are nine hypervariable regions in the 16S rRNA gene, it also contains conserved regions. It is 1500 bp.
+Amplicon sequencing is a targeted DNA sequencing approach used to identify and compare specific genetic regions across many samples. For bacteria and archaea, this typically focuses on the **16S rRNA gene**
 
 
-Within amplicon sequencing, there are two main types:
+**What is the 16S rRNA gene?**
 
+The 16S rRNA (ribosomal RNA) gene encodes the small subunit ribosomal RNA (SSU rRNA), which is a core structural and functional component of the 30S subunit of the prokaryotic ribosome. This RNA plays an essential role in protein synthesis.
+
+**What does '16S' mean?**
+
+The term *16S* refers to the sedimentation coefficient of the RNA molecule, the sedimentation coefficient refers to the rate at which a particle sediments in a centrifugal field. It is measured in Svedberg units, rather than its physical size or molecular weight. This means there are 16 Svedberg units.
+
+**Why is the 16S rRNA gene used in microbiota studies?**
+
+The 16S rRNA gene is widely used in microbiota studies because it is highly conserved across bacterial and archaeal taxa, meaning its sequence has remained very similar across different species over evolutionary time. This conservation allows for broad amplification of the gene using universal primers, while the presence of variable regions enables taxonomic discrimination between microorganisms.
+
+**What primers are used to sequence the 16S rRNA gene?**
+
+The primer pair used which targets the full-length 16S rRNA gene is 27F and 1492R, sequencing approaches that capture this entire gene are typically referred to as **long-read sequencing**.
+
+**What are hypervariable regions, and conserved regions, and why are they important?**
+
+```{r echo=FALSE, message=FALSE,fig.align="left", fig.cap="This image was created on Canva."}
+knitr::include_graphics("images/regions.png")
+```
+
+The 16S rRNA gene contains nine hypervariable regions (V1--V9), which can provide species- or genus-specific signature sequences for bacterial identification. These hypervariable regions range from approximately 30 to 100 base pairs in length, and their degree of conservation varies widely. Sequencing the full-length 16S rRNA gene (approximately 1,500 bp) enables comparison across all hypervariable regions, improving taxonomic resolution.
+
+### The types of amplicon sequencing:
+
+Within amplicon sequencing, there are two main types:    
+   
 ### Short-read sequencing:
 
 \
 Produces high-accuracy reads of relatively short DNA fragments, commonly used for microbial community profiling.
 
-It is called short-read sequencing because it only sequences a section of the 16S rRNA gene. In short read sequences only certain hypervariable regions will be selected. There are a range of hypervariable regions used:     
-     
-  **V1 - V3**: bp 27–534 of the 16S gene.        
-  **V3**       bp 341–534 of the 16S gene.      
-  **V3 - V4**  bp 341–806 of the 16S gene.      
-  **V4** bp 515–806 of the 16S gene.      
+It is called short-read sequencing because it only sequences a section of the 16S rRNA gene. In short read sequences only certain hypervariable regions will be selected. There are a range of hypervariable regions used:
+
+**V1 - V3**: bp 27--534 of the 16S gene.\
+**V3** bp 341--534 of the 16S gene.\
+**V3 - V4** bp 341--806 of the 16S gene.\
+**V4** bp 515--806 of the 16S gene.
 
 There is only one main sequencing platform used for high-through put sequencing, and this is **Illumina.**
 
 \
 **Illumina:**
 
--    Illumina uses sequencing-by-synthesis (SBS) chemistry. This includes fluorescently labelled, reversible terminator nucleotides being incorporated one base at a time and imaged after each cycle.
+-   Illumina uses sequencing-by-synthesis (SBS) chemistry. This includes fluorescently labelled, reversible terminator nucleotides being incorporated one base at a time and imaged after each cycle.
 
--    Illuimina is known for havig high accuracy: Illumina platforms typically achieve ≥99.9% per-base accuracy, making them a gold standard for applications where low error rates are critical (e.g. variant calling, microbial community profiling).
+-   Illuimina is known for havig high accuracy: Illumina platforms typically achieve ≥99.9% per-base accuracy, making them a gold standard for applications where low error rates are critical (e.g. variant calling, microbial community profiling).
 
 -   Depending on the instrument used (e.g. MiSeq, NextSeq, NovaSeq), Illumina can generate millions to billions of reads per run, enabling large-scale population studies and deep metagenomic sequencing.
 
@@ -64,16 +88,16 @@ Once a DNA sample has been extracted, a PCR reaction mix is prepared. This typic
 
 The PCR reaction is then carried out using standard thermal cycling steps:
 
--   **Initial denaturation** – separates the DNA strands\
--   **Denaturation** – repeated in cycles to keep strands separate\
--   **Annealing** – primers bind to the target regions\
--   **Extension** – DNA polymerase synthesizes new DNA
+-   **Initial denaturation** -- separates the DNA strands\
+-   **Denaturation** -- repeated in cycles to keep strands separate\
+-   **Annealing** -- primers bind to the target regions\
+-   **Extension** -- DNA polymerase synthesizes new DNA
 
 These steps are repeated for multiple cycles to amplify the target region.
 
 3.  Indexing/barcoding so many samples can be pooled together.
 
-Indexing (barcoding) is the process of adding a short, unique DNA sequence (an index or barcode) to each sample during library preparation. Because each sample gets a different index, many samples can be pooled together and sequenced in a single run. After sequencing, the reads are demultiplexed—sorted back to their original samples—based on these index sequences.
+Indexing (barcoding) is the process of adding a short, unique DNA sequence (an index or barcode) to each sample during library preparation. Because each sample gets a different index, many samples can be pooled together and sequenced in a single run. After sequencing, the reads are demultiplexed---sorted back to their original samples---based on these index sequences.
 
 4.  High-throughput sequencing.
 
@@ -83,4 +107,60 @@ Depending on whether short-read or long-read sequencing is used, high-throughput
 
 A pipeline is used to analyse the data.
 
-## Shotgun Metagenomics
+
+
+------------------------------------------------------------------------
+
+**What does 16S actually mean in the 16S rRNA gene?**
+
+<div>
+<form id="quiz-form-2">
+
+<input type="radio" name="q2" value="a">
+A. The gene is exactly 16,000 base pairs long  
+<br>
+
+<input type="radio" name="q2" value="b">
+B. 16S refers to the sedimentation coefficient, meaning the rate at which the particle sediments in a centrifugal field  
+<br>
+
+<input type="radio" name="q2" value="c">
+C. It indicates the gene is found in 16 different bacterial species  
+<br>
+
+<input type="radio" name="q2" value="d">
+D. It estimates species turnover between microbial communities  
+<br><br>
+
+<button type="button" onclick="checkAnswer2()">Submit</button>
+
+</form>
+
+::: {#result2 style="margin-top: 1em; font-weight: bold;"}
+:::
+</div>
+
+```{=html}
+<script>
+function checkAnswer2() {
+  const answer = document.querySelector('#quiz-form-2 input[name="q2"]:checked');
+  const result = document.getElementById("result2");
+
+  if (!answer) {
+    result.textContent = "⚠️ Please select an answer.";
+    result.style.color = "orange";
+    return;
+  }
+
+  if (answer.value === "b") {
+    result.textContent = "✅ Correct! The 'S' in 16S refers to Svedberg units, which describe sedimentation rate during centrifugation.";
+    result.style.color = "green";
+  } else {
+    result.textContent = "❌ Not quite. 16S refers to a sedimentation coefficient, not gene length or diversity metrics.";
+    result.style.color = "red";
+  }
+}
+</script>
+```
+
+

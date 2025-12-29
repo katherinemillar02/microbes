@@ -69,7 +69,7 @@ Now let's take some time to go into each of these methods in detail:
 The **CHAO1 Index** is a **non-parametric** estimator used to measure
 **species richness**, focusing on the total number of Operational
 Taxonomic Units (OTUs), or Amplicon Sequence Variance (ASVs) in a
-sample. It is particularly useful in microbiome research, where the data
+sample. It is particularly useful in microbiota research, where the data
 are often highly skewed and many species are rare or underrepresented.
 
 To put it in simple words, the CHAO1 index is brilliant for identifying
@@ -153,15 +153,15 @@ that there is likely a few more species that were not detected. This
 estimates reflects the statistical calculation.
 
 CHAO1 has told us about, rare - possibly underrepresented samples.
-Keeping on the topic of investigating for rare species, I introduce to
+Keeping on the topic of investigating for rare species, below I introduce to
 you; the **Shannon Diversity Index**. Although this metric is a measure
 of both species richness and eveness, it has a paritcular focus on
 rareity in samples.
 
 # Shannon Diversity Index
 
-The Shannon Diversity Index accounts for both, how many species are
-present, and how evenly they are distributed. It summarises the
+The Shannon Diversity Index accounts for; how many species are
+present, AND how evenly they are distributed. It summarises the
 diversity in the population while assuming all species are represented
 in a sample. Both for species richness and evenness.
 
@@ -188,7 +188,7 @@ Let's see this in action using this dataset:
 ::: columns
 **Sample 1 - Medfly from Morocco (Argan 🌰)**
 
-**Bacterial composition (relative proportions):**
+**Bacterial composition (actual counts):**
 
 | Bacterium          | Count |
 |--------------------|-------|
@@ -201,10 +201,17 @@ Let's see this in action using this dataset:
 | *Delftia*          | 1     |
 :::
 
-
+Step 1: Calculate realtive proportions: 
+       
 Let's first compute our relative proportions:
 
-Our total count is: 270+54+36+1+1+2+1=365
+**Our total count is: 270 + 54 + 36 + 1 + 1 +2 + 1 = 365.**        
+So to find our relative proportions, we divide each of our total counts by 365, this is done below:  
+
+
+**Sample 1 - Medfly from Morocco (Argan 🌰)**
+
+**Bacterial composition (actual counts (Count), and relative proportions (p~i~)):**
 
 | Bacterium          | Count | p~i~             |
 |--------------------|-------|------------------|
@@ -218,19 +225,34 @@ Our total count is: 270+54+36+1+1+2+1=365
 
 
 
-$$
+Step 2: Apply the Shannon diversity formula           
+           
+For each species, we multiply its relative proporition (p~i~)) by the natural logarithim of that proportion, and then multiply by -1. These values are then summed to give the overall diversity index. This is shown below. You don't see - 1 directly so this may be confusing but the below basically translates to the same thing: 
+
+        
+
 \begin{aligned}
-&-0.7397 \times \log(0.7397) = 0.2221 \\
-&-0.1479 \times \log(0.1479) = 0.2812 \\
-&-0.0986 \times \log(0.0986) = 0.2280 \\
-&-0.0027 \times \log(0.0027) = 0.0166 \\
-&-0.0027 \times \log(0.0027) = 0.0166 \\
-&-0.0055 \times \log(0.0055) = 0.0305 \\
-&-0.0027 \times \log(0.0027) = 0.0166 \\
+&-(0.7397 \times \log(0.7397)) = 0.2221 \\
+&-(0.1479 \times \log(0.1479)) = 0.2812 \\
+&-(0.0986 \times \log(0.0986)) = 0.2280 \\
+&-(0.0027 \times \log(0.0027)) = 0.0166 \\
+&-(0.0027 \times \log(0.0027)) = 0.0166 \\
+&-(0.0055 \times \log(0.0055)) = 0.0305 \\
+&-(0.0027 \times \log(0.0027)) = 0.0166 \\
 & \\
-&H' = 0.2221 + 0.2812 + 0.2280 + 0.0166 + 0.0166 + 0.0305 + 0.0166 = \boxed{0.8116}
+
+
+
 \end{aligned}
-$$
+
+
+**We then finish by adding all of these together:**
+
+\begin{aligned}
+H' &= 0.2221 + 0.2812 + 0.2280 + 0.0166 + 0.0166 + 0.0305 + 0.0166 \\
+   &= \boxed{0.8116}
+\end{aligned}
+
 
 
 
@@ -253,14 +275,13 @@ bacteria_counts <- c(
 shannon <- diversity(bacteria_counts, index = "shannon")
 shannon
 ```
-Very cool, the R function confirms R calculations!
 
-
+These are not *exactly* the same, but they are pretty close, and we can use it to confirm that our manual calculations worked. 
 
 
 #### **What does this value mean?**
 
-There is no strict limit of the Shannon Index, but limits can be from 0
+There is no strict limit of the Shannon Index, but indexs tend to range can from 0
 (this would mean very low diversity), upwards of around 3 or 4 (meaning
 very high diversity). So our value of 0.7 would mean while there are clearly multiple
 species within our sample, there is uneven distribution and our diversity
@@ -479,7 +500,7 @@ Submit
 
 ```{=html}
 <script>
-function checkAnswer2() {
+function checkAnswer3() {
   const answer = document.querySelector('#quiz-form-3 input[name="q3"]:checked');
   const result = document.getElementById("result3");
 
@@ -513,7 +534,7 @@ A. Shannon’s index is calculated only from the number of species, while Simpso
 <input type="radio" name="q4" value="b"> 
 B. Simpson's focuses more on dominant species, Shannon's focuses more on rare species <br> 
 <input type="radio" name="q4" value="c">
-C.  Shannon’s index increases as the number of dominant species increases, while Simpson’s index decreases.<br>
+C.   Simpson's focuses more on rare species, Shannon's focuses more on dominant species s.<br>
 <input type="radio" name="q4" value="d"> 
 D. Shannon’s index uses a logarithmic scale, while Simpson’s index uses an exponential scale <br><br>
 

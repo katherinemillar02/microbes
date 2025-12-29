@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Alpha Diversity Analysis Methods – Microbial Analysis</title>
+<title>Microbial Analysis - Alpha Diversity Analysis Methods</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -81,13 +81,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
+  "limit": 20,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -96,43 +90,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-submit-button-title": "Submit"
   }
 }</script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -140,9 +105,9 @@ window.Quarto = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
+      <div class="navbar-brand-container">
     <a href="../index.html" class="navbar-brand navbar-brand-logo">
     <img src="../hexmedfly.png" alt="" class="navbar-logo">
     </a>
@@ -151,66 +116,77 @@ window.Quarto = {
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../qmds/introduction.html"> 
-<span class="menu-text">Overview</span></a>
+    <a class="nav-link" href="../qmds/introduction.html" rel="" target="">
+ <span class="menu-text">Overview</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-diversity-metrics-and-ordination-methods" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-diversity-metrics-and-ordination-methods" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
  <span class="menu-text">Diversity Metrics and Ordination Methods</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-diversity-metrics-and-ordination-methods">    
         <li>
-    <a class="dropdown-item" href="../qmds/alpha.html">
+    <a class="dropdown-item" href="../qmds/alpha.html" rel="" target="">
  <span class="dropdown-text">Alpha Diversity Analysis Methods</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../qmds/beta.html">
+    <a class="dropdown-item" href="../qmds/beta.html" rel="" target="">
  <span class="dropdown-text">Beta Diversity Analysis Methods</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../qmds/PCA.html">
+    <a class="dropdown-item" href="../qmds/PCA.html" rel="" target="">
  <span class="dropdown-text">Principal Component Analysis (PCA)</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../qmds/PCoA.html">
+    <a class="dropdown-item" href="../qmds/PCoA.html" rel="" target="">
  <span class="dropdown-text">Principal Co-ordinate Analysis (PCoA)</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../qmds/NMDS.html">
+    <a class="dropdown-item" href="../qmds/NMDS.html" rel="" target="">
  <span class="dropdown-text">Non-Metric Multidimensional Scaling (NMDS)</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../qmds/microbialsummary.html">
+    <a class="dropdown-item" href="../qmds/microbialsummary.html" rel="" target="">
  <span class="dropdown-text">The Microbial Summary</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tephritid-microbiota" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tephritid-microbiota" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
  <span class="menu-text">Tephritid Microbiota</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-tephritid-microbiota">    
         <li>
-    <a class="dropdown-item" href="../qmds/tephritidecology.html">
+    <a class="dropdown-item" href="../qmds/tephritidecology.html" rel="" target="">
  <span class="dropdown-text">Distribution of Tephritid Pests</span></a>
   </li>  
     </ul>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" href="../qmds/sequencingtechniques.html"> 
-<span class="menu-text">Profiling the Microbiota</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-profiling-the-microbiota" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Profiling the Microbiota</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-profiling-the-microbiota">    
+        <li>
+    <a class="dropdown-item" href="../qmds/sequencingtechniques.html" rel="" target="">
+ <span class="dropdown-text">Sequencing Techniques</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../qmds/dnaextraction.html" rel="" target="">
+ <span class="dropdown-text">DNA Extraction</span></a>
+  </li>  
+    </ul>
+  </li>
 </ul>
-          </div> <!-- /navcollapse -->
-            <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools ms-auto">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
+          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -251,7 +227,7 @@ window.Quarto = {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/beta1.png" class="img-fluid figure-img" style="width:50.0%"></p>
-<figcaption>This image was generated from ChatGPT.</figcaption>
+<figcaption class="figure-caption">This image was generated from ChatGPT.</figcaption>
 </figure>
 </div>
 </div>
@@ -277,7 +253,7 @@ window.Quarto = {
 </section>
 <section id="chao1-index" class="level1">
 <h1>CHAO1 Index</h1>
-<p>The <strong>CHAO1 Index</strong> is a <strong>non-parametric</strong> estimator used to measure <strong>species richness</strong>, focusing on the total number of Operational Taxonomic Units (OTUs), or Amplicon Sequence Variance (ASVs) in a sample. It is particularly useful in microbiome research, where the data are often highly skewed and many species are rare or underrepresented.</p>
+<p>The <strong>CHAO1 Index</strong> is a <strong>non-parametric</strong> estimator used to measure <strong>species richness</strong>, focusing on the total number of Operational Taxonomic Units (OTUs), or Amplicon Sequence Variance (ASVs) in a sample. It is particularly useful in microbiota research, where the data are often highly skewed and many species are rare or underrepresented.</p>
 <p>To put it in simple words, the CHAO1 index is brilliant for identifying rare species. To be specific it accounts for species that only appear once (singletons) or twice (doubletons) in a dataset, showing true total species richness.</p>
 <p>The CHAO1 Index formula is:</p>
 <p><span class="math display">\[
@@ -296,7 +272,7 @@ F_{2} = \text{Number of doubleton species (species observed only twice)}
 <h3 data-anchor-id="chao1-index-in-action">CHAO1 Index in action:</h3>
 <p>Let’s use this with some bacteria we found in the <a href="https://www.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000801#tab2">Darrington et al. (2022)</a> dataset. This is based on relative proportions of bacteria, but that has been regenerated to generate total counts of bacteria.</p>
 <div class="columns">
-<p><strong>Medfly from Morocco (Argan 🌰)</strong></p><p><em>Bacterial composition counts, these counts are generated based on relative proportions:</em></p><table class="caption-top table">
+<p><strong>Medfly from Morocco (Argan 🌰)</strong></p><p><em>Bacterial composition counts, these counts are generated based on relative proportions:</em></p><table class="table">
 <thead>
 <tr class="header">
 <th>Bacterium</th>
@@ -354,13 +330,13 @@ F_2 = 1 \\
 <section id="what-does-this-value-mean" class="level4">
 <h4 data-anchor-id="what-does-this-value-mean"><strong>What does this value mean?</strong></h4>
 <p>A CHAO1 index value of <strong>9.5</strong> means the estimated total species richness (or number of OTUs/ASVs) in the sample is about 9.5 species. Although we saw there were 7 different species, our CHAO1 index tells us that there is likely a few more species that were not detected. This estimates reflects the statistical calculation.</p>
-<p>CHAO1 has told us about, rare - possibly underrepresented samples. Keeping on the topic of investigating for rare species, I introduce to you; the <strong>Shannon Diversity Index</strong>. Although this metric is a measure of both species richness and eveness, it has a paritcular focus on rareity in samples.</p>
+<p>CHAO1 has told us about, rare - possibly underrepresented samples. Keeping on the topic of investigating for rare species, below I introduce to you; the <strong>Shannon Diversity Index</strong>. Although this metric is a measure of both species richness and eveness, it has a paritcular focus on rareity in samples.</p>
 </section>
 </section>
 </section>
 <section id="shannon-diversity-index" class="level1">
 <h1>Shannon Diversity Index</h1>
-<p>The Shannon Diversity Index accounts for both, how many species are present, and how evenly they are distributed. It summarises the diversity in the population while assuming all species are represented in a sample. Both for species richness and evenness.</p>
+<p>The Shannon Diversity Index accounts for; how many species are present, AND how evenly they are distributed. It summarises the diversity in the population while assuming all species are represented in a sample. Both for species richness and evenness.</p>
 <p>The Shannon Diveristy formula:</p>
 <p><span class="math display">\[
 H' = -\sum_{i=1}^{S} p_i \log p_i
@@ -376,7 +352,7 @@ p_{\text{i}}= \text{Relative proportion of individuals belonging to the species}
 \]</span></p>
 <p>Let’s see this in action using this dataset:</p>
 <div class="columns">
-<p><strong>Sample 1 - Medfly from Morocco (Argan 🌰)</strong></p><p><strong>Bacterial composition (relative proportions):</strong></p><table class="caption-top table">
+<p><strong>Sample 1 - Medfly from Morocco (Argan 🌰)</strong></p><p><strong>Bacterial composition (actual counts):</strong></p><table class="table">
 <thead>
 <tr class="header">
 <th>Bacterium</th>
@@ -415,9 +391,13 @@ p_{\text{i}}= \text{Relative proportion of individuals belonging to the species}
 </tbody>
 </table>
 </div>
+<p>Step 1: Calculate realtive proportions:</p>
 <p>Let’s first compute our relative proportions:</p>
-<p>Our total count is: 270+54+36+1+1+2+1=365</p>
-<table class="caption-top table">
+<p><strong>Our total count is: 270 + 54 + 36 + 1 + 1 +2 + 1 = 365.</strong><br>
+So to find our relative proportions, we divide each of our total counts by 365, this is done below:</p>
+<p><strong>Sample 1 - Medfly from Morocco (Argan 🌰)</strong></p>
+<p><strong>Bacterial composition (actual counts (Count), and relative proportions (p<sub>i</sub>)):</strong></p>
+<table class="table">
 <thead>
 <tr class="header">
 <th>Bacterium</th>
@@ -463,19 +443,23 @@ p_{\text{i}}= \text{Relative proportion of individuals belonging to the species}
 </tr>
 </tbody>
 </table>
-<p><span class="math display">\[
-\begin{aligned}
-&amp;-0.7397 \times \log(0.7397) = 0.2221 \\
-&amp;-0.1479 \times \log(0.1479) = 0.2812 \\
-&amp;-0.0986 \times \log(0.0986) = 0.2280 \\
-&amp;-0.0027 \times \log(0.0027) = 0.0166 \\
-&amp;-0.0027 \times \log(0.0027) = 0.0166 \\
-&amp;-0.0055 \times \log(0.0055) = 0.0305 \\
-&amp;-0.0027 \times \log(0.0027) = 0.0166 \\
+<p>Step 2: Apply the Shannon diversity formula</p>
+<p>For each species, we multiply its relative proporition (p<sub>i</sub>)) by the natural logarithim of that proportion, and then multiply by -1. These values are then summed to give the overall diversity index. This is shown below. You don’t see - 1 directly so this may be confusing but the below basically translates to the same thing:</p>
+<span class="math display">\[\begin{aligned}
+&amp;-(0.7397 \times \log(0.7397)) = 0.2221 \\
+&amp;-(0.1479 \times \log(0.1479)) = 0.2812 \\
+&amp;-(0.0986 \times \log(0.0986)) = 0.2280 \\
+&amp;-(0.0027 \times \log(0.0027)) = 0.0166 \\
+&amp;-(0.0027 \times \log(0.0027)) = 0.0166 \\
+&amp;-(0.0055 \times \log(0.0055)) = 0.0305 \\
+&amp;-(0.0027 \times \log(0.0027)) = 0.0166 \\
 &amp; \\
-&amp;H' = 0.2221 + 0.2812 + 0.2280 + 0.0166 + 0.0166 + 0.0305 + 0.0166 = \boxed{0.8116}
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span>
+<p><strong>We then finish by adding all of these together:</strong></p>
+<span class="math display">\[\begin{aligned}
+H' &amp;= 0.2221 + 0.2812 + 0.2280 + 0.0166 + 0.0166 + 0.0305 + 0.0166 \\
+   &amp;= \boxed{0.8116}
+\end{aligned}\]</span>
 <p>Let’s test our R understanding by running it in there.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegan)</span>
@@ -495,10 +479,10 @@ p_{\text{i}}= \text{Relative proportion of individuals belonging to the species}
 <pre><code>[1] 0.8112068</code></pre>
 </div>
 </div>
-<p>Very cool, the R function confirms R calculations!</p>
+<p>These are not <em>exactly</em> the same, but they are pretty close, and we can use it to confirm that our manual calculations worked.</p>
 <section id="what-does-this-value-mean-1" class="level4">
 <h4 data-anchor-id="what-does-this-value-mean-1"><strong>What does this value mean?</strong></h4>
-<p>There is no strict limit of the Shannon Index, but limits can be from 0 (this would mean very low diversity), upwards of around 3 or 4 (meaning very high diversity). So our value of 0.7 would mean while there are clearly multiple species within our sample, there is uneven distribution and our diversity is not the highest.</p>
+<p>There is no strict limit of the Shannon Index, but indexs tend to range can from 0 (this would mean very low diversity), upwards of around 3 or 4 (meaning very high diversity). So our value of 0.7 would mean while there are clearly multiple species within our sample, there is uneven distribution and our diversity is not the highest.</p>
 <p>Hopefully now that we understand the Shannon Index, we can move onto the final metric we are looking at, this is the Simpson Index. Like the Shannon index, it is a measure of diversity within a community, but rather than focusing on more rare species, it focuses on the more dominant species.</p>
 </section>
 </section>
@@ -519,7 +503,7 @@ D = 1 - _{}^{} \frac{n(n - 1)}{N(N - 1)}
 \]</span></p>
 <p>Let’s use our count data from earlier!</p>
 <div class="columns">
-<p><strong>Sample 1: Medfly from Morocco (Argan 🌰)</strong></p><p><strong>Bacterial composition (relative proportions), these counts are generated based on relative proportions:</strong></p><table class="caption-top table">
+<p><strong>Sample 1: Medfly from Morocco (Argan 🌰)</strong></p><p><strong>Bacterial composition (relative proportions), these counts are generated based on relative proportions:</strong></p><table class="table">
 <thead>
 <tr class="header">
 <th>Bacterium</th>
@@ -671,7 +655,7 @@ Submit
 </div>
 </div>
 <script>
-function checkAnswer2() {
+function checkAnswer3() {
   const answer = document.querySelector('#quiz-form-3 input[name="q3"]:checked');
   const result = document.getElementById("result3");
   if (!answer) {
@@ -692,7 +676,7 @@ function checkAnswer2() {
 <p><strong>Both Shannon’s and Simpson’s indices measure community diversity by considering both species evenness and richness. What is the key difference between them?</strong></p>
 <div>
 <form id="quiz-form-4">
-<p><input type="radio" name="q4" value="a"> A. Shannon’s index is calculated only from the number of species, while Simpson’s index is calculated only from the abundance of species. <br> <input type="radio" name="q4" value="b"> B. Simpson’s focuses more on dominant species, Shannon’s focuses more on rare species <br> <input type="radio" name="q4" value="c"> C. Shannon’s index increases as the number of dominant species increases, while Simpson’s index decreases.<br> <input type="radio" name="q4" value="d"> D. Shannon’s index uses a logarithmic scale, while Simpson’s index uses an exponential scale <br><br></p>
+<p><input type="radio" name="q4" value="a"> A. Shannon’s index is calculated only from the number of species, while Simpson’s index is calculated only from the abundance of species. <br> <input type="radio" name="q4" value="b"> B. Simpson’s focuses more on dominant species, Shannon’s focuses more on rare species <br> <input type="radio" name="q4" value="c"> C. Simpson’s focuses more on rare species, Shannon’s focuses more on dominant species s.<br> <input type="radio" name="q4" value="d"> D. Shannon’s index uses a logarithmic scale, while Simpson’s index uses an exponential scale <br><br></p>
 <button type="button" onclick="checkAnswer4()">
 Submit
 </button>
@@ -793,33 +777,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
   }
-  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-    let newTheme = '';
-    if(darkModeDefault) {
-      newTheme = isAlternate ? baseTheme : alternateTheme;
-    } else {
-      newTheme = isAlternate ? alternateTheme : baseTheme;
-    }
-    const changeGiscusTheme = () => {
-      // From: https://github.com/giscus/giscus/issues/336
-      const sendMessage = (message) => {
-        const iframe = document.querySelector('iframe.giscus-frame');
-        if (!iframe) return;
-        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-      }
-      sendMessage({
-        setConfig: {
-          theme: newTheme
-        }
-      });
-    }
-    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-    if (isGiscussLoaded) {
-      changeGiscusTheme();
-    }
-  }
   const toggleColorMode = (alternate) => {
     // Switch the stylesheets
     const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
@@ -886,15 +843,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  const darkModeDefault = false;
-  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  let localAlternateSentinel = 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
-    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -922,7 +877,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const onCopySuccess = function(e) {
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -954,50 +920,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
   });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+  function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
+      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1007,17 +934,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start',
+      placement: 'bottom-start'
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1029,130 +947,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
-          }
-        }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
-        }
-        return container.innerHTML
-      } else {
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
-        }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
-    }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
-          }
-        } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
-          .then(res => res.text())
-          .then(html => {
-            const parser = new DOMParser();
-            const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
-            if (note !== null) {
-              const html = processXRef(id, note);
-              instance.setContent(html);
-            } 
-          }).finally(() => {
-            instance.enable();
-            instance.show();
-          });
-        }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
+      return note.innerHTML;
     });
   }
       let selectedAnnoteEl;
@@ -1196,7 +991,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
-            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1222,32 +1016,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1308,7 +1076,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-
 
 
 
