@@ -443,3 +443,11 @@ function checkAnswer5() {
 [Beta Diversity of the Microbiome, Su, 2011](https://journals.asm.org/doi/10.1128/msystems.00363-21).
 
 :::::::
+
+
+<p>This is the end of Beta Diversity. You are now ready to start learning about Ordination Methods. 
+Please click the button below to begin learning about Principal Component Analysis, an important ordination method!</p>
+
+::: {style="text-align: right; margin-top: 2em;"}
+<a href="PCA.qmd" class="btn btn-primary" role="button"> Turn to Principal Component Analysis →</a>
+:::

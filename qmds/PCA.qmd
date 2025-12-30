@@ -14,6 +14,9 @@ about:
     - icon: linkedin
       text: LinkedIn
       href: https://www.linkedin.com/in/katie-millar-15bb56236/
+editor: 
+  markdown: 
+    wrap: 72
 ---
 
 ```{r echo=FALSE, message=FALSE}
@@ -21,58 +24,121 @@ library(tidyverse)
 library(vegan)
 ```
 
-
 ```{r echo=FALSE, out.width="80%", fig.align="center", fig.cap= "Credit: This image was created on Canva."}
 knitr::include_graphics("images/PCA2.png")
 ```
 
  
 
-## A background to PCA
+## A background to Principal Component Analysis:
 
- 
+#### **An overview of Principal Component Analysis:**
 
-#### **What is PCA?**
+**Principal Component Analysis (PCA)** is a widely used **data
+visualisation** and **dimensionality-reduction** technique that helps
+simplify complex datasets containing many variables. Instead of
+analysing each variable independently, PCA summarises the data into a
+small number of principal components that capture the most important
+patterns of variation.
 
-Principal Component Analysis (PCA) is a visualisation method that simplifies complex data by reducing it to just a few key dimensions. It helps you visualise patterns: points that appear close together on the plot are more similar, while those farther apart are more different.  PCA works best when the data exhibits linear relationships, as it captures variation along straight-line directions in the data.
+When visualised in a PCA plot, each point represents a sample. Samples
+that appear close together are more similar in composition, while those
+farther apart are more different. Take the example shown below, the
+horse and zebra are close together, and the chicken and turkey are also
+close together! This makes PCA particularly useful for exploring
+structure, grouping, and trends in large biological datasets, such as
+microbial community data.
 
-This similarity is often based on **Euclidean distance**, which measures the straight-line distance between data points in the reduced space. PCA ensures that this reduced space still captures the most important variation in the data, so Euclidean distances between points remain meaningful.
+PCA performs best when relationships between variables are approximately
+linear, as it identifies directions in the data that explain variation
+along straight-line axes.
 
- 
+```{r echo=FALSE, out.width="50%", fig.align="center", fig.cap= "Credit: This image was created on Canva."}
+knitr::include_graphics("images/pcaexample.png")
+```
 
-#### **Breaking it down into a few key points...**
+#### **How Principal Component Analysis measures similarity:**
 
--   **PCA** reduces the dimensionality of datasets with a lot of different variables and transforms highly correlated variables together into a smaller set of uncorrelated components.
+The similarity between samples in a PCA plot is typically based on
+Euclidean distance, which measures the straight-line distance between
+points in the reduced-dimensional space. PCA is designed so that this
+reduced space retains as much of the original variation as possible,
+meaning that distances between samples remain biologically and
+statistically meaningful.
 
--   This method clusts together correlated variables by finding the **covariance matrix** of the data, that allows one to see the relationship between different variables, and identifying its principal components, which are defined by their **eigenvalues** and **eigenvectors**.
+#### **Breaking Principal Component Analysis down into key concepts:**
 
--   **Eigenvalues** can be used to work out which are the first two, or three (depending on how many are being used) principal components of the dataset, while the **eigenvectors** will be used directly in the calculation of the principal components, along with the raw but **centered data**.
+-   **Dimensionality reduction:** PCA reduces datasets with many
+    variables into a smaller number of uncorrelated components,
+    combining information from highly correlated variables.
 
-> **Centered data:** where the raw data has had the overall mean of its group substracted from it.
+-   **Data centring and scaling:** Before PCA is performed, data are
+    usually centred so that each variable has a mean of zero. In many
+    biological datasets, data are also scaled to account for differences
+    in measurement units or variance between variables.
 
-> **Covariance matrix:** a matrix that summarises the relationships between variables in a dataset, looks at how the variables change together.
+-   **Covariance matrix:** PCA calculates a covariance matrix from the
+    centred data. This matrix describes how pairs of variables vary
+    together and allows PCA to detect patterns of correlation and
+    redundancy within the dataset.
 
-> **Eigenvalues:** numerical values that represent the amount of data explained by each of the principal components.
+-   **Eigen decomposition:** The covariance matrix is decomposed into
+    eigenvalues and eigenvectors: **Eigenvalues** indicate how much of
+    the total variance is explained by each principal component.
+    **Eigenvectors** define the direction of each component in
+    multivariate space and show how strongly each original variable
+    contributes.
 
-> **Eigenvectors:** unit vectors (numerical values) that indicate the direction of the principal components.
+    One way you can remember the difference of these is; (i) the
+    direction of the arrow is the eigenvector, and (i) the length of the
+    arrow is the eigenvalue.
 
-  To make it easier, lets look at it step by step ...
+-   **Ranking principal components:** Principal components are ranked by
+    their eigenvalues. The first principal component (PC1) explains the
+    greatest amount of variation, followed by PC2, PC3, and so on.
+    Typically, only the first few components are retained, based on the
+    proportion of variance explained.
 
- 
+-   **Principal component scores:** The retained eigenvectors are used
+    to calculate principal component scores by projecting the centred
+    data onto the new component axes. These scores represent each
+    sample's position in the reduced-dimensional space and form the
+    basis of PCA plots used for visualisation and downstream analyses.
 
-#### **The key steps to PCA:**
+**Key terms explained:**
 
-1.  [**Scale the data**]{style="color:green"} (work out the mean composition of each bacteria).
+> **Centered data:** Data where the mean value of each variable has been
+> subtracted, resulting in variables with a mean of zero.
 
-2.  [**Centre the data**]{style="color:green"} (subtract the column means from the bacteria composition).
+> **Covariance matrix:** A matrix that summarises how variables in a
+> dataset change together, highlighting correlations between variables.
 
-3.  Find the [**covariance matrix values**]{style="color:green"} using the [**centered data**]{style="color:green"}.
+> **Eigenvalues:** Numerical values that represent the amount of
+> variance explained by each principal component.
 
-4.  Calculate the [**eigenvalues**]{style="color:green"} and [**eigenvectors**]{style="color:green"} with the [**covariance matrix values**]{style="color:green"}.
+> **Eigenvectors:** Directional vectors that define the axes of the
+> principal components and describe variable contributions.
+
+#### **PCA Step-by-Step:**
+
+1.  [**Scale the data**]{style="color:green"} (Standardise variables
+    (e.g. bacterial abundances) to ensure they contribute equally.).
+
+2.  [**Centre the data**]{style="color:green"} (Subtract the column mean
+    of each variable from the dataset.).
+
+3.  [**Calculate the covariance matrix values**]{style="color:green"}
+    (Use the centred data to quantify relationships between variables.)
+    {style="color:green"}.
+
+4.  Calculate the [**eigenvalues**]{style="color:green"} and
+    [**eigenvectors**]{style="color:green"} with the [**covariance
+    matrix values**]{style="color:green"}.
 
 5.  Calculate the [**principal component spaces**]{style="color:green"}.
 
-6.  Generate the [**PCA plot**]{style="color:green"}.
+6.  Generate the [**PCA plot**]{style="color:green"}.(Visualise
+    patterns, similarities, and differences between samples.).
 
  \
 
@@ -86,40 +152,45 @@ knitr::include_graphics("images/PCA-intro.png")
 
  
 
-## **PCA in action**
+## **Principal Component Analysis in action**
 
-Now we know a little bit more about PCA, let's use PCA to understand some data using the dataset from [Darrington et al. (2022)](https://www.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000801#tab2).
+Now we know a little bit more about PCA, let's use PCA to understand
+some data using the dataset from [Darrington et al.
+(2022)](https://www.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000801#tab2).
 
- 
+As mentioned throughout this website, in this study, Medflies were
+reared on six different fruit types, and their microbiota composition
+was analysed. So this dataset will allow us to use PCA to visualise how
+microbiota communities differ depending on the fruit substrate if which
+the Medflies were reared.
 
-As mentioned throughout this website, in this study, Medflies were reared on six different fruit types, and their microbiota composition was analysed. So this dataset will allow us to use PCA to visualise how microbiota communities differ depending on the fruit substrate if which the Medflies were reared.
+If you would like to understand a little more about this study, please
+see: [**The Home Page**](index.qmd)
 
-If you would like to understand a little more about this study, please see: [**The Home Page**](index.qmd)
-
- 
-
-**Table 1:** *Relative abundance (%) of bacterial genera on the surfaces of different fruits. Please scroll sideways to see the entire table.*
+**Table 1:** *Relative abundance (%) of bacterial genera on the surfaces
+of different fruits. Please scroll sideways to see the entire table.*
 
 ::: {style="overflow-x: auto;"}
-| Fruit   | *Klebsiella* | *Acinetobacter* | *Pantoea* | *Pseudoxanthomonas* | *Serratia* | *Stenotrophomonas* | *Delftia* | *Burkholderia* | *Sphingomonas* | *Bacillus* | *Sphingobacterium* | *Mycoplasma* |
+| Fruit      | *Klebsiella* | *Acinetobacter* | *Pantoea* | *Pseudoxanthomonas* | *Serratia* | *Stenotrophomonas* | *Delftia* | *Burkholderia* | *Sphingomonas* | *Bacillus* | *Sphingobacterium* | *Mycoplasma* |
 |------|------|------|------|------|------|------|------|------|------|------|------|------|
-| Apricot | 80%          | 10%             | 0%        | 0%                  | 0%         | 0%                 | 0%        | 0%             | 0%             | 0%         | 0%                 | 5%           |
-| Argan   | 75%          | 10%             | 5%        | 5%                  | 0%         | 0%                 | 0%        | 0%             | 0%             | 0%         | 5%                 | 5%           |
-| Grapefruit      | 75%          | 10%             | 5%        | 5%                  | 0%         | 0%                 | 0%        | 0%             | 0%             | 0%         | 5%                 | 5%           |
-| Orange  | 70%          | 15%             | 5%        | 5%                  | 5%         | 0%                 | 0%        | 0%             | 0%             | 0%         | 0%                 | 5%           |
-| Peach   | 60%          | 10%             | 10%       | 10%                 | 5%         | 5%                 | 0%        | 0%             | 5%             | 5%         | 0%                 | 0%           |
-| Tang    | 40%          | 10%             | 20%       | 20%                 | 10%        | 5%                 | 0%        | 5%             | 10%            | 0%         | 0%                 | 0%           |
+| Apricot    | 80%          | 10%             | 0%        | 0%                  | 0%         | 0%                 | 0%        | 0%             | 0%             | 0%         | 0%                 | 5%           |
+| Argan      | 75%          | 10%             | 5%        | 5%                  | 0%         | 0%                 | 0%        | 0%             | 0%             | 0%         | 5%                 | 5%           |
+| Grapefruit | 75%          | 10%             | 5%        | 5%                  | 0%         | 0%                 | 0%        | 0%             | 0%             | 0%         | 5%                 | 5%           |
+| Orange     | 70%          | 15%             | 5%        | 5%                  | 5%         | 0%                 | 0%        | 0%             | 0%             | 0%         | 0%                 | 5%           |
+| Peach      | 60%          | 10%             | 10%       | 10%                 | 5%         | 5%                 | 0%        | 0%             | 5%             | 5%         | 0%                 | 0%           |
+| Tang       | 40%          | 10%             | 20%       | 20%                 | 10%        | 5%                 | 0%        | 5%             | 10%            | 0%         | 0%                 | 0%           |
 :::
 
  
 
 ### Step 1: Scaling the data
 
-As seen above, in the key steps to PCA, our first step is to use our data - and scale it! This involves calculating the **mean composition** of each bacterial relative abundance across all samples.
+Our first step is to scale our data! This involves calculating the
+**mean composition** of each bacterial relative abundance across all
+samples.
 
- 
-
-**Table 2:** *Relative abundance (%) of bacterial genera on the surfaces of different fruits.  Please scroll sideways to see the entire table.*
+**Table 2:** *Relative abundance (%) of bacterial genera on the surfaces
+of different fruits. Please scroll sideways to see the entire table.*
 
 ::: {#Scale style="overflow-x: auto;"}
 | Fruit    | *Klebsiella* | *Acinetobacter* | *Pantoea* | *Pseudoxanthomonas* | *Serratia* | *Stenotrophomonas* | *Delftia* | *Burkholderia* | *Sphingomonas* | *Bacillus* | *Sphingobacterium* | *Mycoplasma* |
@@ -133,19 +204,25 @@ As seen above, in the key steps to PCA, our first step is to use our data - and 
 | **Mean** | **66.7%**    | **10.8%**       | **7.5%**  | **7.5%**            | **3.3%**   | **1.7%**           | **0%**    | **0.8%**       | **2.5%**       | **0.8%**   | **1.7%**           | **3.3%**     |
 :::
 
- \
- 
-
 ### Step 2: Centering the data
 
-Our next step is to centre the data. We can do this by subtracting the **mean composition** (which was calculated in Step 1) from each individual value in the data-set. This step adjusts each bacterial taxa so that its average value across all samples becomes zero.
+Our next step is to center the data. We can do this by subtracting the
+**mean composition** (which was calculated in Step 1) from each
+individual value in the data-set. This step adjusts each bacterial taxa
+so that its average value across all samples becomes zero.
 
 ::: {.callout-tip title="Deep Dive into Principal Component Analysis"}
 <details>
 
-<summary>Why do we want the average across the samples to be zero?</summary>
+<summary>Why do we want the average across the samples to be
+zero?</summary>
 
-PCA is all about variation, not about absolute values. We need to make the average value across zero, so there is no biasing. Say if the abundance of bacteria 1 was 66%, and the bacteria 2 was 5%, if we don't center this - PCA may think that bacteria is way more important, just because there is more of it, but PCA is not about this, it's all about how bacteria varies and works together with one another.
+PCA is all about variation, not about absolute values. We need to make
+the average value across zero, so there is no biasing. Say if the
+abundance of bacteria 1 was 66%, and the bacteria 2 was 5%, if we don't
+center this - PCA may think that bacteria is way more important, just
+because there is more of it, but PCA is not about this, it's all about
+how bacteria varies and works together with one another.
 
 </details>
 :::
@@ -161,22 +238,32 @@ PCA is all about variation, not about absolute values. We need to make the avera
 | Tang    | -26.7%       | -0.8%           | 12.5%     | 12.5%               | 6.7%       | 3.3%               | 0%        | 4.2%           | 7.5%           | -0.8%      | -1.0%              | -3.3%        |
 :::
 
- 
-
- \
- 
-
 ### Step 3: Calculate the co-variance matrix values
 
-Once the data has been mean-centered, we apply the **covariance formula** to assess the relationships between the bacterial compositions across samples. Covariance measures how much two variables change together.
+Once the data has been mean-centered, we apply the **covariance
+formula** to assess the relationships between the bacterial compositions
+across samples. Covariance measures how much two variables change
+together.
 
-The population covariance is:
+-   A positive covariance indicates that both variables increase or
+    decrease together.
+
+-   A negative covariance indicates that as one variable increases, the
+    other decreases.
+
+-   A covariance close to zero suggests little or no linear
+    relationship.
+
+#### **Covariance formulas:**
+
+The population covariance is defined as:
 
 $$
 \text{Cov}_{\text{population}} = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{n}
 $$
 
-The sample covariance is:
+The sample covariance, typically used for biological analysis is defined
+as:
 
 $$
 \text{Cov}_{\text{sample}} = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{n-1}
@@ -188,33 +275,52 @@ $$
 
 $$
 ( x_i - \bar{x} )
-$$
-
-[This represents the centered value of variable ( x ) --- how far one fruit's measurement (e.g., *Klebsiella* abundance) is from the average across all fruits.]{style="color: gray;"}
+$$ [This represents the **centred value** of variable (x) --- how far a
+single measurement (e.g. *Klebsiella* abundance in one fruit) deviates
+from the average across all samples.]{style="color: gray;"}
 
 $$
 ( y_i - \bar{y} )
-$$
-
-[This represents the centered value of variable ( y ) --- for example, how much another bacterial feature (like *Acinetobacter*) deviates from its average.]{style="color: gray;"}
+$$ [This represents the centred value of variable (y), such as how
+*Acinetobacter* abundance differs from its mean.]{style="color: gray;"}
 
  
 
 $$
 ( n - 1 )
-$$ [This is the total number of samples minus one. We divide by ( n - 1 ) instead of ( n ) because we're working with a sample, not the entire population --- this is known as **Bessel's correction**.]{style="color: gray;"}
+$$ \[This is the total number of samples minus one. We divide by ( n - 1
+[This is the total number of samples minus one. Dividing by (n - 1)
+instead of (n) corrects for bias when estimating population variance
+from a sample --- a correction known as **Bessel's
+correction**.]{style="color: gray;"}
 
  
 
-Using the co-variance formula, and calculating the mean centered data - we can try calculate our covariance matrix values. We have two options, we can either jump straight to using R, OR, we can first give ourselves a bit of an understanding of how they are calculated manually - so we really understand the method...
+#### *Calculating the covariance matrix manually:*
 
- 
+Using the **covariance formula** and our previously calculated
+**mean-centred data**, we can now calculate the values needed to build
+the covariance matrix.
 
-#### **3.1 Calculating the covariance matrix values manually**
+At this stage, we have two options:
 
-With our previously calculated mean centered data, lets work out the co-variance matrix of *Klebsiella* and *Acinetobacter*, and the presence of how these bacteria act together across the different fruits.  
+-   **Jump straight to R**, where the covariance matrix can be
+    calculated automatically using built-in functions, or:
 
-*Covariance Calculation of Klebsiella vs Acinetobacter:*
+-   **Work through the calculations manually first**, to build an
+    intuitive understanding of how covariance values are generated and
+    how PCA works under the hood.
+
+While software will always do this step for us in practice, walking
+through a small example by hand helps clarify what the covariance matrix
+represents and why it is such a critical component of PCA.
+
+We calculate the co-variance matrix using our previously calculated
+**mean-centred data**. Let's use*Klebsiella* and *Acinetobacter* as our
+example.
+
+*First, we take the mean-centred bacterial abundances of Klebsiella and
+Acinetobacter:*
 
 | Fruit     | *Klebsiella* | *Acinetobacter* |
 |-----------|--------------|-----------------|
@@ -225,14 +331,19 @@ With our previously calculated mean centered data, lets work out the co-variance
 | Peach     | -6.7%        | -0.8%           |
 | Tangerine | -26.7%       | -0.8%           |
 
-Let's quickly tae just these two bacteria from the table above where we calculated the centered values, the top of the formula, tells us to multiple the centered values of one bacteria, by another bacteria. So let's do that for all of them.
+These values represent how much each bacterial abundance deviates from
+its mean across all fruits.
 
-Apricot: 
-$$
+**Step 1**: Multiply centered values
+
+The numerator of the covariance formula requires us to multiply the
+centered values of one bacterium by those of the other for each fruit:
+
+For example; **Apricot**: $$
 ( x_i - \bar{x} ) ( y_i - \bar{y} ) = ( 13.3 ) ( -0.8 ) = -10.64
 $$
 
--   Now lets do these for all of the fruits.
+Repeating this calculation for all fruits:
 
 ```{=tex}
 \begin{align*}
@@ -244,27 +355,30 @@ $$
 &Tangerine:(-26.7)*(-0.8) =  21.36 \\
 \end{align*}
 ```
--   Sum the results
+Step 2: Sum the products
 
 ```{=tex}
 \begin{align*}
     (-10.64) + (-6.64) + (-6.64) + 13.86 + 5.36 +  21.36  = 16.66 \\
 \end{align*}
 ```
--   We now have the calculation for the top of our formula, now we use the bottom of the formula and divide the result of the sum by (n-1)
-
-$$
+Step 3: Divide by n - 1 Because this is a sample covariance, we divide
+by n - 1, where n=6 fruits: $$
 \text= \frac{16.66}{6-1} = 3.332
 $$
 
-We've worked out the variance of two different species across these 6 different fruits, very good going!
+This positive covariance suggests that *Klebsiella* and *Acinetobacter*
+tend to vary together across fruit hosts, although the strength of this
+relationship is relatively modest.
 
-To make sure we have got it down, lets take the variance of the *same* bacteria, and as our formula is bacteria \* bacteria, we can just do squared.
+**Checking our understanding - *Klebsiella* vs *Klebsiella* :**
 
- 
+To reinforce the concept, let's take another example. This time, let's
+calculate the variance of a single bacterium (*Klebsiella*). In this
+instance, variance is simply covariance of a variable with itself,
+meaning we square the centred values.
 
-*Variance: Klebsiella vs Klebsiella* 
-\begin{align*}
+*Variance: Klebsiella vs Klebsiella* \begin{align*}
 &Apricot:(13.3)^2 =  176.89 \\
 &Argan:(8.3)^2 = 68.89 \\
 &Grapefruit:(8.3)^2 = 68.89 \\
@@ -282,13 +396,23 @@ $$
  \frac{1083.34}{6-1} = 216.668
 $$
 
-We have manually worked out that the covariance matrix of (*Klebsiella*, *Acinetobacter*) = **3.332** and the covariance matrix of (*Klebsiella*, *Klebsiella*) = **216.668**.
+Here, the covariance matrix value for (*Klebsiella*, *Klebsiella*) is
+**216.668**. This represents the variance of *Klebsiella* across the
+fruit samples, indicating that *Klebsiella* abundance varies
+substantially between the samples. In contrast, the much lower
+covariance value for (*Klebsiella*, *Acinetobacter*) shows how the
+abundances of these two taxa vary **together** across samples, so it
+makes sense that this is lower.
 
-Now we know how to work out covariance matrices *manually*, we can be pleased with ourselves, and just use R to work out the rest... This is how to do that!
+Now that we have actually calculated two examples of the covariance
+matrix values manually, we can be more confident that we understand the
+concepts, and we can use R code to work out the rest.
 
-#### **3.2 Using R to work out the covariance matrix values**
+#### **Using R to calculate covariance matrix values**
 
-We first put our centered data in a **matrix** for R to read:
+In using R to calculate the covariance matrix values. We first put our
+centered abundance data into a matrix so that R can compute the
+covariance matrix.
 
 ```{r}
 centered_data <- data.frame(
@@ -310,8 +434,13 @@ centered_data_matrix <- as.matrix(centered_data)
 
 ```
 
+The column of 1-6 shows the different fruit, in the order of Apricot,
+Argan, Grapefruit, Orange, Peach and Tangerine.
+
 <button onclick="toggleVisibility(&#39;centered-data-container&#39;)">
-Show/Hide Centered Data Matrix
+
+Show/Hide `centered_data_matrix <- as.matrix(centered_data)` output
+
 </button>
 
 ::: {#centered-data-container style="display:none;"}
@@ -339,26 +468,39 @@ centered_data_matrix
 ```{=html}
 <script> function toggleVisibility(id) { var el = document.getElementById(id); el.style.display = (el.style.display === 'none') ? 'block' : 'none'; } </script>
 ```
- 
+Now our centered data is in a **matrix, of Fruits x Bacteria** (an
+important step), we can use this to work out the covariance matrix.
 
-Now our centered data is in a **matrix**, of Fruits x Bacteria, we can use this to work out the covariance matrix. I will show you two different ways to work this out in R.
+There are two different ways this can be calculated in R, I will show
+you:
 
-Below shows the code for the actual formula, but written in R.
+Below shows the code for the actual formula, but written in R:
 
 ```{r}
 cov_matrix_1 <- (t(centered_data_matrix) %*% centered_data_matrix) / (nrow(centered_data_matrix) - 1)
 ```
 
-`t()`: this function stands for *transpose*, meaning we will be *flipping* the rows and columns. ie: we have fruits as rows, bacteria as columns, but we want to flip this.
+`t()`: this function stands for *transpose*, meaning we will be
+*flipping* the rows and columns. ie: we have fruits as rows, bacteria as
+columns, but we want to flip this.
 
 `%*%`: this is the symbol for how we multiply matrices.
 
-Like when we calculated it ourselves above, we our multiplying the centered values of the bacteria from one bacteria to another. Then, dividing the total of this across all the fruits by **n** (the fruits) **-1** (the go-to for calculating a sample size).
+Like when we calculated it ourselves above, we our multiplying the
+centered values of the bacteria from one bacteria to another. Then,
+dividing the total of this across all the fruits by **n** (the fruits)
+**-1** (the go-to for calculating a sample size).
+
+`(nrow(centered_data_matrix) - 1)`: This is the **degrees of freedom
+correction** used in the *sample* covariance. We use the number of
+fruits, - 1.
 
 Let's look at the output from `cov_matrix_1`:
 
 <button onclick="toggleVisibility(&#39;cov-matrix-output&#39;)">
-Show/Hide Manual R `cov_matrix_1` Output
+
+Show/Hide Manual R `cov_matrix_1` output
+
 </button>
 
 ::: {#cov-matrix-output style="display:none;"}
@@ -377,20 +519,25 @@ function toggleVisibility(id) {
 }
 </script>
 ```
+We have now generated all the covariance matrix values. Let's check some
+of these results against what we calculated earlier. For *Klebsiella*
+and *Acinetobacter*, we calculated **3.332** to be the covariance
+matrix, and for *Klebsiella* and *Klebsiella* - we calculated
+**216.668**. Looking at what R has output for us, this pretty much
+matches up!
 
- 
-
-Great, now if you compare the covariance matrix values we calculated earlier, for Klebsiella and Acinetobacter, we calculated 3.332 to be the covariance matrix, and for Klebsiella and Klebsiella - we calculated 216.668, this pretty much matches what R has outputted for us!
-
- 
-Alternatively, R also has the `cov()` function, which will work out the covariance matrix for you.
+If you want to make it even easier, R also has the `cov()` function,
+which will work out the covariance matrix for you. You simply need to
+put in your centered data matrix.
 
 ```{r}
 cov_matrix_R <- cov(centered_data_matrix)
 ```
 
 <button onclick="toggleVisibility(&#39;cov_matrix_R&#39;)">
-Show/Hide R Function `cov_matrix_R` Output
+
+Show/Hide R Function `cov_matrix_R` output
+
 </button>
 
 ::: {#cov_matrix_R style="display:none;"}
@@ -409,16 +556,21 @@ function toggleVisibility(id) {
 }
 </script>
 ```
- 
-
-And again, as you can see from this output, these numbers are very very similar to the ones we calculated! You now know some different ways to calculate the covariance matrix values.
+Again, the numbers shown are the covariance matrix values. If we compare
+these with our manually calculated ones too, you can see these are also
+very similar!
 
 ::: {.callout-tip title="Deep Dive into PCA"}
 <details>
 
 <summary>What do the co-variance matrix values show?</summary>
 
-The co-variance matrix here shows how these bacterial species vary together across different fruits. Positive values mean they move in the same direction, negative values mean when one increases, the other tends to decrease. For example lets look at our outputs and focus on *Klebsiella*. *Klebsiella* and *Acinetobacter* move together (3.33), while *Klebsiella* and *Pantonea* move in opposite directions (-100).
+The co-variance matrix here shows how these bacterial species vary
+together across different fruits. Positive values mean they move in the
+same direction, negative values mean when one increases, the other tends
+to decrease. For example lets look at our outputs and focus on
+*Klebsiella*. *Klebsiella* and *Acinetobacter* move together (3.33),
+while *Klebsiella* and *Pantonea* move in opposite directions (-100).
 
 </details>
 :::
@@ -428,31 +580,50 @@ The co-variance matrix here shows how these bacterial species vary together acro
 
 ### Step 4: Generating eigenvalues and eigenvectors.
 
-Once we have the covariance matrices, we can proceed with the next step of PCA calculations by calculating the **eigenvalues** and **eigenvectors**! As discussed earlier;
+Once we have the covariance matrices, we can proceed with the next step
+of PCA calculations by calculating the **eigenvalues** and
+**eigenvectors**! As discussed earlier:
 
--   The eigen**values** represent the amount of **variance** in each principal component
+-   The eigen**values** represent the amount of **variance** in each
+    principal component
 
--   The eigen**vectors** represent the **direction** of principal components.
+-   The eigen**vectors** represent the **direction** of principal
+    components.
 
 ```{r echo=FALSE, out.width="100%", fig.align="center", fig.cap="This image was generated from ChatGPT."}
    knitr::include_graphics("images/eigen.png") 
 ```
 
-However, the maths to calculate the eigenvalues and eigenvectors is VERY VERY complicated, so for now, we are just going to use R...
+The maths to calculate the eigenvalues and eigenvectors is quite
+complicated, so for now, we are just going to use R. If the maths is
+something you are keen to know to know, [this page by Ken
+Kuttler](https://math.libretexts.org/Bookshelves/Linear_Algebra/A_First_Course_in_Linear_Algebra_(Kuttler)/07%3A_Spectral_Theory/7.01%3A_Eigenvalues_and_Eigenvectors_of_a_Matrix)
+might help.
 
-If the maths is something you are keen to know to know, [this page by Ken Kuttler](https://math.libretexts.org/Bookshelves/Linear_Algebra/A_First_Course_in_Linear_Algebra_(Kuttler)/07%3A_Spectral_Theory/7.01%3A_Eigenvalues_and_Eigenvectors_of_a_Matrix) might help.
+It's probably still good for us to understand a little bit about the
+background as to how eigenvalues and eigenvectors work. This leads us to
+something called **spectral theory**: a branch of mathematics that
+studies the spectrum of a matrix or operator (including its eigenvalues
+and eigenvectors). Spectral theory helps us understand how a matrix
+behaves by analysing these components, offering deep insights into the
+structure and transformations represented by the matrix.
 
-Despite this, it's probably still sensible to understand a little more how eigenvalues and eigenvectors work. This leads us to something called spectral theory: a branch of mathematics that studies the spectrum of a matrix or operator, including its eigenvalues and eigenvectors. Spectral theory helps us understand how a matrix behaves by analysing these components, offering deep insights into the structure and transformations represented by the matrix.
+We can calculate these using the `eigen()` function in R, which will
+output both the values and the vectors.
 
-We can calculate these using the `eigen()` function in R, which will output both the values and the vectors.
+**The eigens:**
 
 ```{r}
 eigen <- eigen(cov_matrix_R)
 ```
 
-<button onclick="toggleVisibility(&#39;eigen&#39;)">
-Show/Hide Eigen Output
-</button>
+This function will output both eigenvalues and eigenvectors.
+Alternatively, we can look at the value and vectors individually, for
+the purpose of calculating our principal components for this analysis
+lets do this, and go through what each eigen is showing.
+
+<button onclick="toggleVisibility(&#39;eigen&#39;)">Show/Hide `eigen`
+Output</button>
 
 ::: {#eigen style="display:none;"}
 ```{r eigen, echo=FALSE}
@@ -467,21 +638,28 @@ function toggleVisibility(id) {
   var el = document.getElementById(id);
   el.style.display = el.style.display === 'none' ? 'block' : 'none';
 }
-</script>
-```
- 
-
-This will output both eigenvalues and eigenvectors. Alternatively, we can look at the value and vectors individually, for the purpose of calculating our principal components for this analysis lets do this, and go through what each eigen is showing.
-
+</script>             
+```          
+                  
+     
+<br>            
+                                             
 **The eigenvalues:**
-
 ```{r}
 eigen_values <- eigen$values
 ```
 
-<button onclick="toggleVisibility(&#39;eigen_values&#39;)">
-Show/Hide Eigen Values Output
-</button>
+R has given us 12 eigenvalues because our dataset includes 12 different
+bacteria types, meaning the covariance matrix is 12×12. Each eigenvalue
+corresponds to a principal component and tells us how much variance in
+the data that component explains. As we can see, the first few
+eigenvalues are large, capturing most of the variation, while the later
+ones are extremely small - close to zero - and can be ignored. This
+means we can reduce the dimensionality of our data by focusing on just
+the components with the largest eigenvalues - we will go more into this
+later.
+
+<button onclick="toggleVisibility(&#39;eigen_values&#39;)">Show/Hide `eigen_values` Output</button>
 
 ::: {#eigen_values style="display:none;"}
 ```{r eigen_values, echo=FALSE}
@@ -498,21 +676,23 @@ function toggleVisibility(id) {
 }
 </script>
 ```
- 
-
-R has given us 12 eigenvalues because our dataset includes 12 different bacteria types, meaning the covariance matrix is 12×12. Each eigenvalue corresponds to a principal component and tells us how much variance in the data that component explains. As we can see, the first few eigenvalues are large, capturing most of the variation, while the later ones are extremely small --- close to zero --- and can be ignored. This means we can reduce the dimensionality of our data by focusing on just the components with the largest eigenvalues - we will go more into this later.
-
- 
-
+ <br>    
+              
 **The eigenvectors:**
 
 ```{r}
 eigen_vectors <- eigen$vectors
 ```
 
-<button onclick="toggleVisibility(&#39;eigen_vectors&#39;)">
-Show/Hide Eigen Vectors Output
-</button>
+The eigenvectors are set out the same sort of way as our co-variance
+matrix, in the order of *Klebsiella*, *Acinetobacter*, *Pantonea*
+etc\... For example, the first eigenvalue shows **0.78063519** for
+*Klebsiella* v *Klebsiella*, the lack of negative value means it is in
+the opposite direction to *Klebsiella* and *Pantonea*, which has a
+negative value (-0.09110918).
+
+<button onclick="toggleVisibility(&#39;eigen_vectors&#39;)">Show/Hide
+`eigen_vectors` output</button>
 
 ::: {#eigen_vectors style="display:none;"}
 ```{r eigen_vectors, echo=FALSE}
@@ -529,48 +709,44 @@ function toggleVisibility(id) {
 }
 </script>
 ```
-
- 
-
-The eigenvectors are set out the same sort of way as our co-variance matrix, in the order of *Klebsiella*, *Acinetobacter* and *Pantonea*. For example, the first eigenvalue shows **0.78063519** for *Klebsiella* v *Klebsiella*, the lack of negative value means it is in the opposite direction to *Klebsiella* and *Pantonea*, which has a negative value (-0.09110918).
-
  
 
 ### Step 5: Calculate the Principal Components
 
-Now we have found the eigenvalues and eigenvectors we work out the principal components! Let's make sure to go through this step by step. 
-
- 
-
+Now we have found the eigenvalues and eigenvectors we work out the
+principal components! Let's make sure to go through this step by step.
+                  
 *5.1 We first need to take the centered data matrix we made earlier*
 
 `centered_data_matrix`
-
- 
-
-*5.2 We then need to work out the **eigenvectors** from the **covariance matrix** (we made the eigenvectors from our centered data):*
+           
+                        
+*5.2 We then need to work out the **eigenvectors** from the **covariance
+matrix** (we made the eigenvectors from our centered data):*
 
 ```{r}
 eigen <- eigen(cov_matrix_R)
 eigen_vectors <- eigen$vectors
 ```
 
- 
-
+                      
 *5.3 We choose what eigenvalues we are using*
 
-Only the first **4** principal components are actually positive values, principal components 5-12 are negative values, so we can in theory ignore these, and take the first four for now.
+Only the first **4** principal components are actually positive values,
+principal components 5-12 are negative values, so we can in theory
+ignore these, and take the first four for now.
 
 ```{r}
 eigen_values <- eigen$values[1:4]
 eigen_values
 ```
-
+   
  
-
 *5.4 We calculate the actual PC components*
 
-We know that the eigenvectors represent the *direction* of the principal components, so we first calculate our principal components, based on our centered data, and our eigenvectors, by using the matrix multiplication.
+We know that the eigenvectors represent the *direction* of the principal
+components, so we first calculate our principal components, based on our
+centered data, and our eigenvectors, by using the matrix multiplication. We only take PC1 and PC2, as we only need the first 2. 
 
 ```{r}
 
@@ -592,7 +768,11 @@ PCA_values
 
 *5.5 Generating the PCA plot.*
 
-But before we do this, earlier I mentioned that we will go back to the eigen values - this is for now. We took four as they were all positive values, but choosing components is usually based on what explains most of the variance, so we will be fine taking the first two. As they make up for the vast majority of the variance.
+But before we do this, earlier I mentioned that we will go back to the
+eigen values - this is for now. We took four as they were all positive
+values, but choosing components is usually based on what explains most
+of the variance, so we will be fine taking the first two. As they make
+up for the vast majority of the variance.
 
 ```{r}
 eigen_values <- eigen_values[1:2]
@@ -602,82 +782,11 @@ PCA_variance <- round(100 * eigen_values / sum(eigen_values), 2)
 
 ```
 
-Using these **2** PCA values, we can get away with generating just the one PCA plot; this is PCA 1 vs. PCA 2.
+Using these **2** PCA values, we can get away with generating just the
+one PCA plot; this is PCA 1 vs. PCA 2.
 
 ```{r}
 library(ggplot2)
-
-pca_plot <- ggplot(PCA_values, aes(x = PC1, y = PC2, color = Fruit)) +
-  geom_point(size = 4) +
-  geom_text(aes(label = Fruit), vjust = -1, hjust = 1.2, size = 3, show.legend = FALSE) +
-  labs(
-    title = "PCA of Fruit Samples",
-    x = paste0("Principal Component 1 (", PCA_variance[1], "%)"),
-    y = paste0("Principal Component 2 (", PCA_variance[2], "%)")
-  ) +
-  theme_minimal() +
-  theme(
-    plot.margin = margin(20, 20, 20, 20),
-    plot.title = element_text(hjust = 0.5)
-  ) +
-  scale_color_brewer(palette = "Dark2")
-```
- 
-
-Now let's see this beautiful plot all together! 
- 
-
-```{r fig.width=8, fig.height=6, echo=FALSE}
-
-library(ggplot2)
-# ONE
-# we need the centered data, and we need it as a matriz
-centered_data <- data.frame(
-  Klebsiella = c(13.3, 8.3, 8.3, 3.3, -6.7, -26.7),
-  Acinetobacter = c(-0.8, -0.8, -0.8, 4.2, -0.8, -0.8),
-  Pantoea = c(-7.5, -2.5, -2.5, -2.5, 2.5, 12.5),
-  Pseudoxanthomonas = c(-7.5, -2.5, -2.5, -2.5, 2.5, 12.5),
-  Serratia = c(-3.3, -3.3, -3.3, 1.7, 1.7, 6.7),
-  Stenotrophomonas = c(-1.7, -1.7, -1.7, -1.7, 3.3, 3.3),
-  Delftia = c(0, 0, 0, 0, 0, 0),
-  Burkholderia = c(-0.8, -0.8, -0.8, -0.8, -0.8, 4.2),
-  Sphingomonas = c(-2.5, -2.5, -2.5, -2.5, 2.5, 7.5),
-  Bacillus = c(-0.8, -0.8, -0.8, -0.8, 4.2, -0.8),
-  Sphingobacterium = c(-1.7, 3.3, 3.3, -1.7, -1.7, -1.0),
-  Mycoplasma = c(1.7, 1.7, 1.7, 1.7, -3.3, -3.3))
-
-centered_data_matrix <- as.matrix(centered_data)
-
-# TWO
-# we also need the eigenvectors, from the covariance matrix 
-cov_matrix_R <- cov(centered_data_matrix)
-
-eigen <- eigen(cov_matrix_R)
-
-
-# THREE
-# we select the top two  values, as we have a matrix of 3
-eigen_vectors <- eigen$vectors[, 1:2]
-
-
-# FOUR
-# we then get the reduced data, the principal components
-reduced_data <- centered_data_matrix %*% eigen_vectors
- # these two are the principal components, so lets make it clearer in the dataframe 
-
-
-
-# FIVE
-# lets put it all together into a PCA DF
-
-sample_names <- c("Apricot", "Argan", "Grapefruit", "Orange", "Peach", "Tangerine")
-
-PCA_values <- data.frame(
-  Sample = sample_names,
-  PC1 = reduced_data[, 1],
-  PC2 = reduced_data[, 2]
-)
-
 
 pca_plot <- ggplot(PCA_values, aes(x = PC1, y = PC2, color = Fruit)) +
   geom_point(size = 4) +
@@ -695,20 +804,29 @@ pca_plot <- ggplot(PCA_values, aes(x = PC1, y = PC2, color = Fruit)) +
   scale_color_brewer(palette = "Dark2")
 
 pca_plot
-
-
+  
 ```
 
  
-**What can we see?**
- 
 
-This PCA plot shows variation among different fruit samples based on their principal components. Samples like Orange and Peach cluster closely together, indicating similar microbiome compositions, while Apricot and Argan are positioned farther apart, meaning Medfly reared on these fruits may have greater differences. Grapefruit stands out as more distinct from the other samples. Overall, the plot shows clear groupings and separation among the Medfly microbiotas based on the fruits they were reared on. You can check this against the data shown at the beginning of this page! 
+
+  **What can we see?**  
+
+This PCA plot shows variation among different fruit samples based on
+their principal components. Samples like Orange and Peach cluster
+closely together, indicating similar microbiome compositions, while
+Apricot and Argan are positioned farther apart, meaning Medfly reared on
+these fruits may have greater differences. Grapefruit stands out as more
+distinct from the other samples. Overall, the plot shows clear groupings
+and separation among the Medfly microbiotas based on the fruits they
+were reared on. You can check this against the data shown at the
+beginning of this page!
 
  \
  
 
-To summarise this chapter, we have taken a deep dive into PCA, and hopefully what actually it is.
+To summarise this chapter, we have taken a deep dive into PCA, and
+hopefully what actually it is.
 
  \
  
@@ -724,12 +842,27 @@ That probably felt like a lot, and well done for getting through!
 ::: {#quiz1}
 <form id="quiz-form-1">
 
-<input type="radio" name="q1" value="a"> A. 1. Center the data, 2. Scale the data, 3. Calculate the covariance matrix values, 4. Calculate the eigenvalues and eigenvectors, 5. Calculate the principal component spaces, 6. Generate the PCA plot with these <br> <input type="radio" name="q1" value="b"> B. 1. Normalize the data, 2. Perform clustering, 3. Compute distances, 4. Generate a heatmap, 5. Sort by similarity, 6. Interpret clusters visually<br> <input type="radio" name="q1" value="c"> C. 1. One-hot encode variables, 2. Apply k-means clustering, 3. Compute centroids, 4. Evaluate silhouette scores, 5. Merge similar groups, 6. Visualize group centroids<br> <input type="radio" name="q1" value="d"> D. 1. Calculate correlation matrix, 2. Remove outliers, 3. Build decision trees, 4. Rank variable importance, 5. Apply bootstrapping, 6. Use top features in model<br><br>
+<input type="radio" name="q1" value="a"> A. 1. Center the data, 2. Scale
+the data, 3. Calculate the covariance matrix values, 4. Calculate the
+eigenvalues and eigenvectors, 5. Calculate the principal component
+spaces, 6. Generate the PCA plot with these <br>
+<input type="radio" name="q1" value="b"> B. 1. Normalize the data, 2.
+Perform clustering, 3. Compute distances, 4. Generate a heatmap, 5. Sort
+by similarity, 6. Interpret clusters visually<br>
+<input type="radio" name="q1" value="c"> C. 1. One-hot encode variables,
+2. Apply k-means clustering, 3. Compute centroids, 4. Evaluate
+silhouette scores, 5. Merge similar groups, 6. Visualize group
+centroids<br> <input type="radio" name="q1" value="d"> D. 1. Calculate
+correlation matrix, 2. Remove outliers, 3. Build decision trees, 4. Rank
+variable importance, 5. Apply bootstrapping, 6. Use top features in
+model<br><br>
 
 <button type="button" onclick="checkAnswer1()">
 
 Submit
+
 </button>
+
 </form>
 
 ::: {#result1 style="margin-top: 1em; font-weight: bold;"}
@@ -766,10 +899,18 @@ function checkAnswer1() {
 ::: {#quiz2}
 <form id="quiz-form-2">
 
-<input type="radio" name="q2" value="a"> A. To ensure eigenvalues are always positive<br> <input type="radio" name="q2" value="b"> B. To convert the data into binary form for easier computation<br> <input type="radio" name="q2" value="c"> C. To ensure that each feature has a mean of zero, allowing PCA to correctly find directions of maximum variance<br> <input type="radio" name="q2" value="d"> D. To standardize the range of each variable to between 0 and 1<br><br>
+<input type="radio" name="q2" value="a"> A. To ensure eigenvalues are
+always positive<br> <input type="radio" name="q2" value="b"> B. To
+convert the data into binary form for easier computation<br>
+<input type="radio" name="q2" value="c"> C. To ensure that each feature
+has a mean of zero, allowing PCA to correctly find directions of maximum
+variance<br> <input type="radio" name="q2" value="d"> D. To standardize
+the range of each variable to between 0 and 1<br><br>
 
 <button type="button" onclick="checkAnswer2()">
+
 Submit
+
 </button>
 
 </form>
@@ -803,19 +944,30 @@ function checkAnswer2() {
 
 ------------------------------------------------------------------------
 
-**In PCA, what do the eigenvalues and eigenvectors of the covariance matrix represent?**
+**In PCA, what do the eigenvalues and eigenvectors of the covariance
+matrix represent?**
 
 ::: {#quiz3}
 <form id="quiz-form-3">
 
-<input type="radio" name="q3" value="a"> A. Eigenvalues determine the correlation between original variables; eigenvectors show how to cluster them<br> <input type="radio" name="q3" value="b"> B. Eigenvalues represent the amount of variance captured by each principal component; eigenvectors define the direction of these components<br> <input type="radio" name="q3" value="c"> C. Eigenvalues are used to normalize the data; eigenvectors eliminate redundancy<br> <input type="radio" name="q3" value="d"> D. Eigenvalues and eigenvectors sort features in descending order of importance based on their original units<br><br>
+<input type="radio" name="q3" value="a"> A. Eigenvalues determine the
+correlation between original variables; eigenvectors show how to cluster
+them<br> <input type="radio" name="q3" value="b"> B. Eigenvalues
+represent the amount of variance captured by each principal component;
+eigenvectors define the direction of these components<br>
+<input type="radio" name="q3" value="c"> C. Eigenvalues are used to
+normalize the data; eigenvectors eliminate redundancy<br>
+<input type="radio" name="q3" value="d"> D. Eigenvalues and eigenvectors
+sort features in descending order of importance based on their original
+units<br><br>
 
 <button type="button" onclick="checkAnswer3()">
+
 Submit
+
 </button>
 
 </form>
-
 
 ::: {#result3 style="margin-top: 1em; font-weight: bold;"}
 :::
@@ -846,15 +998,15 @@ function checkAnswer3() {
 
 ------------------------------------------------------------------------
 
+# References:
 
-# References:  
-[Eigenvalues and Eigenvectors Maths Book ](https://math.libretexts.org/Bookshelves/Linear_Algebra/A_First_Course_in_Linear_Algebra_(Kuttler)/07%3A_Spectral_Theory/7.01%3A_Eigenvalues_and_Eigenvectors_of_a_Matrix)
+[Eigenvalues and Eigenvectors Maths
+Book](https://math.libretexts.org/Bookshelves/Linear_Algebra/A_First_Course_in_Linear_Algebra_(Kuttler)/07%3A_Spectral_Theory/7.01%3A_Eigenvalues_and_Eigenvectors_of_a_Matrix)
 
-
-<p>Cool stuff. You have now completed learning about PCA, please click the button below to begin learning about NMDS!</p>
+<p>Cool stuff. You have now completed learning about PCA, please click
+the button below to begin learning about NMDS!</p>
 
 ::: {style="text-align: right; margin-top: 2em;"}
-<a href="NMDS.qmd" class="btn btn-primary" role="button"> Turn to NMDS →</a>
+<a href="NMDS.qmd" class="btn btn-primary" role="button"> Turn to NMDS
+→</a>
 :::
-
-

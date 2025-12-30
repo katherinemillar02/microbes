@@ -29,7 +29,6 @@ library(ggplot2)
 ```{r echo=FALSE, message=FALSE}
 library(tidyverse)
 library(vegan)
-library(vegan)
 library(ggplot2)
 
 ```

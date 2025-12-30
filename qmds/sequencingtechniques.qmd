@@ -14,6 +14,7 @@ Amplicon sequencing is a targeted DNA sequencing approach used to identify and c
 
 The 16S rRNA (ribosomal RNA) gene encodes the small subunit ribosomal RNA (SSU rRNA), which is a core structural and functional component of the 30S subunit of the prokaryotic ribosome. This RNA plays an essential role in protein synthesis.
 
+
 **What does '16S' mean?**
 
 The term *16S* refers to the sedimentation coefficient of the RNA molecule, the sedimentation coefficient refers to the rate at which a particle sediments in a centrifugal field. It is measured in Svedberg units, rather than its physical size or molecular weight. This means there are 16 Svedberg units.

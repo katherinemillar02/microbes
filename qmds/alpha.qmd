@@ -1,5 +1,8 @@
 ---
 title: "Alpha Diversity Analysis Methods"
+format: html
+webr:
+  enabled: true
 about:
   template: marquee
   links:
@@ -18,6 +21,8 @@ editor:
   markdown: 
     wrap: 72
 ---
+
+
 
 ```{r}
 #| echo: false
@@ -574,8 +579,9 @@ function checkAnswer4() {
 
 ------------------------------------------------------------------------
 
+
 <p>Congratulations! You have now completed learning about Alpha
-Diversity, please click the button below to begin learning about Beta
+Diversity, Please click the button below to begin learning about Beta
 Diversity Analysis methods!</p>
 
 ::: {style="text-align: right; margin-top: 2em;"}
