@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Sequencing Techniques – Microbial Analysis</title>
+<title>Microbial Analysis - Microbial Sequencing Techniques</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -48,13 +48,7 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
+  "limit": 20,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -63,10 +57,8 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-submit-button-title": "Submit"
   }
 }</script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -78,9 +70,9 @@ ul.task-list li input[type="checkbox"] {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
+      <div class="navbar-brand-container">
     <a href="../index.html" class="navbar-brand navbar-brand-logo">
     <img src="../hexmedfly.png" alt="" class="navbar-logo">
     </a>
@@ -89,77 +81,77 @@ ul.task-list li input[type="checkbox"] {
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../qmds/introduction.html"> 
-<span class="menu-text">Overview</span></a>
+    <a class="nav-link" href="../qmds/introduction.html" rel="" target="">
+ <span class="menu-text">Overview</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-diversity-metrics-and-ordination-methods" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-diversity-metrics-and-ordination-methods" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
  <span class="menu-text">Diversity Metrics and Ordination Methods</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-diversity-metrics-and-ordination-methods">    
         <li>
-    <a class="dropdown-item" href="../qmds/alpha.html">
+    <a class="dropdown-item" href="../qmds/alpha.html" rel="" target="">
  <span class="dropdown-text">Alpha Diversity Analysis Methods</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../qmds/beta.html">
+    <a class="dropdown-item" href="../qmds/beta.html" rel="" target="">
  <span class="dropdown-text">Beta Diversity Analysis Methods</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../qmds/PCA.html">
+    <a class="dropdown-item" href="../qmds/PCA.html" rel="" target="">
  <span class="dropdown-text">Principal Component Analysis (PCA)</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../qmds/PCoA.html">
+    <a class="dropdown-item" href="../qmds/PCoA.html" rel="" target="">
  <span class="dropdown-text">Principal Co-ordinate Analysis (PCoA)</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../qmds/NMDS.html">
+    <a class="dropdown-item" href="../qmds/NMDS.html" rel="" target="">
  <span class="dropdown-text">Non-Metric Multidimensional Scaling (NMDS)</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../qmds/microbialsummary.html">
+    <a class="dropdown-item" href="../qmds/microbialsummary.html" rel="" target="">
  <span class="dropdown-text">The Microbial Summary</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tephritid-microbiota" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tephritid-microbiota" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
  <span class="menu-text">Tephritid Microbiota</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-tephritid-microbiota">    
         <li>
-    <a class="dropdown-item" href="../qmds/tephritidecology.html">
+    <a class="dropdown-item" href="../qmds/tephritidecology.html" rel="" target="">
  <span class="dropdown-text">Distribution of Tephritid Pests</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-profiling-the-microbiota" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-profiling-the-microbiota" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
  <span class="menu-text">Profiling the Microbiota</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-profiling-the-microbiota">    
         <li>
-    <a class="dropdown-item" href="../qmds/sequencingtechniques.html">
- <span class="dropdown-text">Sequencing Techniques</span></a>
+    <a class="dropdown-item" href="../qmds/sequencingtechniques.html" rel="" target="">
+ <span class="dropdown-text">Microbial Sequencing Techniques</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../qmds/dnaextraction.html">
+    <a class="dropdown-item" href="../qmds/dnaextraction.html" rel="" target="">
  <span class="dropdown-text">DNA Extraction</span></a>
   </li>  
     </ul>
   </li>
 </ul>
-          </div> <!-- /navcollapse -->
-            <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools ms-auto">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
+          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -172,9 +164,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#amplicon-sequencing" id="toc-amplicon-sequencing" class="nav-link active" data-scroll-target="#amplicon-sequencing">Amplicon Sequencing</a>
+  <li><a href="#an-introduction-to-amplicon-sequencing" id="toc-an-introduction-to-amplicon-sequencing" class="nav-link active" data-scroll-target="#an-introduction-to-amplicon-sequencing">An Introduction to Amplicon Sequencing</a></li>
+  <li><a href="#the-types-of-amplicon-sequencing" id="toc-the-types-of-amplicon-sequencing" class="nav-link" data-scroll-target="#the-types-of-amplicon-sequencing">The Types of Amplicon Sequencing</a>
   <ul class="collapse">
-  <li><a href="#the-types-of-amplicon-sequencing" id="toc-the-types-of-amplicon-sequencing" class="nav-link" data-scroll-target="#the-types-of-amplicon-sequencing">The types of amplicon sequencing:</a></li>
   <li><a href="#short-read-sequencing" id="toc-short-read-sequencing" class="nav-link" data-scroll-target="#short-read-sequencing">Short-read sequencing:</a></li>
   <li><a href="#long-read-sequencing" id="toc-long-read-sequencing" class="nav-link" data-scroll-target="#long-read-sequencing">Long-read sequencing:</a></li>
   <li><a href="#how-amplicon-sequencing-works" id="toc-how-amplicon-sequencing-works" class="nav-link" data-scroll-target="#how-amplicon-sequencing-works">How amplicon sequencing works:</a></li>
@@ -187,7 +179,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Sequencing Techniques</h1>
+<h1 class="title">Microbial Sequencing Techniques</h1>
 </div>
 
 
@@ -200,50 +192,100 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
-
 </header>
 
-
-<p>This section will take you through any sequencing techniques.</p>
-<section id="amplicon-sequencing" class="level2">
-<h2 class="anchored" data-anchor-id="amplicon-sequencing">Amplicon Sequencing</h2>
-<p>Amplicon sequencing is a targeted DNA sequencing approach used to identify and compare specific genetic regions across many samples. For bacteria and archaea, this typically focuses on the <strong>16S rRNA gene</strong></p>
-<p><strong>What is the 16S rRNA gene?</strong></p>
-<p>The 16S rRNA (ribosomal RNA) gene encodes the small subunit ribosomal RNA (SSU rRNA), which is a core structural and functional component of the 30S subunit of the prokaryotic ribosome. This RNA plays an essential role in protein synthesis.</p>
-<p><strong>What does ‘16S’ mean?</strong></p>
-<p>The term <em>16S</em> refers to the sedimentation coefficient of the RNA molecule, the sedimentation coefficient refers to the rate at which a particle sediments in a centrifugal field. It is measured in Svedberg units, rather than its physical size or molecular weight. This means there are 16 Svedberg units.</p>
-<p><strong>Why is the 16S rRNA gene used in microbiota studies?</strong></p>
-<p>The 16S rRNA gene is widely used in microbiota studies because it is highly conserved across bacterial and archaeal taxa, meaning its sequence has remained very similar across different species over evolutionary time. This conservation allows for broad amplification of the gene using universal primers, while the presence of variable regions enables taxonomic discrimination between microorganisms.</p>
-<p><strong>What primers are used to sequence the 16S rRNA gene?</strong></p>
-<p>The primer pair used which targets the full-length 16S rRNA gene is 27F and 1492R, sequencing approaches that capture this entire gene are typically referred to as <strong>long-read sequencing</strong>.</p>
-<p><strong>What are hypervariable regions, and conserved regions, and why are they important?</strong></p>
 <div class="cell" data-layout-align="left">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-left">
 <figure class="figure">
-<p><img src="images/regions.png" class="img-fluid figure-img" width="751"></p>
-<figcaption>This image was created on Canva.</figcaption>
+<p><img src="images/sequencing.png" class="img-fluid figure-img" width="762"></p>
+<figcaption class="figure-caption">This image was created on Canva.</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>The 16S rRNA gene contains nine hypervariable regions (V1–V9), which can provide species- or genus-specific signature sequences for bacterial identification. These hypervariable regions range from approximately 30 to 100 base pairs in length, and their degree of conservation varies widely. Sequencing the full-length 16S rRNA gene (approximately 1,500 bp) enables comparison across all hypervariable regions, improving taxonomic resolution.</p>
-<section id="the-types-of-amplicon-sequencing" class="level3">
-<h3 class="anchored" data-anchor-id="the-types-of-amplicon-sequencing">The types of amplicon sequencing:</h3>
-<p>Within amplicon sequencing, there are two main types:</p>
+<p>Before we actually have the data to analyse, we must analyse the DNA of our samlples through microbial sequencing technqiues. This section will take you through the sequencing techniques used to anlayse microbial data.</p>
+<section id="an-introduction-to-amplicon-sequencing" class="level2">
+<h2 class="anchored" data-anchor-id="an-introduction-to-amplicon-sequencing">An Introduction to Amplicon Sequencing</h2>
+<p>Amplicon sequencing is a targeted DNA sequencing approach used to identify and compare specific genetic regions across many samples. For bacteria and archaea, this typically focuses on the <strong>16S rRNA gene</strong>. &nbsp;<br>
+&nbsp;</p>
+<p><strong>What is the 16S rRNA gene?</strong></p>
+<div class="cell" data-layout-align="left">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="images/16SrRNA.png" class="img-fluid figure-img" width="154"></p>
+<figcaption class="figure-caption">Molecular structure of the 30S Subunit, Schluenzen et al.&nbsp;2000.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The 16S rRNA (ribosomal RNA) gene encodes the small subunit ribosomal RNA (SSU rRNA), which is a core structural and functional component of the 30S subunit of the prokaryotic ribosome. This RNA plays an essential role in protein synthesis.<br>
+&nbsp;<br>
+&nbsp;</p>
+<p><strong>What does ‘16S’ mean?</strong></p>
+<p>The term <em>16S</em> refers to the sedimentation coefficient of the RNA molecule, the sedimentation coefficient refers to the rate at which a particle sediments in a centrifugal field. It is measured in Svedberg units, rather than its physical size or molecular weight. This means there are 16 Svedberg units. &nbsp;<br>
+&nbsp;</p>
+<p><strong>Why is the 16S rRNA gene used in microbiota studies?</strong></p>
+<p>The 16S rRNA gene is widely used in microbiota studies because it is highly conserved across bacterial and archaeal taxa, meaning its sequence has remained very similar across different species over evolutionary time. This conservation allows for broad amplification of the gene using universal primers, while the presence of variable regions enables taxonomic discrimination between microorganisms.</p>
+<p>&nbsp;<br>
+&nbsp;<br>
+<strong>What primers are used to sequence the 16S rRNA gene?</strong></p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/primers.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<figcaption class="figure-caption">The forward and reverse primers of the 16S rRNA gene. THis image was generated on Canva.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The primer pair used which targets the full-length 16S rRNA gene is 27F and 1492R, sequencing approaches that capture this entire gene are typically referred to as <strong>long-read sequencing</strong>. &nbsp;<br>
+&nbsp;</p>
+<p><strong>What are hypervariable regions, and conserved regions, and why are they important?</strong></p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/regions.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption class="figure-caption">The hypervariable (V1-V9), and conserved regions of the 16SrRNA gene. This image was created on Canva.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The <strong>16S rRNA gene (~1,500 bp)</strong> is evolutionary constrained, but it is interspersed with regions that are able to tolerate more sequence variation.</p>
+<p>This creates a mosaic like stucture of:</p>
+<ul>
+<li><p><strong>9 hypervariable regions (V1-V9)</strong></p></li>
+<li><p><strong>Intervening conserved (constant) regions</strong></p></li>
+</ul>
+<p>The <strong>hypervariable regions</strong> can provide species- or genus-specific signature sequences for bacterial identification. These hypervariable regions range from approximately 30 to 100 base pairs in length, and their degree of conservation varies widely. Sequencing the full-length 16S rRNA gene (approximately 1,500 bp) enables comparison across all 9 hypervariable regions, improving taxonomic resolution.</p>
+<p><strong>Conserved regions</strong> on the other hand, are regions that have remained relatively unchanged across bacteria over long evolutionary periods due to strong selective pressure. As a result, these regions evolve slowly and retain high sequence similarity even among distantly related bacteria. They also have an important function of being criticial for ribosome structure and protein synthesis, which is essential for bacterial survival.<br>
+</p>
+<p>In short, <strong>conserved regions</strong> are the universal primers, <strong>hypervariable regions</strong> allow for taxonomic discrimination.<br>
+</p>
+<p>&nbsp;</p>
 </section>
+<section id="the-types-of-amplicon-sequencing" class="level2">
+<h2 class="anchored" data-anchor-id="the-types-of-amplicon-sequencing">The Types of Amplicon Sequencing</h2>
+<p>Within bacterial amplicon sequencing, there are two main types:</p>
 <section id="short-read-sequencing" class="level3">
 <h3 class="anchored" data-anchor-id="short-read-sequencing">Short-read sequencing:</h3>
 <p><br>
 Produces high-accuracy reads of relatively short DNA fragments, commonly used for microbial community profiling.</p>
-<p>It is called short-read sequencing because it only sequences a section of the 16S rRNA gene. In short read sequences only certain hypervariable regions will be selected. There are a range of hypervariable regions used:</p>
-<p><strong>V1 - V3</strong>: bp 27–534 of the 16S gene.<br>
-<strong>V3</strong> bp 341–534 of the 16S gene.<br>
-<strong>V3 - V4</strong> bp 341–806 of the 16S gene.<br>
-<strong>V4</strong> bp 515–806 of the 16S gene.</p>
-<p>There is only one main sequencing platform used for high-through put sequencing, and this is <strong>Illumina.</strong></p>
-<p><br>
-<strong>Illumina:</strong></p>
+<p>It is referred to as <strong>short-read sequencing</strong> because it only sequences a section of the <strong>16S rRNA gene</strong>. In short read sequences only 1-2 specific hypervariable regions will be selected. There are a range of hypervariable regions commonly used:</p>
+<ul>
+<li><u><strong>V1 - V3</strong>:</u> <em>27-534 bp</em> of the 16S gene.<br>
+</li>
+<li><u><strong>V3</strong>:</u> <em>341-534 bp</em> of the 16S gene.<br>
+</li>
+<li><u><strong>V3 - V4</strong>:</u> <em>341-806 bp</em> of the 16S gene.<br>
+</li>
+<li><u><strong>V4</strong>:</u> <em>515-806 bp</em> of the 16S gene.</li>
+</ul>
+<p><strong>Short-read sequencing</strong> is typically performed using high-throughput sequencing platforms, these are designed to generate millions of reads in parallel. The <strong>Illumina</strong> sequencing platform has become the dominant technology for <strong>short read 16S rRNA gene amplicon sequencing</strong>.</p>
+<p><strong>Illumina Technology</strong></p>
 <ul>
 <li><p>Illumina uses sequencing-by-synthesis (SBS) chemistry. This includes fluorescently labelled, reversible terminator nucleotides being incorporated one base at a time and imaged after each cycle.</p></li>
 <li><p>Illuimina is known for havig high accuracy: Illumina platforms typically achieve ≥99.9% per-base accuracy, making them a gold standard for applications where low error rates are critical (e.g.&nbsp;variant calling, microbial community profiling).</p></li>
@@ -311,7 +353,7 @@ Produces longer DNA reads, allowing better resolution of complex genomic regions
 <p><input type="radio" name="q2" value="d"> D. It estimates species turnover between microbial communities<br>
 <br><br></p>
 <button type="button" onclick="checkAnswer2()">
-Submit
+<p>Submit</p>
 </button>
 </form>
 <div id="result2" style="margin-top: 1em; font-weight: bold;">
@@ -387,33 +429,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
   }
-  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-    let newTheme = '';
-    if(darkModeDefault) {
-      newTheme = isAlternate ? baseTheme : alternateTheme;
-    } else {
-      newTheme = isAlternate ? alternateTheme : baseTheme;
-    }
-    const changeGiscusTheme = () => {
-      // From: https://github.com/giscus/giscus/issues/336
-      const sendMessage = (message) => {
-        const iframe = document.querySelector('iframe.giscus-frame');
-        if (!iframe) return;
-        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-      }
-      sendMessage({
-        setConfig: {
-          theme: newTheme
-        }
-      });
-    }
-    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-    if (isGiscussLoaded) {
-      changeGiscusTheme();
-    }
-  }
   const toggleColorMode = (alternate) => {
     // Switch the stylesheets
     const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
@@ -480,15 +495,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  const darkModeDefault = false;
-  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  let localAlternateSentinel = 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
-    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -523,7 +536,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const onCopySuccess = function(e) {
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -555,50 +579,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
   });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+  function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
+      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -608,17 +593,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start',
+      placement: 'bottom-start'
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -630,130 +606,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
-          }
-        }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
-        }
-        return container.innerHTML
-      } else {
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
-        }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
-    }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
-          }
-        } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
-          .then(res => res.text())
-          .then(html => {
-            const parser = new DOMParser();
-            const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
-            if (note !== null) {
-              const html = processXRef(id, note);
-              instance.setContent(html);
-            } 
-          }).finally(() => {
-            instance.enable();
-            instance.show();
-          });
-        }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
+      return note.innerHTML;
     });
   }
       let selectedAnnoteEl;
@@ -797,7 +650,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
-            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -823,32 +675,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -909,7 +735,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-
 
 
 

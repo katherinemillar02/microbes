@@ -1,60 +1,93 @@
 ---
-title: "Sequencing Techniques"
+title: "Microbial Sequencing Techniques"
 editor: visual
 ---
 
-This section will take you through any sequencing techniques.
+```{r echo=FALSE, message=FALSE,fig.align="left", fig.cap="This image was created on Canva."}
+knitr::include_graphics("images/sequencing.png")
+```
 
-## Amplicon Sequencing
+Before we actually have the data to analyse, we must analyse the DNA of our samlples through microbial sequencing technqiues. This section will take you through the sequencing techniques used to anlayse microbial data.
 
-Amplicon sequencing is a targeted DNA sequencing approach used to identify and compare specific genetic regions across many samples. For bacteria and archaea, this typically focuses on the **16S rRNA gene**
+## An Introduction to Amplicon Sequencing
 
+Amplicon sequencing is a targeted DNA sequencing approach used to identify and compare specific genetic regions across many samples. For bacteria and archaea, this typically focuses on the **16S rRNA gene**.  \
+ 
 
 **What is the 16S rRNA gene?**
 
-The 16S rRNA (ribosomal RNA) gene encodes the small subunit ribosomal RNA (SSU rRNA), which is a core structural and functional component of the 30S subunit of the prokaryotic ribosome. This RNA plays an essential role in protein synthesis.
+```{r echo=FALSE, message=FALSE,fig.align="left", fig.cap="Molecular structure of the 30S Subunit, Schluenzen et al. 2000."}
+knitr::include_graphics("images/16SrRNA.png")
 
+```
+
+The 16S rRNA (ribosomal RNA) gene encodes the small subunit ribosomal RNA (SSU rRNA), which is a core structural and functional component of the 30S subunit of the prokaryotic ribosome. This RNA plays an essential role in protein synthesis.\
+ \
+ 
 
 **What does '16S' mean?**
 
-The term *16S* refers to the sedimentation coefficient of the RNA molecule, the sedimentation coefficient refers to the rate at which a particle sediments in a centrifugal field. It is measured in Svedberg units, rather than its physical size or molecular weight. This means there are 16 Svedberg units.
+The term *16S* refers to the sedimentation coefficient of the RNA molecule, the sedimentation coefficient refers to the rate at which a particle sediments in a centrifugal field. It is measured in Svedberg units, rather than its physical size or molecular weight. This means there are 16 Svedberg units.  \
+ 
 
 **Why is the 16S rRNA gene used in microbiota studies?**
 
 The 16S rRNA gene is widely used in microbiota studies because it is highly conserved across bacterial and archaeal taxa, meaning its sequence has remained very similar across different species over evolutionary time. This conservation allows for broad amplification of the gene using universal primers, while the presence of variable regions enables taxonomic discrimination between microorganisms.
 
+ \
+ \
 **What primers are used to sequence the 16S rRNA gene?**
 
-The primer pair used which targets the full-length 16S rRNA gene is 27F and 1492R, sequencing approaches that capture this entire gene are typically referred to as **long-read sequencing**.
+```{r echo=FALSE, out.width="60%", message=FALSE, fig.cap="The forward and reverse primers of the 16S rRNA gene. THis image was generated on Canva."}
+knitr::include_graphics("images/primers.png")
+
+```
+
+The primer pair used which targets the full-length 16S rRNA gene is 27F and 1492R, sequencing approaches that capture this entire gene are typically referred to as **long-read sequencing**.  \
+ 
 
 **What are hypervariable regions, and conserved regions, and why are they important?**
 
-```{r echo=FALSE, message=FALSE,fig.align="left", fig.cap="This image was created on Canva."}
+```{r echo=FALSE,out.width="80%", message=FALSE, fig.cap="The hypervariable (V1-V9), and conserved regions of the 16SrRNA gene. This image was created on Canva."}
 knitr::include_graphics("images/regions.png")
 ```
 
-The 16S rRNA gene contains nine hypervariable regions (V1--V9), which can provide species- or genus-specific signature sequences for bacterial identification. These hypervariable regions range from approximately 30 to 100 base pairs in length, and their degree of conservation varies widely. Sequencing the full-length 16S rRNA gene (approximately 1,500 bp) enables comparison across all hypervariable regions, improving taxonomic resolution.
+The **16S rRNA gene (\~1,500 bp)** is evolutionary constrained, but it is interspersed with regions that are able to tolerate more sequence variation.
 
-### The types of amplicon sequencing:
+This creates a mosaic like stucture of:
 
-Within amplicon sequencing, there are two main types:    
-   
+-   **9 hypervariable regions (V1-V9)**
+
+-   **Intervening conserved (constant) regions**
+
+The **hypervariable regions** can provide species- or genus-specific signature sequences for bacterial identification. These hypervariable regions range from approximately 30 to 100 base pairs in length, and their degree of conservation varies widely. Sequencing the full-length 16S rRNA gene (approximately 1,500 bp) enables comparison across all 9 hypervariable regions, improving taxonomic resolution.
+
+**Conserved regions** on the other hand, are regions that have remained relatively unchanged across bacteria over long evolutionary periods due to strong selective pressure. As a result, these regions evolve slowly and retain high sequence similarity even among distantly related bacteria. They also have an important function of being criticial for ribosome structure and protein synthesis, which is essential for bacterial survival.\
+
+In short, **conserved regions** are the universal primers, **hypervariable regions** allow for taxonomic discrimination.\
+
+ 
+
+## The Types of Amplicon Sequencing
+
+Within bacterial amplicon sequencing, there are two main types:
+
 ### Short-read sequencing:
 
 \
 Produces high-accuracy reads of relatively short DNA fragments, commonly used for microbial community profiling.
 
-It is called short-read sequencing because it only sequences a section of the 16S rRNA gene. In short read sequences only certain hypervariable regions will be selected. There are a range of hypervariable regions used:
+It is referred to as **short-read sequencing** because it only sequences a section of the **16S rRNA gene**. In short read sequences only 1-2 specific hypervariable regions will be selected. There are a range of hypervariable regions commonly used:
 
-**V1 - V3**: bp 27--534 of the 16S gene.\
-**V3** bp 341--534 of the 16S gene.\
-**V3 - V4** bp 341--806 of the 16S gene.\
-**V4** bp 515--806 of the 16S gene.
+-   [**V1 - V3**:]{.underline} *27-534 bp* of the 16S gene.\
+-   [**V3**:]{.underline} *341-534 bp* of the 16S gene.\
+-   [**V3 - V4**:]{.underline} *341-806 bp* of the 16S gene.\
+-   [**V4**:]{.underline} *515-806 bp* of the 16S gene.
 
-There is only one main sequencing platform used for high-through put sequencing, and this is **Illumina.**
+**Short-read sequencing** is typically performed using high-throughput sequencing platforms, these are designed to generate millions of reads in parallel. The **Illumina** sequencing platform has become the dominant technology for **short read 16S rRNA gene amplicon sequencing**. 
 
-\
-**Illumina:**
+
+**Illumina Technology**
 
 -   Illumina uses sequencing-by-synthesis (SBS) chemistry. This includes fluorescently labelled, reversible terminator nucleotides being incorporated one base at a time and imaged after each cycle.
 
@@ -108,37 +141,37 @@ Depending on whether short-read or long-read sequencing is used, high-throughput
 
 A pipeline is used to analyse the data.
 
-
-
 ------------------------------------------------------------------------
 
 **What does 16S actually mean in the 16S rRNA gene?**
 
 <div>
+
 <form id="quiz-form-2">
 
-<input type="radio" name="q2" value="a">
-A. The gene is exactly 16,000 base pairs long  
+<input type="radio" name="q2" value="a"> A. The gene is exactly 16,000 base pairs long\
 <br>
 
-<input type="radio" name="q2" value="b">
-B. 16S refers to the sedimentation coefficient, meaning the rate at which the particle sediments in a centrifugal field  
+<input type="radio" name="q2" value="b"> B. 16S refers to the sedimentation coefficient, meaning the rate at which the particle sediments in a centrifugal field\
 <br>
 
-<input type="radio" name="q2" value="c">
-C. It indicates the gene is found in 16 different bacterial species  
+<input type="radio" name="q2" value="c"> C. It indicates the gene is found in 16 different bacterial species\
 <br>
 
-<input type="radio" name="q2" value="d">
-D. It estimates species turnover between microbial communities  
+<input type="radio" name="q2" value="d"> D. It estimates species turnover between microbial communities\
 <br><br>
 
-<button type="button" onclick="checkAnswer2()">Submit</button>
+<button type="button" onclick="checkAnswer2()">
+
+Submit
+
+</button>
 
 </form>
 
 ::: {#result2 style="margin-top: 1em; font-weight: bold;"}
 :::
+
 </div>
 
 ```{=html}
@@ -163,5 +196,3 @@ function checkAnswer2() {
 }
 </script>
 ```
-
-

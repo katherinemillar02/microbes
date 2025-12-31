@@ -174,7 +174,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="dropdown-menu" aria-labelledby="nav-menu-profiling-the-microbiota">    
         <li>
     <a class="dropdown-item" href="../qmds/sequencingtechniques.html" rel="" target="">
- <span class="dropdown-text">Sequencing Techniques</span></a>
+ <span class="dropdown-text">Microbial Sequencing Techniques</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../qmds/dnaextraction.html" rel="" target="">
@@ -243,6 +243,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Principal Component Analysis (PCA)</strong> is a widely used <strong>data visualisation</strong> and <strong>dimensionality-reduction</strong> technique that helps simplify complex datasets containing many variables. Instead of analysing each variable independently, PCA summarises the data into a small number of principal components that capture the most important patterns of variation.</p>
 <p>When visualised in a PCA plot, each point represents a sample. Samples that appear close together are more similar in composition, while those farther apart are more different. Take the example shown below, the horse and zebra are close together, and the chicken and turkey are also close together! This makes PCA particularly useful for exploring structure, grouping, and trends in large biological datasets, such as microbial community data.</p>
 <p>PCA performs best when relationships between variables are approximately linear, as it identifies directions in the data that explain variation along straight-line axes.</p>
+<p><strong>Why do we need to use PCA with huge microbial datasets?</strong></p>
+<form>
+<p><select id="q1"> <option value="">– Select an answer –</option> <option value="a">A. To increase the number of variables in a dataset</option> <option value="b">B. To reduce dimensionality by summarizing correlated variables while retaining most of the variance</option> <option value="c">C. To normalize data by rescaling variables to the same units</option> <option value="d">D. To rank variables according to their original measurement units</option> </select> <br><br></p>
+<button type="button" onclick="checkPCA1()">
+Submit
+</button>
+</form>
+<div id="result1" style="margin-top: 1em; font-weight: bold;">
+</div>
+<script>
+function checkPCA1() {
+  const answer = document.getElementById("q1").value;
+  const result = document.getElementById("result1");
+  if (!answer) {
+    result.textContent = "⚠️ Please select an answer.";
+    result.style.color = "orange";
+    return;
+  }
+  if (answer === "b") {
+    result.textContent =
+      "✅ Correct! PCA reduces dimensionality by capturing most of the variance in fewer uncorrelated components.";
+    result.style.color = "green";
+  } else {
+    result.textContent =
+      "❌ Not quite. Think about dimensionality reduction and correlated variables.";
+    result.style.color = "red";
+  }
+}
+</script>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -257,6 +286,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="how-principal-component-analysis-measures-similarity" class="level4">
 <h4 data-anchor-id="how-principal-component-analysis-measures-similarity"><strong>How Principal Component Analysis measures similarity:</strong></h4>
 <p>The similarity between samples in a PCA plot is typically based on Euclidean distance, which measures the straight-line distance between points in the reduced-dimensional space. PCA is designed so that this reduced space retains as much of the original variation as possible, meaning that distances between samples remain biologically and statistically meaningful.</p>
+<p>PCA assumes that the main patterns in the data can be described using linear (straight-line) relationships. It identifies new axes that are linear combinations of the original variables and captures variation along these straight-line directions. As a result, PCA works best when relationships between variables are approximately linear, and it may fail to represent complex non-linear patterns in the data.</p>
+<p><strong>What measures distances in PCA, and why?</strong></p>
+<p><select id="pca-answer"> <option value="">– Select an option –</option>
+<option value="a"> A. Manhattan distance, because PCA minimizes absolute differences between variables </option>
+<option value="b"> B. Euclidean distance in the original variable space, because PCA preserves raw feature distances </option>
+<option value="c"> C. Euclidean distance in principal component space, because PCA projects data onto orthogonal axes that capture variance </option>
+<option value="d"> D. Bray–Curtis dissimilarity, because PCA is designed for compositional count data </option> </select> <br><br></p>
+<button type="button" onclick="checkAnswer()">
+Submit
+</button>
+<div id="result" style="margin-top: 1em; font-weight: bold;">
+</div>
+<script>
+function checkAnswer() {
+  const answer = document.getElementById("pca-answer").value;
+  const result = document.getElementById("result");
+  if (answer === "") {
+    result.textContent = "⚠️ Please select an answer.";
+    result.style.color = "orange";
+    return;
+  }
+  if (answer === "c") {
+    result.textContent =
+      "✅ Correct! Distances in PCA plots are Euclidean distances in principal component space, where samples are projected onto orthogonal axes that capture the greatest variance.";
+    result.style.color = "green";
+  } else {
+    result.textContent =
+      "❌ Not quite. Think about how PCA projects data onto new orthogonal axes and how distances are interpreted in that space.";
+    result.style.color = "red";
+  }
+}
+</script>
 </section>
 <section id="breaking-principal-component-analysis-down-into-key-concepts" class="level4">
 <h4 data-anchor-id="breaking-principal-component-analysis-down-into-key-concepts"><strong>Breaking Principal Component Analysis down into key concepts:</strong></h4>
@@ -890,7 +951,7 @@ Why do we want the average across the samples to be zero?
 </div>
 <p>The column of 1-6 shows the different fruit, in the order of Apricot, Argan, Grapefruit, Orange, Peach and Tangerine.</p>
 <button onclick="toggleVisibility('centered-data-container')">
-<p>Show/Hide <code>centered_data_matrix &lt;- as.matrix(centered_data)</code> output</p>
+Show/Hide <code>centered_data_matrix &lt;- as.matrix(centered_data)</code> output
 </button>
 <div id="centered-data-container" style="display:none;">
 <div class="cell">
@@ -932,7 +993,7 @@ Why do we want the average across the samples to be zero?
 <p><code>(nrow(centered_data_matrix) - 1)</code>: This is the <strong>degrees of freedom correction</strong> used in the <em>sample</em> covariance. We use the number of fruits, - 1.</p>
 <p>Let’s look at the output from <code>cov_matrix_1</code>:</p>
 <button onclick="toggleVisibility('cov-matrix-output')">
-<p>Show/Hide Manual R <code>cov_matrix_1</code> output</p>
+Show/Hide Manual R <code>cov_matrix_1</code> output
 </button>
 <div id="cov-matrix-output" style="display:none;">
 <div class="cell">
@@ -991,7 +1052,7 @@ function toggleVisibility(id) {
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>cov_matrix_R <span class="ot">&lt;-</span> <span class="fu">cov</span>(centered_data_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <button onclick="toggleVisibility('cov_matrix_R')">
-<p>Show/Hide R Function <code>cov_matrix_R</code> output</p>
+Show/Hide R Function <code>cov_matrix_R</code> output
 </button>
 <div id="cov_matrix_R" style="display:none;">
 <div class="cell">
@@ -1333,7 +1394,7 @@ function toggleVisibility(id) {
 <form id="quiz-form-1">
 <p><input type="radio" name="q1" value="a"> A. 1. Center the data, 2. Scale the data, 3. Calculate the covariance matrix values, 4. Calculate the eigenvalues and eigenvectors, 5. Calculate the principal component spaces, 6. Generate the PCA plot with these <br> <input type="radio" name="q1" value="b"> B. 1. Normalize the data, 2. Perform clustering, 3. Compute distances, 4. Generate a heatmap, 5. Sort by similarity, 6. Interpret clusters visually<br> <input type="radio" name="q1" value="c"> C. 1. One-hot encode variables, 2. Apply k-means clustering, 3. Compute centroids, 4. Evaluate silhouette scores, 5. Merge similar groups, 6. Visualize group centroids<br> <input type="radio" name="q1" value="d"> D. 1. Calculate correlation matrix, 2. Remove outliers, 3. Build decision trees, 4. Rank variable importance, 5. Apply bootstrapping, 6. Use top features in model<br><br></p>
 <button type="button" onclick="checkAnswer1()">
-<p>Submit</p>
+Submit
 </button>
 </form>
 <div id="result1" style="margin-top: 1em; font-weight: bold;">
@@ -1363,7 +1424,7 @@ function checkAnswer1() {
 <form id="quiz-form-2">
 <p><input type="radio" name="q2" value="a"> A. To ensure eigenvalues are always positive<br> <input type="radio" name="q2" value="b"> B. To convert the data into binary form for easier computation<br> <input type="radio" name="q2" value="c"> C. To ensure that each feature has a mean of zero, allowing PCA to correctly find directions of maximum variance<br> <input type="radio" name="q2" value="d"> D. To standardize the range of each variable to between 0 and 1<br><br></p>
 <button type="button" onclick="checkAnswer2()">
-<p>Submit</p>
+Submit
 </button>
 </form>
 <div id="result2" style="margin-top: 1em; font-weight: bold;">
@@ -1393,7 +1454,7 @@ function checkAnswer2() {
 <form id="quiz-form-3">
 <p><input type="radio" name="q3" value="a"> A. Eigenvalues determine the correlation between original variables; eigenvectors show how to cluster them<br> <input type="radio" name="q3" value="b"> B. Eigenvalues represent the amount of variance captured by each principal component; eigenvectors define the direction of these components<br> <input type="radio" name="q3" value="c"> C. Eigenvalues are used to normalize the data; eigenvectors eliminate redundancy<br> <input type="radio" name="q3" value="d"> D. Eigenvalues and eigenvectors sort features in descending order of importance based on their original units<br><br></p>
 <button type="button" onclick="checkAnswer3()">
-<p>Submit</p>
+Submit
 </button>
 </form>
 <div id="result3" style="margin-top: 1em; font-weight: bold;">
@@ -1422,11 +1483,12 @@ function checkAnswer3() {
 <section id="references" class="level1">
 <h1>References:</h1>
 <p><a href="https://math.libretexts.org/Bookshelves/Linear_Algebra/A_First_Course_in_Linear_Algebra_(Kuttler)/07%3A_Spectral_Theory/7.01%3A_Eigenvalues_and_Eigenvectors_of_a_Matrix">Eigenvalues and Eigenvectors Maths Book</a></p>
+<hr>
 <p>
-Cool stuff. You have now completed learning about PCA, please click the button below to begin learning about NMDS!
+Cool stuff. You have now completed learning about Principal Component Analysis, please click the button below to begin learning about Principal Co-ordinate Analysis!
 </p>
 <div style="text-align: right; margin-top: 2em;">
-<p><a href="../qmds/NMDS.html" class="btn btn-primary" role="button"> Turn to NMDS →</a></p>
+<p><a href="../qmds/PCoA.html" class="btn btn-primary" role="button"> Turn to Principal Co-ordinate Analysis →</a></p>
 </div>
 
 
