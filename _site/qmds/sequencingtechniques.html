@@ -351,24 +351,52 @@ Produces longer DNA reads, allowing better resolution of complex genomic regions
 </ol>
 <p>A pipeline is used to analyse the data.</p>
 <hr>
-<p><strong>What does 16S actually mean in the 16S rRNA gene?</strong></p>
-<div>
+<!-- Question 1 -->
+<p>
+<strong>Which of these is the most common region/s to be used in 16S?</strong>
+</p>
+<form id="quiz-form-1">
+<p><input type="radio" name="q1" value="a"> A. V1<br> <input type="radio" name="q1" value="b"> B. V7–8<br> <input type="radio" name="q1" value="c"> C. V3–4<br> <input type="radio" name="q1" value="d"> D. V7<br><br></p>
+<button type="button" onclick="checkAnswer1()">
+Submit
+</button>
+</form>
+<div id="result1" style="margin-top: 1em; font-weight: bold;">
+
+</div>
+<script>
+function checkAnswer1() {
+  const answer = document.querySelector('#quiz-form-1 input[name="q1"]:checked');
+  const result = document.getElementById("result1");
+
+  if (!answer) {
+    result.textContent = "⚠️ Please select an answer.";
+    result.style.color = "orange";
+    return;
+  }
+
+  if (answer.value === "c") {
+    result.textContent = "✅ Correct! The V3–V4 region is the most commonly sequenced region in 16S studies.";
+    result.style.color = "green";
+  } else {
+    result.textContent = "❌ Not quite. V3–V4 is the most widely used region due to its taxonomic resolution and compatibility with Illumina platforms.";
+    result.style.color = "red";
+  }
+}
+</script>
+<hr>
+<!-- Question 2 -->
+<p>
+<strong>What does 16S actually mean in the 16S rRNA gene?</strong>
+</p>
 <form id="quiz-form-2">
-<p><input type="radio" name="q2" value="a"> A. The gene is exactly 16,000 base pairs long<br>
-<br></p>
-<p><input type="radio" name="q2" value="b"> B. 16S refers to the sedimentation coefficient, meaning the rate at which the particle sediments in a centrifugal field<br>
-<br></p>
-<p><input type="radio" name="q2" value="c"> C. It indicates the gene is found in 16 different bacterial species<br>
-<br></p>
-<p><input type="radio" name="q2" value="d"> D. It estimates species turnover between microbial communities<br>
-<br><br></p>
+<p><input type="radio" name="q2" value="a"> A. The gene is exactly 16,000 base pairs long<br> <input type="radio" name="q2" value="b"> B. 16S refers to the sedimentation coefficient, meaning the rate at which the particle sediments in a centrifugal field<br> <input type="radio" name="q2" value="c"> C. It indicates the gene is found in 16 different bacterial species<br> <input type="radio" name="q2" value="d"> D. It estimates species turnover between microbial communities<br><br></p>
 <button type="button" onclick="checkAnswer2()">
-<p>Submit</p>
+Submit
 </button>
 </form>
 <div id="result2" style="margin-top: 1em; font-weight: bold;">
 
-</div>
 </div>
 <script>
 function checkAnswer2() {
@@ -382,7 +410,7 @@ function checkAnswer2() {
   }
 
   if (answer.value === "b") {
-    result.textContent = "✅ Correct! The 'S' in 16S refers to Svedberg units, which describe sedimentation rate during centrifugation.";
+    result.textContent = "✅ Correct! The 'S' in 16S refers to Svedberg units, describing sedimentation rate during centrifugation.";
     result.style.color = "green";
   } else {
     result.textContent = "❌ Not quite. 16S refers to a sedimentation coefficient, not gene length or diversity metrics.";
