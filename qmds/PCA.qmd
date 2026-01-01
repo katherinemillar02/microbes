@@ -67,13 +67,13 @@ along straight-line axes.
   </select>
   <br><br>
 
-  <button type="button" onclick="checkPCA1()">Submit</button>
+  <button type="button" onclick="checkq1()">Submit</button>
 </form>
 
 <div id="result1" style="margin-top: 1em; font-weight: bold;"></div>
 
 <script>
-function checkPCA1() {
+function checkq1() {
   const answer = document.getElementById("q1").value;
   const result = document.getElementById("result1");
 
@@ -965,7 +965,7 @@ That probably felt like a lot, and well done for getting through!
 **What are the six key steps of PCA you were introduced to?**
 
 ::: {#quizs1}
-<form id="quiz-form-1">
+<form id="quiz-form-s1">
 
 <input type="radio" name="sq1" value="a"> A. 1. Center the data, 2. Scale
 the data, 3. Calculate the covariance matrix values, 4. Calculate the
@@ -982,7 +982,7 @@ correlation matrix, 2. Remove outliers, 3. Build decision trees, 4. Rank
 variable importance, 5. Apply bootstrapping, 6. Use top features in
 model<br><br>
 
-<button type="button" onclick="checkAnswer1()">Submit
+<button type="button" onclick="checkAnswers1()">Submit
 </button></form>
 
 ::: {#results1 style="margin-top: 1em; font-weight: bold;"}
@@ -991,8 +991,8 @@ model<br><br>
 
 ```{=html}
 <script>
-function checkAnswer1() {
-  const answer = document.querySelector('#quiz-form-1 input[name="sq1"]:checked');
+function checkAnswers1() {
+  const answer = document.querySelector('#quiz-form-s1 input[name="sq1"]:checked');
   const result = document.getElementById("results1");
 
   if (!answer) {
@@ -1079,14 +1079,14 @@ D. Eigenvalues and eigenvectors sort features in descending order of importance 
 
 </form>
 
-<div id="result3" style="margin-top: 1em; font-weight: bold;"></div>
+<div id="results3" style="margin-top: 1em; font-weight: bold;"></div>
 </div>
 
 ```{=html}
 <script>
 function checkAnswers3() {
   const answer = document.querySelector('#quiz-form-s3 input[name="sq3"]:checked');
-  const result = document.getElementById("result3");
+  const result = document.getElementById("results3");
 
   if (!answer) {
     result.textContent = "⚠️ Please select an answer.";
