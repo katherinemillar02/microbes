@@ -116,7 +116,7 @@
     "href": "qmds/dnaextraction.html",
     "title": "DNA Extraction and Lysis",
     "section": "",
-    "text": "Before we can analyse the data, before we can even sequence - we need to extract the DNA from our sample.\nAcross microbial science, we might sequence from a number of samples. Some people use soil, feaces of birds, whole insect tissue or the dissected guts of insects just to name a few.\nThe DNA extraction kit which one uses can make a considerable difference to your data.\nDNA yields are also of great importance to ensure yiu have sufficient DNA before it gets sent off for sequencing."
+    "text": "Before we can analyse the data, before we can even sequence - we need to extract the DNA from our sample.\nAcross microbial science, we might sequence from a number of samples. Some people use soil, feaces of birds, whole insect tissue or the dissected guts of insects just to name a few.\nThe DNA extraction kit which one uses can make a considerable difference to your data.\nDNA yields are also of great importance to ensure you have sufficient DNA before it gets sent off for sequencing. Amplicon sequnecing uses PCR, and this means you can get away with having lower yields. It selectively and exponentially amplifying marker genes."
   },
   {
     "objectID": "qmds/PCA.html",

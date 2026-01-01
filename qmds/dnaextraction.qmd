@@ -9,5 +9,5 @@ Across microbial science, we might sequence from a number of samples. Some peopl
 
 The DNA extraction kit which one uses can make a considerable difference to your data. 
 
-DNA yields are also of great importance to ensure yiu have sufficient DNA before it gets sent off for sequencing. 
+DNA yields are also of great importance to ensure you have sufficient DNA before it gets sent off for sequencing. Amplicon sequnecing uses PCR, and this means you can get away with having lower yields. It selectively and exponentially amplifying marker genes. 
 
