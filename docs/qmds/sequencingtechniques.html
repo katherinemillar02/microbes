@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Sequencing Techniques – Microbial Analysis</title>
+<title>Microbial Sequencing Techniques – Microbial Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -147,11 +147,11 @@ ul.task-list li input[type="checkbox"] {
     <ul class="dropdown-menu" aria-labelledby="nav-menu-profiling-the-microbiota">    
         <li>
     <a class="dropdown-item" href="../qmds/sequencingtechniques.html">
- <span class="dropdown-text">Sequencing Techniques</span></a>
+ <span class="dropdown-text">Microbial Sequencing Techniques</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../qmds/dnaextraction.html">
- <span class="dropdown-text">DNA Extraction</span></a>
+ <span class="dropdown-text">DNA Extraction and Lysis</span></a>
   </li>  
     </ul>
   </li>
@@ -172,9 +172,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#amplicon-sequencing" id="toc-amplicon-sequencing" class="nav-link active" data-scroll-target="#amplicon-sequencing">Amplicon Sequencing</a>
+  <li><a href="#an-introduction-to-amplicon-sequencing" id="toc-an-introduction-to-amplicon-sequencing" class="nav-link active" data-scroll-target="#an-introduction-to-amplicon-sequencing">An Introduction to Amplicon Sequencing</a></li>
+  <li><a href="#the-types-of-amplicon-sequencing" id="toc-the-types-of-amplicon-sequencing" class="nav-link" data-scroll-target="#the-types-of-amplicon-sequencing">The Types of Amplicon Sequencing</a>
   <ul class="collapse">
-  <li><a href="#the-types-of-amplicon-sequencing" id="toc-the-types-of-amplicon-sequencing" class="nav-link" data-scroll-target="#the-types-of-amplicon-sequencing">The types of amplicon sequencing:</a></li>
   <li><a href="#short-read-sequencing" id="toc-short-read-sequencing" class="nav-link" data-scroll-target="#short-read-sequencing">Short-read sequencing:</a></li>
   <li><a href="#long-read-sequencing" id="toc-long-read-sequencing" class="nav-link" data-scroll-target="#long-read-sequencing">Long-read sequencing:</a></li>
   <li><a href="#how-amplicon-sequencing-works" id="toc-how-amplicon-sequencing-works" class="nav-link" data-scroll-target="#how-amplicon-sequencing-works">How amplicon sequencing works:</a></li>
@@ -187,7 +187,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Sequencing Techniques</h1>
+<h1 class="title">Microbial Sequencing Techniques</h1>
 </div>
 
 
@@ -204,46 +204,98 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This section will take you through any sequencing techniques.</p>
-<section id="amplicon-sequencing" class="level2">
-<h2 class="anchored" data-anchor-id="amplicon-sequencing">Amplicon Sequencing</h2>
-<p>Amplicon sequencing is a targeted DNA sequencing approach used to identify and compare specific genetic regions across many samples. For bacteria and archaea, this typically focuses on the <strong>16S rRNA gene</strong></p>
-<p><strong>What is the 16S rRNA gene?</strong></p>
-<p>The 16S rRNA (ribosomal RNA) gene encodes the small subunit ribosomal RNA (SSU rRNA), which is a core structural and functional component of the 30S subunit of the prokaryotic ribosome. This RNA plays an essential role in protein synthesis.</p>
-<p><strong>What does ‘16S’ mean?</strong></p>
-<p>The term <em>16S</em> refers to the sedimentation coefficient of the RNA molecule, the sedimentation coefficient refers to the rate at which a particle sediments in a centrifugal field. It is measured in Svedberg units, rather than its physical size or molecular weight. This means there are 16 Svedberg units.</p>
-<p><strong>Why is the 16S rRNA gene used in microbiota studies?</strong></p>
-<p>The 16S rRNA gene is widely used in microbiota studies because it is highly conserved across bacterial and archaeal taxa, meaning its sequence has remained very similar across different species over evolutionary time. This conservation allows for broad amplification of the gene using universal primers, while the presence of variable regions enables taxonomic discrimination between microorganisms.</p>
-<p><strong>What primers are used to sequence the 16S rRNA gene?</strong></p>
-<p>The primer pair used which targets the full-length 16S rRNA gene is 27F and 1492R, sequencing approaches that capture this entire gene are typically referred to as <strong>long-read sequencing</strong>.</p>
-<p><strong>What are hypervariable regions, and conserved regions, and why are they important?</strong></p>
 <div class="cell" data-layout-align="left">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-left">
 <figure class="figure">
-<p><img src="images/regions.png" class="img-fluid figure-img" width="751"></p>
+<p><img src="images/sequencing.png" class="img-fluid figure-img" width="762"></p>
 <figcaption>This image was created on Canva.</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>The 16S rRNA gene contains nine hypervariable regions (V1–V9), which can provide species- or genus-specific signature sequences for bacterial identification. These hypervariable regions range from approximately 30 to 100 base pairs in length, and their degree of conservation varies widely. Sequencing the full-length 16S rRNA gene (approximately 1,500 bp) enables comparison across all hypervariable regions, improving taxonomic resolution.</p>
-<section id="the-types-of-amplicon-sequencing" class="level3">
-<h3 class="anchored" data-anchor-id="the-types-of-amplicon-sequencing">The types of amplicon sequencing:</h3>
-<p>Within amplicon sequencing, there are two main types:</p>
+<p>Before we actually have the data to analyse, we must analyse the DNA of our samlples through microbial sequencing technqiues. This section will take you through the sequencing techniques used to anlayse microbial data.</p>
+<section id="an-introduction-to-amplicon-sequencing" class="level2">
+<h2 class="anchored" data-anchor-id="an-introduction-to-amplicon-sequencing">An Introduction to Amplicon Sequencing</h2>
+<p>Amplicon sequencing is a targeted DNA sequencing approach used to identify and compare specific genetic regions across many samples. For bacteria and archaea, this typically focuses on the <strong>16S rRNA gene</strong>. &nbsp;<br>
+&nbsp;</p>
+<p><strong>What is the 16S rRNA gene?</strong></p>
+<div class="cell" data-layout-align="left">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="images/16SrRNA.png" class="img-fluid figure-img" width="154"></p>
+<figcaption>Molecular structure of the 30S Subunit, Schluenzen et al.&nbsp;2000.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The 16S rRNA (ribosomal RNA) gene encodes the small subunit ribosomal RNA (SSU rRNA), which is a core structural and functional component of the 30S subunit of the prokaryotic ribosome. This RNA plays an essential role in protein synthesis.<br>
+&nbsp;<br>
+&nbsp;</p>
+<p><strong>What does ‘16S’ mean?</strong></p>
+<p>The term <em>16S</em> refers to the sedimentation coefficient of the RNA molecule, the sedimentation coefficient refers to the rate at which a particle sediments in a centrifugal field. It is measured in Svedberg units, rather than its physical size or molecular weight. This means there are 16 Svedberg units. &nbsp;<br>
+&nbsp;</p>
+<p><strong>Why is the 16S rRNA gene used in microbiota studies?</strong></p>
+<p>The 16S rRNA gene is widely used in microbiota studies because it is highly conserved across bacterial and archaeal taxa, meaning its sequence has remained very similar across different species over evolutionary time. This conservation allows for broad amplification of the gene using universal primers, while the presence of variable regions enables taxonomic discrimination between microorganisms.</p>
+<p>&nbsp;<br>
+&nbsp;<br>
+<strong>What primers are used to sequence the 16S rRNA gene?</strong></p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/primers.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<figcaption>The forward and reverse primers of the 16S rRNA gene. THis image was generated on Canva.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The primer pair used which targets the full-length 16S rRNA gene is 27F and 1492R, sequencing approaches that capture this entire gene are typically referred to as <strong>long-read sequencing</strong>. &nbsp;<br>
+&nbsp;</p>
+<p><strong>What are hypervariable regions, and conserved regions, and why are they important?</strong></p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/regions.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>The hypervariable (V1-V9), and conserved regions of the 16SrRNA gene. This image was created on Canva.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The <strong>16S rRNA gene (~1,500 bp)</strong> is evolutionary constrained, but it is interspersed with regions that are able to tolerate more sequence variation.</p>
+<p>This creates a mosaic like stucture of:</p>
+<ul>
+<li><p><strong>9 hypervariable regions (V1-V9)</strong></p></li>
+<li><p><strong>Intervening conserved (constant) regions</strong></p></li>
+</ul>
+<p>The <strong>hypervariable regions</strong> can provide species- or genus-specific signature sequences for bacterial identification. These hypervariable regions range from approximately 30 to 100 base pairs in length, and their degree of conservation varies widely. Sequencing the full-length 16S rRNA gene (approximately 1,500 bp) enables comparison across all 9 hypervariable regions, improving taxonomic resolution.</p>
+<p><strong>Conserved regions</strong> on the other hand, are regions that have remained relatively unchanged across bacteria over long evolutionary periods due to strong selective pressure. As a result, these regions evolve slowly and retain high sequence similarity even among distantly related bacteria. They also have an important function of being criticial for ribosome structure and protein synthesis, which is essential for bacterial survival.<br>
+</p>
+<p>In short, <strong>conserved regions</strong> are the universal primers, <strong>hypervariable regions</strong> allow for taxonomic discrimination.<br>
+</p>
+<p>&nbsp;</p>
 </section>
+<section id="the-types-of-amplicon-sequencing" class="level2">
+<h2 class="anchored" data-anchor-id="the-types-of-amplicon-sequencing">The Types of Amplicon Sequencing</h2>
+<p>Within bacterial amplicon sequencing, there are two main types:</p>
 <section id="short-read-sequencing" class="level3">
 <h3 class="anchored" data-anchor-id="short-read-sequencing">Short-read sequencing:</h3>
 <p><br>
 Produces high-accuracy reads of relatively short DNA fragments, commonly used for microbial community profiling.</p>
-<p>It is called short-read sequencing because it only sequences a section of the 16S rRNA gene. In short read sequences only certain hypervariable regions will be selected. There are a range of hypervariable regions used:</p>
-<p><strong>V1 - V3</strong>: bp 27–534 of the 16S gene.<br>
-<strong>V3</strong> bp 341–534 of the 16S gene.<br>
-<strong>V3 - V4</strong> bp 341–806 of the 16S gene.<br>
-<strong>V4</strong> bp 515–806 of the 16S gene.</p>
-<p>There is only one main sequencing platform used for high-through put sequencing, and this is <strong>Illumina.</strong></p>
-<p><br>
-<strong>Illumina:</strong></p>
+<p>It is referred to as <strong>short-read sequencing</strong> because it only sequences a section of the <strong>16S rRNA gene</strong>. In short read sequences only 1-2 specific hypervariable regions will be selected. There are a range of hypervariable regions commonly used:</p>
+<ul>
+<li><u><strong>V1 - V3</strong>:</u> <em>27-534 bp</em> of the 16S gene.<br>
+</li>
+<li><u><strong>V3</strong>:</u> <em>341-534 bp</em> of the 16S gene.<br>
+</li>
+<li><u><strong>V3 - V4</strong>:</u> <em>341-806 bp</em> of the 16S gene.<br>
+</li>
+<li><u><strong>V4</strong>:</u> <em>515-806 bp</em> of the 16S gene.</li>
+</ul>
+<p><strong>Short-read sequencing</strong> is typically performed using high-throughput sequencing platforms, these are designed to generate millions of reads in parallel. The <strong>Illumina</strong> sequencing platform has become the dominant technology for <strong>short read 16S rRNA gene amplicon sequencing</strong>.</p>
+<p><strong>Illumina Technology</strong></p>
 <ul>
 <li><p>Illumina uses sequencing-by-synthesis (SBS) chemistry. This includes fluorescently labelled, reversible terminator nucleotides being incorporated one base at a time and imaged after each cycle.</p></li>
 <li><p>Illuimina is known for havig high accuracy: Illumina platforms typically achieve ≥99.9% per-base accuracy, making them a gold standard for applications where low error rates are critical (e.g.&nbsp;variant calling, microbial community profiling).</p></li>
@@ -299,24 +351,52 @@ Produces longer DNA reads, allowing better resolution of complex genomic regions
 </ol>
 <p>A pipeline is used to analyse the data.</p>
 <hr>
-<p><strong>What does 16S actually mean in the 16S rRNA gene?</strong></p>
-<div>
+<!-- Question 1 -->
+<p>
+<strong>Which of these is the most common region/s to be used in 16S?</strong>
+</p>
+<form id="quiz-form-1">
+<p><input type="radio" name="q1" value="a"> A. V1<br> <input type="radio" name="q1" value="b"> B. V7–8<br> <input type="radio" name="q1" value="c"> C. V3–4<br> <input type="radio" name="q1" value="d"> D. V7<br><br></p>
+<button type="button" onclick="checkAnswer1()">
+Submit
+</button>
+</form>
+<div id="result1" style="margin-top: 1em; font-weight: bold;">
+
+</div>
+<script>
+function checkAnswer1() {
+  const answer = document.querySelector('#quiz-form-1 input[name="q1"]:checked');
+  const result = document.getElementById("result1");
+
+  if (!answer) {
+    result.textContent = "⚠️ Please select an answer.";
+    result.style.color = "orange";
+    return;
+  }
+
+  if (answer.value === "c") {
+    result.textContent = "✅ Correct! The V3–V4 region is the most commonly sequenced region in 16S studies.";
+    result.style.color = "green";
+  } else {
+    result.textContent = "❌ Not quite. V3–V4 is the most widely used region due to its taxonomic resolution and compatibility with Illumina platforms.";
+    result.style.color = "red";
+  }
+}
+</script>
+<hr>
+<!-- Question 2 -->
+<p>
+<strong>What does 16S actually mean in the 16S rRNA gene?</strong>
+</p>
 <form id="quiz-form-2">
-<p><input type="radio" name="q2" value="a"> A. The gene is exactly 16,000 base pairs long<br>
-<br></p>
-<p><input type="radio" name="q2" value="b"> B. 16S refers to the sedimentation coefficient, meaning the rate at which the particle sediments in a centrifugal field<br>
-<br></p>
-<p><input type="radio" name="q2" value="c"> C. It indicates the gene is found in 16 different bacterial species<br>
-<br></p>
-<p><input type="radio" name="q2" value="d"> D. It estimates species turnover between microbial communities<br>
-<br><br></p>
+<p><input type="radio" name="q2" value="a"> A. The gene is exactly 16,000 base pairs long<br> <input type="radio" name="q2" value="b"> B. 16S refers to the sedimentation coefficient, meaning the rate at which the particle sediments in a centrifugal field<br> <input type="radio" name="q2" value="c"> C. It indicates the gene is found in 16 different bacterial species<br> <input type="radio" name="q2" value="d"> D. It estimates species turnover between microbial communities<br><br></p>
 <button type="button" onclick="checkAnswer2()">
 Submit
 </button>
 </form>
 <div id="result2" style="margin-top: 1em; font-weight: bold;">
 
-</div>
 </div>
 <script>
 function checkAnswer2() {
@@ -330,7 +410,7 @@ function checkAnswer2() {
   }
 
   if (answer.value === "b") {
-    result.textContent = "✅ Correct! The 'S' in 16S refers to Svedberg units, which describe sedimentation rate during centrifugation.";
+    result.textContent = "✅ Correct! The 'S' in 16S refers to Svedberg units, describing sedimentation rate during centrifugation.";
     result.style.color = "green";
   } else {
     result.textContent = "❌ Not quite. 16S refers to a sedimentation coefficient, not gene length or diversity metrics.";
