@@ -281,14 +281,14 @@ window.Quarto = {
 <p><strong>Why do we need to use PCA with huge microbial datasets?</strong></p>
 <form>
 <p><select id="q1"> <option value="">– Select an answer –</option> <option value="a">A. To increase the number of variables in a dataset</option> <option value="b">B. To reduce dimensionality by summarizing correlated variables while retaining most of the variance</option> <option value="c">C. To normalize data by rescaling variables to the same units</option> <option value="d">D. To rank variables according to their original measurement units</option> </select> <br><br></p>
-<button type="button" onclick="checkPCA1()">
+<button type="button" onclick="checkq1()">
 Submit
 </button>
 </form>
 <div id="result1" style="margin-top: 1em; font-weight: bold;">
 </div>
 <script>
-function checkPCA1() {
+function checkq1() {
   const answer = document.getElementById("q1").value;
   const result = document.getElementById("result1");
   if (!answer) {
@@ -1459,9 +1459,9 @@ function toggleVisibility(id) {
 <hr>
 <p><strong>What are the six key steps of PCA you were introduced to?</strong></p>
 <div id="quizs1">
-<form id="quiz-form-1">
+<form id="quiz-form-s1">
 <p><input type="radio" name="sq1" value="a"> A. 1. Center the data, 2. Scale the data, 3. Calculate the covariance matrix values, 4. Calculate the eigenvalues and eigenvectors, 5. Calculate the principal component spaces, 6. Generate the PCA plot with these <br> <input type="radio" name="q1" value="b"> B. 1. Normalize the data, 2. Perform clustering, 3. Compute distances, 4. Generate a heatmap, 5. Sort by similarity, 6. Interpret clusters visually<br> <input type="radio" name="q1" value="c"> C. 1. One-hot encode variables, 2. Apply k-means clustering, 3. Compute centroids, 4. Evaluate silhouette scores, 5. Merge similar groups, 6. Visualize group centroids<br> <input type="radio" name="q1" value="d"> D. 1. Calculate correlation matrix, 2. Remove outliers, 3. Build decision trees, 4. Rank variable importance, 5. Apply bootstrapping, 6. Use top features in model<br><br></p>
-<button type="button" onclick="checkAnswer1()">
+<button type="button" onclick="checkAnswers1()">
 Submit
 </button>
 </form>
@@ -1469,8 +1469,8 @@ Submit
 </div>
 </div>
 <script>
-function checkAnswer1() {
-  const answer = document.querySelector('#quiz-form-1 input[name="sq1"]:checked');
+function checkAnswers1() {
+  const answer = document.querySelector('#quiz-form-s1 input[name="sq1"]:checked');
   const result = document.getElementById("results1");
   if (!answer) {
     result.textContent = "⚠️ Please select an answer.";
@@ -1528,13 +1528,13 @@ function checkAnswer2() {
 Submit
 </button>
 </form>
-<div id="result3" style="margin-top: 1em; font-weight: bold;">
+<div id="results3" style="margin-top: 1em; font-weight: bold;">
 </div>
 </div>
 <script>
 function checkAnswers3() {
   const answer = document.querySelector('#quiz-form-s3 input[name="sq3"]:checked');
-  const result = document.getElementById("result3");
+  const result = document.getElementById("results3");
   if (!answer) {
     result.textContent = "⚠️ Please select an answer.";
     result.style.color = "orange";
