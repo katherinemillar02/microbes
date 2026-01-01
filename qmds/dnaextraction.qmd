@@ -1,9 +1,26 @@
 ---
-title: "DNA Extraction"
+title: "DNA Extraction and Lysis"
 editor: visual
 ---
 
+Before we can analyse the data, before we can even sequence - we need to extract the DNA from our sample. 
 
-Kits 
+Across microbial science, we might sequence from a number of samples. Some people use soil, feaces of birds, whole insect tissue or the dissected guts of insects just to name a few. 
 
-DNA Yields
+The DNA extraction kit which one uses can make a considerable difference to your data. 
+
+
+```{r, message=FALSE, echo=FALSE}
+library(readxl)
+library(DT)
+
+df <- read_excel("dnasequencing.xlsx")
+
+datatable(
+  df,
+  options = list(pageLength = 100, scrollX = TRUE),
+  caption = "My Excel Table"
+)
+
+```
+

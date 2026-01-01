@@ -349,6 +349,46 @@ together.
 
 -   A covariance close to zero suggests little or no linear
     relationship.
+    
+    <strong>Why do we need the covariance matrix?</strong>
+
+<form>
+  <select id="q3">
+    <option value="">-- Select an answer --</option>
+    <option value="a">A. To see how our values vary and go in directions together. </option>
+    <option value="b">B. To ensure our values are integers. </option>
+    <option value="c">C. To make the average across samples 0. </option>
+    <option value="d">D. Because there needs to centered data. </option>
+  </select>
+
+  <button type="button" onclick="checkPCA1()">Submit</button>
+</form>
+
+<div id="result3" style="margin-top: 1em; font-weight: bold;"></div>
+
+<script>
+function checkPCA1() {
+  const answer = document.getElementById("q3").value;
+  const result = document.getElementById("result3");
+
+  if (!answer) {
+    result.textContent = "⚠️ Please select an answer.";
+    result.style.color = "orange";
+    return;
+  }
+
+  if (answer === "a") {
+    result.textContent =
+      "✅ Correct!.";
+    result.style.color = "green";
+  } else {
+    result.textContent =
+      "❌ Not quite. ";
+    result.style.color = "red";
+  }
+}
+</script>
+
 
 #### **Covariance formulas:**
 
@@ -924,10 +964,10 @@ That probably felt like a lot, and well done for getting through!
 
 **What are the six key steps of PCA you were introduced to?**
 
-::: {#quiz1}
+::: {#quizs1}
 <form id="quiz-form-1">
 
-<input type="radio" name="q1" value="a"> A. 1. Center the data, 2. Scale
+<input type="radio" name="sq1" value="a"> A. 1. Center the data, 2. Scale
 the data, 3. Calculate the covariance matrix values, 4. Calculate the
 eigenvalues and eigenvectors, 5. Calculate the principal component
 spaces, 6. Generate the PCA plot with these <br>
@@ -945,15 +985,15 @@ model<br><br>
 <button type="button" onclick="checkAnswer1()">Submit
 </button></form>
 
-::: {#result1 style="margin-top: 1em; font-weight: bold;"}
+::: {#results1 style="margin-top: 1em; font-weight: bold;"}
 :::
 :::
 
 ```{=html}
 <script>
 function checkAnswer1() {
-  const answer = document.querySelector('#quiz-form-1 input[name="q1"]:checked');
-  const result = document.getElementById("result1");
+  const answer = document.querySelector('#quiz-form-1 input[name="sq1"]:checked');
+  const result = document.getElementById("results1");
 
   if (!answer) {
     result.textContent = "⚠️ Please select an answer.";
@@ -1018,33 +1058,34 @@ function checkAnswer2() {
 
 ------------------------------------------------------------------------
 
-**In PCA, what do the eigenvalues and eigenvectors of the covariance
-matrix represent?**
+**In PCA, what do the eigenvalues and eigenvectors of the covariance matrix represent?**
 
-::: {#quiz3}
-<form id="quiz-form-3">
+<div id="quizs3">
+<form id="quiz-form-s3">
 
-<input type="radio" name="q3" value="a"> A. Eigenvalues determine the
-correlation between original variables; eigenvectors show how to cluster
-them<br> <input type="radio" name="q3" value="b"> B. Eigenvalues
-represent the amount of variance captured by each principal component;
-eigenvectors define the direction of these components<br>
-<input type="radio" name="q3" value="c"> C. Eigenvalues are used to
-normalize the data; eigenvectors eliminate redundancy<br>
-<input type="radio" name="q3" value="d"> D. Eigenvalues and eigenvectors
-sort features in descending order of importance based on their original
-units<br><br>
+<input type="radio" name="sq3" value="a">
+A. Eigenvalues determine the correlation between original variables; eigenvectors show how to cluster them<br>
 
-<button type="button" onclick="checkAnswer3()">Submit</button></form>
+<input type="radio" name="sq3" value="b">
+B. Eigenvalues represent the amount of variance captured by each principal component; eigenvectors define the direction of these components<br>
 
-::: {#result3 style="margin-top: 1em; font-weight: bold;"}
-:::
-:::
+<input type="radio" name="sq3" value="c">
+C. Eigenvalues are used to normalize the data; eigenvectors eliminate redundancy<br>
+
+<input type="radio" name="sq3" value="d">
+D. Eigenvalues and eigenvectors sort features in descending order of importance based on their original units<br><br>
+
+<button type="button" onclick="checkAnswers3()">Submit</button>
+
+</form>
+
+<div id="result3" style="margin-top: 1em; font-weight: bold;"></div>
+</div>
 
 ```{=html}
 <script>
-function checkAnswer3() {
-  const answer = document.querySelector('#quiz-form-3 input[name="q3"]:checked');
+function checkAnswers3() {
+  const answer = document.querySelector('#quiz-form-s3 input[name="sq3"]:checked');
   const result = document.getElementById("result3");
 
   if (!answer) {
@@ -1063,7 +1104,6 @@ function checkAnswer3() {
 }
 </script>
 ```
-
 ------------------------------------------------------------------------
 
 # References:

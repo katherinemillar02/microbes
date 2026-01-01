@@ -808,8 +808,37 @@ Why do we want the average across the samples to be zero?
 <ul>
 <li><p>A positive covariance indicates that both variables increase or decrease together.</p></li>
 <li><p>A negative covariance indicates that as one variable increases, the other decreases.</p></li>
-<li><p>A covariance close to zero suggests little or no linear relationship.</p></li>
+<li><p>A covariance close to zero suggests little or no linear relationship.</p>
+<p><strong>Why do we need the covariance matrix?</strong></p></li>
 </ul>
+<form>
+<p><select id="q3"> <option value="">– Select an answer –</option> <option value="a">A. To see how our values vary and go in directions together. </option> <option value="b">B. To ensure our values are integers. </option> <option value="c">C. To make the average across samples 0. </option> <option value="d">D. Because there needs to centered data. </option> </select></p>
+<button type="button" onclick="checkPCA1()">
+Submit
+</button>
+</form>
+<div id="result3" style="margin-top: 1em; font-weight: bold;">
+</div>
+<script>
+function checkPCA1() {
+  const answer = document.getElementById("q3").value;
+  const result = document.getElementById("result3");
+  if (!answer) {
+    result.textContent = "⚠️ Please select an answer.";
+    result.style.color = "orange";
+    return;
+  }
+  if (answer === "a") {
+    result.textContent =
+      "✅ Correct!.";
+    result.style.color = "green";
+  } else {
+    result.textContent =
+      "❌ Not quite. ";
+    result.style.color = "red";
+  }
+}
+</script>
 <section id="covariance-formulas" class="level4">
 <h4 data-anchor-id="covariance-formulas"><strong>Covariance formulas:</strong></h4>
 <p>The population covariance is defined as:</p>
@@ -1390,20 +1419,20 @@ function toggleVisibility(id) {
 <p>That probably felt like a lot, and well done for getting through!</p>
 <hr>
 <p><strong>What are the six key steps of PCA you were introduced to?</strong></p>
-<div id="quiz1">
+<div id="quizs1">
 <form id="quiz-form-1">
-<p><input type="radio" name="q1" value="a"> A. 1. Center the data, 2. Scale the data, 3. Calculate the covariance matrix values, 4. Calculate the eigenvalues and eigenvectors, 5. Calculate the principal component spaces, 6. Generate the PCA plot with these <br> <input type="radio" name="q1" value="b"> B. 1. Normalize the data, 2. Perform clustering, 3. Compute distances, 4. Generate a heatmap, 5. Sort by similarity, 6. Interpret clusters visually<br> <input type="radio" name="q1" value="c"> C. 1. One-hot encode variables, 2. Apply k-means clustering, 3. Compute centroids, 4. Evaluate silhouette scores, 5. Merge similar groups, 6. Visualize group centroids<br> <input type="radio" name="q1" value="d"> D. 1. Calculate correlation matrix, 2. Remove outliers, 3. Build decision trees, 4. Rank variable importance, 5. Apply bootstrapping, 6. Use top features in model<br><br></p>
+<p><input type="radio" name="sq1" value="a"> A. 1. Center the data, 2. Scale the data, 3. Calculate the covariance matrix values, 4. Calculate the eigenvalues and eigenvectors, 5. Calculate the principal component spaces, 6. Generate the PCA plot with these <br> <input type="radio" name="q1" value="b"> B. 1. Normalize the data, 2. Perform clustering, 3. Compute distances, 4. Generate a heatmap, 5. Sort by similarity, 6. Interpret clusters visually<br> <input type="radio" name="q1" value="c"> C. 1. One-hot encode variables, 2. Apply k-means clustering, 3. Compute centroids, 4. Evaluate silhouette scores, 5. Merge similar groups, 6. Visualize group centroids<br> <input type="radio" name="q1" value="d"> D. 1. Calculate correlation matrix, 2. Remove outliers, 3. Build decision trees, 4. Rank variable importance, 5. Apply bootstrapping, 6. Use top features in model<br><br></p>
 <button type="button" onclick="checkAnswer1()">
 Submit
 </button>
 </form>
-<div id="result1" style="margin-top: 1em; font-weight: bold;">
+<div id="results1" style="margin-top: 1em; font-weight: bold;">
 </div>
 </div>
 <script>
 function checkAnswer1() {
-  const answer = document.querySelector('#quiz-form-1 input[name="q1"]:checked');
-  const result = document.getElementById("result1");
+  const answer = document.querySelector('#quiz-form-1 input[name="sq1"]:checked');
+  const result = document.getElementById("results1");
   if (!answer) {
     result.textContent = "⚠️ Please select an answer.";
     result.style.color = "orange";
@@ -1450,10 +1479,13 @@ function checkAnswer2() {
 </script>
 <hr>
 <p><strong>In PCA, what do the eigenvalues and eigenvectors of the covariance matrix represent?</strong></p>
-<div id="quiz3">
-<form id="quiz-form-3">
-<p><input type="radio" name="q3" value="a"> A. Eigenvalues determine the correlation between original variables; eigenvectors show how to cluster them<br> <input type="radio" name="q3" value="b"> B. Eigenvalues represent the amount of variance captured by each principal component; eigenvectors define the direction of these components<br> <input type="radio" name="q3" value="c"> C. Eigenvalues are used to normalize the data; eigenvectors eliminate redundancy<br> <input type="radio" name="q3" value="d"> D. Eigenvalues and eigenvectors sort features in descending order of importance based on their original units<br><br></p>
-<button type="button" onclick="checkAnswer3()">
+<div id="quizs3">
+<form id="quiz-form-s3">
+<p><input type="radio" name="sq3" value="a"> A. Eigenvalues determine the correlation between original variables; eigenvectors show how to cluster them<br></p>
+<p><input type="radio" name="sq3" value="b"> B. Eigenvalues represent the amount of variance captured by each principal component; eigenvectors define the direction of these components<br></p>
+<p><input type="radio" name="sq3" value="c"> C. Eigenvalues are used to normalize the data; eigenvectors eliminate redundancy<br></p>
+<p><input type="radio" name="sq3" value="d"> D. Eigenvalues and eigenvectors sort features in descending order of importance based on their original units<br><br></p>
+<button type="button" onclick="checkAnswers3()">
 Submit
 </button>
 </form>
@@ -1461,8 +1493,8 @@ Submit
 </div>
 </div>
 <script>
-function checkAnswer3() {
-  const answer = document.querySelector('#quiz-form-3 input[name="q3"]:checked');
+function checkAnswers3() {
+  const answer = document.querySelector('#quiz-form-s3 input[name="sq3"]:checked');
   const result = document.getElementById("result3");
   if (!answer) {
     result.textContent = "⚠️ Please select an answer.";
