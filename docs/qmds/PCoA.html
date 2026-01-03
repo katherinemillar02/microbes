@@ -436,7 +436,7 @@ Show/Hide <code>bray_curtis &lt;- vegdist(df_2, method = "bray"</code>) output
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>bray_curtis_matrix <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(bray_curtis) <span class="co"># First covert the values to a matrix</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>fruit_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Apricot"</span>, <span class="st">"Argan"</span>, <span class="st">"GF"</span>, <span class="st">"Orange"</span>, <span class="st">"Peach"</span>, <span class="st">"Tang"</span>) <span class="co"># Label what the fruits are </span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>fruit_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Apricot"</span>, <span class="st">"Argan"</span>, <span class="st">"GF"</span>, <span class="st">"Orange"</span>, <span class="st">"Peach"</span>, <span class="st">"Tangerine"</span>) <span class="co"># Label what the fruits are </span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(bray_curtis_matrix) <span class="ot">&lt;-</span> fruit_names <span class="co"># Add the fruit names to row names</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
@@ -448,13 +448,13 @@ Show/Hide <code>bray_curtis_matrix</code> output
 <div id="bray_curtis_matrix-container" style="display:none;">
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>          Apricot     Argan        GF    Orange     Peach      Tang
-Apricot 0.0000000 0.1000000 0.1000000 0.1500000 0.3170732 0.5348837
-Argan   0.1000000 0.0000000 0.0000000 0.0952381 0.2558140 0.4666667
-GF      0.1000000 0.0000000 0.0000000 0.0952381 0.2558140 0.4666667
-Orange  0.1500000 0.0952381 0.0952381 0.0000000 0.2093023 0.4222222
-Peach   0.3170732 0.2558140 0.2558140 0.2093023 0.0000000 0.2608696
-Tang    0.5348837 0.4666667 0.4666667 0.4222222 0.2608696 0.0000000</code></pre>
+<pre><code>            Apricot     Argan        GF    Orange     Peach Tangerine
+Apricot   0.0000000 0.1000000 0.1000000 0.1500000 0.3170732 0.5348837
+Argan     0.1000000 0.0000000 0.0000000 0.0952381 0.2558140 0.4666667
+GF        0.1000000 0.0000000 0.0000000 0.0952381 0.2558140 0.4666667
+Orange    0.1500000 0.0952381 0.0952381 0.0000000 0.2093023 0.4222222
+Peach     0.3170732 0.2558140 0.2558140 0.2093023 0.0000000 0.2608696
+Tangerine 0.5348837 0.4666667 0.4666667 0.4222222 0.2608696 0.0000000</code></pre>
 </div>
 </div>
 </div>
@@ -476,13 +476,13 @@ Show/Hide <code>pcoa_values</code> output
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>$points
-               [,1]         [,2]
-Apricot  0.18087554  0.004725498
-Argan    0.11375747  0.022353574
-GF       0.11375747  0.022353574
-Orange   0.06328949 -0.012621679
-Peach   -0.12055480 -0.078357582
-Tang    -0.35112516  0.041546616
+                 [,1]         [,2]
+Apricot    0.18087554  0.004725498
+Argan      0.11375747  0.022353574
+GF         0.11375747  0.022353574
+Orange     0.06328949 -0.012621679
+Peach     -0.12055480 -0.078357582
+Tangerine -0.35112516  0.041546616
 
 $eig
 [1]  2.004254e-01  9.047034e-03  4.449146e-03  3.386055e-03  8.527298e-18
@@ -526,13 +526,13 @@ Show/Hide <code>points</code> output
 <div id="points-container" style="display:none;">
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>              PCoA1        PCoA2   Fruit
-Apricot  0.18087554  0.004725498 Apricot
-Argan    0.11375747  0.022353574   Argan
-GF       0.11375747  0.022353574      GF
-Orange   0.06328949 -0.012621679  Orange
-Peach   -0.12055480 -0.078357582   Peach
-Tang    -0.35112516  0.041546616    Tang</code></pre>
+<pre><code>                PCoA1        PCoA2     Fruit
+Apricot    0.18087554  0.004725498   Apricot
+Argan      0.11375747  0.022353574     Argan
+GF         0.11375747  0.022353574        GF
+Orange     0.06328949 -0.012621679    Orange
+Peach     -0.12055480 -0.078357582     Peach
+Tangerine -0.35112516  0.041546616 Tangerine</code></pre>
 </div>
 </div>
 </div>
@@ -576,6 +576,7 @@ Show/Hide <code>var_explained</code> output
 </div>
 </div>
 </div>
+<p><strong>What do we see?</strong> From this we can see that the microbial composition from Argan and Grapefruit are the same.</p>
 
 
 </section>

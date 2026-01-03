@@ -104,7 +104,7 @@ Once the values have been calculated, we want the output to be easier to interpr
 
 bray_curtis_matrix <- as.matrix(bray_curtis) # First covert the values to a matrix
 
-fruit_names <- c("Apricot", "Argan", "GF", "Orange", "Peach", "Tang") # Label what the fruits are 
+fruit_names <- c("Apricot", "Argan", "GF", "Orange", "Peach", "Tangerine") # Label what the fruits are 
 
 rownames(bray_curtis_matrix) <- fruit_names # Add the fruit names to row names
 
@@ -230,4 +230,5 @@ ggplot(points, aes(x = PCoA1, y = PCoA2, label = Fruit, colour = Fruit)) +
 
 ```
 
-
+**What do we see?**
+From this we can see that the microbial composition from Argan and Grapefruit are the same. 
