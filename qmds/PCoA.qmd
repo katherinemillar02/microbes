@@ -3,55 +3,56 @@ title: "Principal Co-ordinate Analysis (PCoA)"
 editor: visual
 ---
 
-**Principal Coordinates Analysis (PCoA)**, also known as classical multidimensional scaling (MDS), although this is sometimes challenged - is another common ordination technique. 
-
-
-```{r echo=FALSE, out.width="60%", fig.align="center", fig.cap= "Credit: This image was created on Canva."}
+```{r echo=FALSE, out.width="60%", fig.align="center", fig.cap= "An image of a PCoA. Credit: This image was created on Canva."}
 knitr::include_graphics("images/PCoA.png")
 ```
 
+**Principal Coordinates Analysis (PCoA or PCO)**, has also been described as classical **multidimensional scaling (MDS)**.
 
+**PcoA** is an ordination method, similar to **Principal Co-ordinate Analysis (PCA)**, but it is more flexible in the type of data it can handle. While PCA requires *linear relationships* and *metric (Euclidean)* data, **PCoA** can be applied to *distance* or *dissimilarity matrices*, including those from *non-linear* and *non-Eucledian* measures. This makes **PCoA** especially useful for microbial like data, ecological data and other complex datasets where relationships are not strictly linear.
 
-### What is PCoA? 
+### A Background to PCoA:
 
-  - PCoA is used to analyse or visualise relationships between samples, based on their **pairwise distances** or **dissimilarities**. 
-  - It reduces dimensionality, while preserving as much of the original structure as possible. 
-  - Unlike [**PCA**](PCA.qmd), **PCoA** can be applied to **non-Euclidean distances**, such as [**Bray–Curtis**](beta.qmd#bray-curtis-dissimilarity) or [**Jaccard**](beta.qmd#jaccard-dissimilarity). This means it is more flexible, and it does not have to satisfy any rules. 
-  - The general goal of PCoA is to represent possible non-Eucledian distances with a set of Eucledian co-ordinates. 
-  - Like most ordination methods, PCoA will project the pairwise distance samples into a co-ordinate system, where axes that best preserve the original distances are selected. Closely related samples cluster together, and dissimilar samples will spread further apart. 
-  - The general principle is that this reflects is that *n* sample units can be illustrated in only one dimension! 
-  - This is different to NMDS because, NMDs uses rank order distance. 
+**What is PCoA used for, what's a benefit??**\
+**PCoA** is used to analyse or visualise relationships between samples, based on their **pairwise distances** or **dissimilarities**. It reduces dimensionality, while preserving as much of the original structure as possible. The general goal of PCoA is to represent possible non-Eucledian distances with a set of Eucledian co-ordinates.
 
+**What makes PCoA different to PCA?**\
+Unlike [**PCA**](PCA.qmd), **PCoA** can be applied to **non-Euclidean distances**, such as [**Bray--Curtis**](beta.qmd#bray-curtis-dissimilarity) or [**Jaccard**](beta.qmd#jaccard-dissimilarity). This means it is more flexible, and it does not have to satisfy any rules. The data used in **PCA** has to satisfy rules of linearity.
 
+**What's the goal of PCoA?**\
+Like most ordination methods, PCoA will project the pairwise distance samples into a co-ordinate system, where axes that best preserve the original distances are selected. Closely related samples cluster together, and dissimilar samples will spread further apart.
 
+**How is PCoA different to NMDS?**\
+We will properly go into this in the next chapter, but there is another ordination method; NMDS. PCoA is different to NMDS because, PCoA works on the actual pairwise differences in a dissimilarity matrix. NMDS uses only the rank order of distances, which pairs are more similar to dissimilar.
 
- 
- 
- 
-### How do we PCoA?
+### Principal Co-ordinate Analysis in Action
 
-Let's be a bit simple and go through R. 
+As said above, you are able to use dissimilarity values for PCoA. In previous chapters, we were able to run Bray Curtis in R.\
+As a reminder, if we are using R to calculate the Bray-Curtis dissimilarity values, we first want to put our data into a dataframe containing the relative abundance of our bacteria for each of the six fruit samples. As we did in the [**PCA**](PCA.qmd) chapter, we will use `"bray"` in the `vegdist()` function in R to calculate the Bray-Curtis dissimilarity values. Ensuring we are making a dataframe where row names have been ommited, as this is the only way a dataframe will run. 
 
-
-
+We will be using relative bacterial percentages of the microbiota in the [Darrington et al.
+(2022)](https://www.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000801#tab2) paper, like we have been using throughout this website.            
+      
+Here is the dataset in it's original form:    
 
 ::: {style="overflow-x: auto;"}
+
 | Fruit   | *Klebsiella* | *Acinetobacter* | *Pantoea* | *Pseudoxanthomonas* | *Serratia* | *Stenotrophomonas* | *Delftia* | *Burkholderia* | *Sphingomonas* | *Bacillus* | *Sphingobacterium* | *Mycoplasma* |
-|------|------|------|------|------|------|------|------|------|------|------|------|------|
-| Apricot | 80%          | 10%             | 0%        | 0%                  | 0%         | 0%                 | 0%        | 0%             | 0%             | 0%         | 0%                 | 5%           |
-| Argan   | 75%          | 10%             | 5%        | 5%                  | 0%         | 0%                 | 0%        | 0%             | 0%             | 0%         | 5%                 | 5%           |
-| GF      | 75%          | 10%             | 5%        | 5%                  | 0%         | 0%                 | 0%        | 0%             | 0%             | 0%         | 5%                 | 5%           |
-| Orange  | 70%          | 15%             | 5%        | 5%                  | 5%         | 0%                 | 0%        | 0%             | 0%             | 0%         | 0%                 | 5%           |
-| Peach   | 60%          | 10%             | 10%       | 10%                 | 5%         | 5%                 | 0%        | 0%             | 5%             | 5%         | 0%                 | 0%           |
-| Tang    | 40%          | 10%             | 20%       | 20%                 | 10%        | 5%                 | 0%        | 5%             | 10%            | 0%         | 0%                 | 0%           |
+|--------|--------------|-----------------|-----------|---------------------|------------|--------------------|-----------|----------------|----------------|------------|---------------------|--------------|
+| Apricot | 80% | 10% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 5% |
+| Argan   | 75% | 10% | 5% | 5% | 0% | 0% | 0% | 0% | 0% | 0% | 5% | 5% |
+| GF      | 75% | 10% | 5% | 5% | 0% | 0% | 0% | 0% | 0% | 0% | 5% | 5% |
+| Orange  | 70% | 15% | 5% | 5% | 5% | 0% | 0% | 0% | 0% | 0% | 0% | 5% |
+| Peach   | 60% | 10% | 10% | 10% | 5% | 5% | 0% | 0% | 5% | 5% | 0% | 0% |
+| Tang    | 40% | 10% | 20% | 20% | 10% | 5% | 0% | 5% | 10% | 0% | 0% | 0% |
+
 :::
+       
+       
+          
+**Step 1:** For R to run everything properly, you first need to put your bacteria relative percentage into a data-frame. Don't forget R wants you to **omit the row names**, otherwise it won't properly work.
 
- 
-
-As demonstrated briefly above, if we are using R to calculate the Bray-Curtis dissimilarity values, we first want to put our data into a dataframe containing the relative abundance of our bacteria for each of the six fruit samples. As we did earlier we will use `"bray"` in the `vegdist()` function in R to calculate the Bray-Curtis dissimilarity values. Ensuring we are making a dataframe where row names have been ommited.
-
-```{r, echo=FALSE, message=FALSE}
-library(vegan)
+```{r, message=FALSE}
 
 df_2 <- data.frame(
   Klebsiella = c(80, 75, 75, 70, 60, 40),
@@ -65,79 +66,168 @@ df_2 <- data.frame(
   Sphingomonas = c(0, 0, 0, 0, 5, 10),
   Bacillus = c(0, 0, 0, 0, 5, 0),
   Sphingobacterium = c(0, 5, 5, 0, 0, 0),
-  Mycoplasma = c(5, 5, 5, 5, 0, 0)
-)
+  Mycoplasma = c(5, 5, 5, 5, 0, 0))
+```
 
-bray_curtis <- vegdist(df_2, method = "bray")
-bray_curtis_matrix <- as.matrix(bray_curtis)
-fruit_names <- c("Apricot", "Argan", "GF", "Orange", "Peach", "Tang")
-rownames(bray_curtis_matrix) <- fruit_names
-colnames(bray_curtis_matrix) <- fruit_names
+   
 
+
+**Step 2**: Once this data-frame has been made as an object, we can use `veg_dist()` and `bray` to find the dissimilarity values. If you wanted to test out what you learnt in the [**Bray--Curtis**](beta.qmd#bray-curtis-dissimilarity) section of this website, you could also do the maths manually, comparing each set of two fruits together, but for ease, we will use the R function here.
+
+```{r,message=FALSE}
+library(vegan) # input the vegan package, we wil also need this for the next couple of steps.
+
+bray_curtis <- vegdist(df_2, method = "bray") # use vegdist(), and the "bray" distances. 
+```
+
+
+
+<button onclick="toggleVisibility(&#39;bray-curtiscontainer&#39;)">Show/Hide `bray_curtis <- vegdist(df_2, method = "bray"`) output</button>
+
+::: {#bray-curtiscontainer style="display:none;"}
+```{r, echo=FALSE}
+bray_curtis <- vegdist(df_2, method = "bray") # use vegdist(), and the "bray" distances. 
+bray_curtis
+```
+:::
+
+```{=html}
+<script> function toggleVisibility(id) { var el = document.getElementById(id); el.style.display = (el.style.display === 'none') ? 'block' : 'none'; } </script>
+```
+         
+       
+
+Once the values have been calculated, we want the output to be easier to interpret. The `vegdist()` function does not retain the sample names (in this case, the fruits), so we manually add them back in. By assigning fruit names to both the rows and columns, the table will include repeated fruit pairings; however, this format makes it much clearer to identify the Bray–Curtis dissimilarity values for each specific fruit comparison.   
+
+```{r, message=FALSE}
+
+
+bray_curtis_matrix <- as.matrix(bray_curtis) # First covert the values to a matrix
+
+fruit_names <- c("Apricot", "Argan", "GF", "Orange", "Peach", "Tang") # Label what the fruits are 
+
+rownames(bray_curtis_matrix) <- fruit_names # Add the fruit names to row names
+
+colnames(bray_curtis_matrix) <- fruit_names # Add the fruit names to column names
+
+
+```
+
+<button onclick="toggleVisibility(&#39;bray_curtis_matrix-container&#39;)">Show/Hide `bray_curtis_matrix`  output</button>
+
+::: {#bray_curtis_matrix-container style="display:none;"}
+```{r, echo=FALSE}
 bray_curtis_matrix
+```
+:::
 
+```{=html}
+<script> function toggleVisibility(id) { var el = document.getElementById(id); el.style.display = (el.style.display === 'none') ? 'block' : 'none'; } </script>
+```       
+       
+          
+**Step 3**: Now that we have our Bray Curtis values for each duo fruit type combination, we can use this to get our **PCoA/PCO/MDS** values.
+ Thankfully, there is a nice formula to help us calculate the values.    
+
+As you might be able to see, the function for this is `cmdscale`, this is a Classical (Metric) Multidimensional Scaling function, which as has been described above is just another name for PCO and PCoA.    
+
+The next part of the function is where the `bray_curtis_matrix` we made is inputted, this is simply an input of the dissimilarity values.    
+
+We then have the `eig` in the function. With this we simply say whether or not we would like our eigenvalues returned. Like in PCA, we do need eigenvalues the final plot, so we need to say we'd like to generate them. 
+
+The final part of this function is `k`, this sets the dimensions, we would like to stick to 2D in this one, so we will just set it as two. 
+
+```{r,message=FALSE}
+pcoa_values <- cmdscale(bray_curtis_matrix, eig = TRUE, k = 2)
 ```
 
+<button onclick="toggleVisibility(&#39;pcoa_values-container&#39;)">Show/Hide `pcoa_values`  output</button>
 
-In R we can use cmdscale because PCoA is supposodley the same as classical multidimendional scaling. 
-```{r, echo=FALSE, message=FALSE}
-library(tidyverse)
-pcoa_result <- cmdscale(bray_curtis_matrix, eig = TRUE, k = 2)
+::: {#pcoa_values-container style="display:none;"}
+```{r, echo=FALSE}
+pcoa_values
+```
+:::
+
+```{=html}
+<script> function toggleVisibility(id) { var el = document.getElementById(id); el.style.display = (el.style.display === 'none') ? 'block' : 'none'; } </script>
+```       
+       
+   
+
+**Breaking down the output of 'cmdscale()'**
+
+The output shows:\
+   
+`points`: These are the coordinates of the points chosen to represent the dissimilarities.
+   
+   
+`eig`: these are the eigenvalues computed during the scaling process. Similar to PCA, the number of eigenvalues outputted is the same as the number of samples there are.        
+   
+
+`GOF`: This stands for Goodness Of Fit, and shows if we can trust the output or not.      
+   
+   
+
+**Step 4**: We first extract the PCO co-ordinate points.    
+We extract points from the pcoa_values, and we name these as PCoA1 and PCoA2. 
 
 
-points <- as.data.frame(pcoa_result$points)
+```{r, message=FALSE}
+points <- as.data.frame(pcoa_values$points)
 colnames(points) <- c("PCoA1", "PCoA2")
-points$Management <- df_2$Management
-variance <- round(100 * pcoa_result$eig / sum(pcoa_result$eig), 2)
+points$Fruit <- fruit_names
+
+```
+So now when we run points, we can see which fruit has what PCoA co-ordinate. 
+
+<button onclick="toggleVisibility(&#39;points-container&#39;)">Show/Hide `points`  output</button>
+
+::: {#points-container style="display:none;"}
+```{r, echo=FALSE}
+points
+```
+:::
+
+```{=html}
+<script> function toggleVisibility(id) { var el = document.getElementById(id); el.style.display = (el.style.display === 'none') ? 'block' : 'none'; } </script>
+``` 
+
+      
+We then use our eigenvalues to percentages of the PCO components of the variance. 
+```{r, message=FALSE}
+
+eig_vals <- pcoa_values$eig
+
+var_explained <- eig_vals / sum(eig_vals) * 100
+```
+
+<button onclick="toggleVisibility(&#39;var_explained-container&#39;)">Show/Hide `var_explained`  output</button>
+
+::: {#var_explained-container style="display:none;"}
+```{r, echo=FALSE}
+var_explained
+```
+:::
+
+```{=html}
+<script> function toggleVisibility(id) { var el = document.getElementById(id); el.style.display = (el.style.display === 'none') ? 'block' : 'none'; } </script>
+``` 
+
+By looking at the first two values, we can say that the majority of the variance can be captured in these. 
+
+Finally, we can use all of this to generate the plot. 
+```{r, message=FALSE}
+library(ggplot2) # we will need the ggplot package to output the plot. 
 
 
-ggplot(points, aes(x = PCoA1, y = PCoA2, colour = fruit_names)) +
- geom_point(size = 3) +
- stat_ellipse(level = 0.95, linetype = 2, alpha = 0.3) +
- labs(
- title = "PCoA Analysis (Bray-Curtis)",
- x = paste0("PCoA1 (", variance[1], "%)"),
- y = paste0("PCoA2 (", variance[2], "%)")
- ) +
- theme_minimal()
+ggplot(points, aes(x = PCoA1, y = PCoA2, label = Fruit, colour = Fruit)) +
+  geom_point(size = 3) +
+  geom_text(vjust = -0.8) +
+  xlab(paste0("PCoA1 (", round(var_explained[1], 1), "%)")) +
+  ylab(paste0("PCoA2 (", round(var_explained[2], 1), "%)")) +
+  theme_minimal()
+
 ```
 
 
-Makes sense. 
-
-
-
-
-
-
-1. **Generate a distance matrix** 
-
- - A dissimilarity matrix is created from the original data. 
- - The matrix is centralised (to adjust it for eigen-decomposition). 
- 
-Let's use the Darrington dataset and R to work this out. 
-
-
- 
-2. **Eigen-decomposition** 
-
- - The centralised matrix undergoes eigen-decomposition. 
- - Like PCA, The eigenvalues we generate represent the variance explained; eigenvectors define new co-ordinate axes (also like what we learnt in PCA)!
- 
- 
- 
-
-3. **Select pricipal coordinates**
- - Coordinates corresponding to the largest eigenvalues are kept, as these are the best representation of the data. 
- 
- 4. **Project samples**  
- - Each sample is assigned coordinates in this reduced space, this is the visualisation. 
- 
-        
-      
-### PCA vs PCoA: 
-  - PCoA is a special type of PCA, because it does not need Eucledian distances. 
-  - PCA needs Eucledian distances. 
-  - In PCoA, distance matrixes can be used.. 
-
-  

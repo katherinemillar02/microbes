@@ -412,13 +412,8 @@ As a reminder, if we are using R to calculate the Bray-Curtis dissimilarity valu
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegan) <span class="co"># input the vegan package, we wil also need this for the next couple of steps.</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>bray_curtis <span class="ot">&lt;-</span> <span class="fu">vegdist</span>(df_2, <span class="at">method =</span> <span class="st">"bray"</span>) <span class="co"># use vegdist(), and the "bray" distances. </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<button onclick="toggleVisibility('bray-curtiscontainer')">
-Show/Hide <code>bray_curtis &lt;- vegdist(df_2, method = "bray"</code>) output
-</button>
-<div id="bray-curtiscontainer" style="display:none;">
-<div class="cell">
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>bray_curtis <span class="ot">&lt;-</span> <span class="fu">vegdist</span>(df_2, <span class="at">method =</span> <span class="st">"bray"</span>) <span class="co"># use vegdist(), and the "bray" distances. </span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>bray_curtis</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          1         2         3         4         5
 2 0.1000000                                        
@@ -428,10 +423,6 @@ Show/Hide <code>bray_curtis &lt;- vegdist(df_2, method = "bray"</code>) output
 6 0.5348837 0.4666667 0.4666667 0.4222222 0.2608696</code></pre>
 </div>
 </div>
-</div>
-<script> function toggleVisibility(id) { var el = document.getElementById(id); el.style.display = (el.style.display === 'none') ? 'block' : 'none'; } </script>
-<p>&nbsp;<br>
-&nbsp;</p>
 <p>Once the values have been calculated, we want the output to be easier to interpret. The <code>vegdist()</code> function does not retain the sample names (in this case, the fruits), so we manually add them back in. By assigning fruit names to both the rows and columns, the table will include repeated fruit pairings; however, this format makes it much clearer to identify the Bray–Curtis dissimilarity values for each specific fruit comparison.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>bray_curtis_matrix <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(bray_curtis) <span class="co"># First covert the values to a matrix</span></span>
@@ -440,13 +431,9 @@ Show/Hide <code>bray_curtis &lt;- vegdist(df_2, method = "bray"</code>) output
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(bray_curtis_matrix) <span class="ot">&lt;-</span> fruit_names <span class="co"># Add the fruit names to row names</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(bray_curtis_matrix) <span class="ot">&lt;-</span> fruit_names <span class="co"># Add the fruit names to column names</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<button onclick="toggleVisibility('bray_curtis_matrix-container')">
-Show/Hide <code>bray_curtis_matrix</code> output
-</button>
-<div id="bray_curtis_matrix-container" style="display:none;">
-<div class="cell">
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(bray_curtis_matrix) <span class="ot">&lt;-</span> fruit_names <span class="co"># Add the fruit names to column names</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>bray_curtis_matrix <span class="co"># Your final bray_curtis_matrix output </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          Apricot     Argan        GF    Orange     Peach      Tang
 Apricot 0.0000000 0.1000000 0.1000000 0.1500000 0.3170732 0.5348837
@@ -457,8 +444,6 @@ Peach   0.3170732 0.2558140 0.2558140 0.2093023 0.0000000 0.2608696
 Tang    0.5348837 0.4666667 0.4666667 0.4222222 0.2608696 0.0000000</code></pre>
 </div>
 </div>
-</div>
-<script> function toggleVisibility(id) { var el = document.getElementById(id); el.style.display = (el.style.display === 'none') ? 'block' : 'none'; } </script>
 <p>&nbsp;<br>
 &nbsp;<br>
 <strong>Step 3</strong>: Now that we have our Bray Curtis values for each duo fruit type combination, we can use this to get our <strong>PCoA/PCO/MDS</strong> values. Thankfully, there is a nice formula to help us calculate the values.</p>
@@ -467,13 +452,12 @@ Tang    0.5348837 0.4666667 0.4666667 0.4222222 0.2608696 0.0000000</code></pre>
 <p>We then have the <code>eig</code> in the function. With this we simply say whether or not we would like our eigenvalues returned. Like in PCA, we do need eigenvalues the final plot, so we need to say we’d like to generate them.</p>
 <p>The final part of this function is <code>k</code>, this sets the dimensions, we would like to stick to 2D in this one, so we will just set it as two.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>pcoa_values <span class="ot">&lt;-</span> <span class="fu">cmdscale</span>(bray_curtis_matrix, <span class="at">eig =</span> <span class="cn">TRUE</span>, <span class="at">k =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<button onclick="toggleVisibility('pcoa_values-container')">
-Show/Hide <code>pcoa_values</code> output
-</button>
-<div id="pcoa_values-container" style="display:none;">
-<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegan)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>pcoa_values <span class="ot">&lt;-</span> <span class="fu">cmdscale</span>(bray_curtis_matrix, <span class="at">eig =</span> <span class="cn">TRUE</span>, <span class="at">k =</span> <span class="dv">2</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>pcoa_values</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$points
                [,1]         [,2]
@@ -498,33 +482,20 @@ $GOF
 [1] 0.9639442 0.9639442</code></pre>
 </div>
 </div>
-</div>
-<script> function toggleVisibility(id) { var el = document.getElementById(id); el.style.display = (el.style.display === 'none') ? 'block' : 'none'; } </script>
-<p>&nbsp;<br>
-&nbsp;</p>
-<p><strong>Breaking down the output of ‘cmdscale()’</strong></p>
+<p><strong>What actually happens when we run ‘cmdscale()’</strong></p>
 <p>The output shows:<br>
-&nbsp;<br>
-<code>points</code>: These are the coordinates of the points chosen to represent the dissimilarities. &nbsp;<br>
-&nbsp;<br>
-<code>eig</code>: these are the eigenvalues computed during the scaling process. Similar to PCA, the number of eigenvalues outputted is the same as the number of samples there are.<br>
-&nbsp;</p>
-<p><code>GOF</code>: This stands for Goodness Of Fit, and shows if we can trust the output or not.<br>
-&nbsp;<br>
-&nbsp;</p>
+(1) <code>points</code>: These are the coordinates of the points chosen to represent the dissimilarities. (2) The <code>eig</code>; these are the eigenvalues computed during the scaling process. Similar to PCA, the number of eigenvalues outputted is the same as the number of samples there are.</p>
+<ol start="3" type="1">
+<li><code>GOF</code>: This stands for Goodness Of Fit, and shows if we can trust the output or not.</li>
+</ol>
 <p><strong>Step 4</strong>: We first extract the PCO co-ordinate points.<br>
 We extract points from the pcoa_values, and we name these as PCoA1 and PCoA2.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>points <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(pcoa_values<span class="sc">$</span>points)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(points) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"PCoA1"</span>, <span class="st">"PCoA2"</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>points<span class="sc">$</span>Fruit <span class="ot">&lt;-</span> fruit_names</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>So now when we run points, we can see which fruit has what PCoA co-ordinate.</p>
-<button onclick="toggleVisibility('points-container')">
-Show/Hide <code>points</code> output
-</button>
-<div id="points-container" style="display:none;">
-<div class="cell">
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>points<span class="sc">$</span>Fruit <span class="ot">&lt;-</span> fruit_names</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>points</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>              PCoA1        PCoA2   Fruit
 Apricot  0.18087554  0.004725498 Apricot
@@ -535,43 +506,28 @@ Peach   -0.12055480 -0.078357582   Peach
 Tang    -0.35112516  0.041546616    Tang</code></pre>
 </div>
 </div>
-</div>
-<script> function toggleVisibility(id) { var el = document.getElementById(id); el.style.display = (el.style.display === 'none') ? 'block' : 'none'; } </script>
-<p>&nbsp;<br>
-We then use our eigenvalues to percentages of the PCO components of the variance.</p>
+<p>So now when we run points, we can see which fruit has what PCoA co-ordinate.</p>
+<p>We then use our eigenvalues to percentages of the PCO components of the variance, again we are using the first 2.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>eig_vals <span class="ot">&lt;-</span> pcoa_values<span class="sc">$</span>eig</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>var_explained <span class="ot">&lt;-</span> eig_vals <span class="sc">/</span> <span class="fu">sum</span>(eig_vals) <span class="sc">*</span> <span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<button onclick="toggleVisibility('var_explained-container')">
-Show/Hide <code>var_explained</code> output
-</button>
-<div id="var_explained-container" style="display:none;">
+<p>Finally, we can use all of this to generate the plot</p>
 <div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1]  9.223118e+01  4.163238e+00  2.047395e+00  1.558185e+00  3.924068e-15
-[6] -4.636570e-15</code></pre>
-</div>
-</div>
-</div>
-<script> function toggleVisibility(id) { var el = document.getElementById(id); el.style.display = (el.style.display === 'none') ? 'block' : 'none'; } </script>
-<p>By looking at the first two values, we can say that the majority of the variance can be captured in these.</p>
-<p>Finally, we can use all of this to generate the plot.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co"># we will need the ggplot package to output the plot. </span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(points, <span class="fu">aes</span>(<span class="at">x =</span> PCoA1, <span class="at">y =</span> PCoA2, <span class="at">label =</span> Fruit, <span class="at">colour =</span> Fruit)) <span class="sc">+</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="fu">paste0</span>(<span class="st">"PCoA1 ("</span>, <span class="fu">round</span>(var_explained[<span class="dv">1</span>], <span class="dv">1</span>), <span class="st">"%)"</span>)) <span class="sc">+</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="fu">paste0</span>(<span class="st">"PCoA2 ("</span>, <span class="fu">round</span>(var_explained[<span class="dv">2</span>], <span class="dv">1</span>), <span class="st">"%)"</span>)) <span class="sc">+</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co"># we will need the ggplot package to output the plot. </span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(points, <span class="fu">aes</span>(<span class="at">x =</span> PCoA1, <span class="at">y =</span> PCoA2, <span class="at">label =</span> Fruit)) <span class="sc">+</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="fu">paste0</span>(<span class="st">"PCoA1 ("</span>, <span class="fu">round</span>(var_explained[<span class="dv">1</span>], <span class="dv">1</span>), <span class="st">"%)"</span>)) <span class="sc">+</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="fu">paste0</span>(<span class="st">"PCoA2 ("</span>, <span class="fu">round</span>(var_explained[<span class="dv">2</span>], <span class="dv">1</span>), <span class="st">"%)"</span>)) <span class="sc">+</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="PCoA_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="PCoA_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>

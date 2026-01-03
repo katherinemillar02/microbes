@@ -117,36 +117,4 @@ Diversity →</a>
 
 
 
-**Which of these is the most common region/S to be used in 16S?**
-
-div>
-
-<form id="quiz-form-1">
-
-<input type="radio" name="q1" value="a"> A. V1
-<br>
-
-<input type="radio" name="q1" value="b"> B. V7-8
-<br>
-
-<input type="radio" name="q1" value="c"> C. V3-4
-<br>
-
-<input type="radio" name="q1" value="d"> D. V7
-<br>
-
-<button type="button" onclick="checkAnswer1()">
-
-Submit
-
-</button>
-
-</form>
-
-
-
-::: {#result2 style="margin-top: 1em; font-weight: bold;"}
-:::
-
-</div>
 
